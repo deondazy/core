@@ -1,0 +1,18 @@
+{
+    "name": "deondazy/core",
+    "description": "Simple PHP MVC Library",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Deondazy\\Core\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "deondazy",
+            "email": "deondazy@gmail.com"
+        }
+    ],
+    "require": {}
+}
