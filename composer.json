@@ -14,5 +14,7 @@
             "email": "deondazy@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "filp/whoops": "^2.14"
+    }
 }
