@@ -12,7 +12,7 @@ class Database
     /**
      * Database instance.
      *
-     * @var PDO
+     * @var Database
      */
     private static $instance;
 
@@ -35,7 +35,7 @@ class Database
      *
      * @var string
      */
-    public $lastQuery;
+    protected $lastQuery;
 
     /**
      * Connection options.
@@ -89,25 +89,27 @@ class Database
      * @param string $username Database username
      * @param string $password Database password
      *
-     * @return null|PDO
+     * @return PDO
      */
     public function connect($dsn, $username = null, $password = null)
     {
-        // Are we already connected?
+        // Return early if already connected
         if ($this->isConnected()) {
-            return null;
+            return $this->pdo;
         }
 
+        // If passed DSN is an instance of PDO, use it directly
         if ($dsn instanceof PDO) {
             $this->pdo = $dsn;
-        } else {
-            $options = $this->options;
+            return $this->pdo;
+        }
+        
+        $options = $this->options;
 
-            try {
-                $this->pdo = new PDO($dsn, $username, $password, $options);
-            } catch (PDOException $e) {
-                throw new DatabaseException("{$e->getMessage()} in {$e->getFile()} on line {$e->getLine()} <br> {$e->getTraceAsString()} <br> {$e->getCode()}");
-            }
+        try {
+            $this->pdo = new PDO($dsn, $username, $password, $options);
+        } catch (PDOException $e) {
+            throw new DatabaseException($e->getMessage());
         }
 
         return $this->pdo;
@@ -143,8 +145,6 @@ class Database
      */
     public function query($query)
     {
-        $this->connect($this->pdo);
-
         try {
             $this->statement = $this->pdo->prepare($query);
 
@@ -260,7 +260,7 @@ class Database
         }
         $set = rtrim($set, ', '); // remove last comma(,)
 
-        // Construuct the query
+        // Construct the query
         $this->query("UPDATE {$table} SET {$set} WHERE id = :id");
 
         $this->bind(':id', $id);
@@ -325,7 +325,7 @@ class Database
         }
 
         $this->query($query);
-        return $this->fetchAll();
+        return $this->statement->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -333,10 +333,9 @@ class Database
      *
      * @return array
      */
-    public function fetchAll()
+    private function fetchAll()
     {
-        $this->execute();
-        return $this->statement->fetchAll(PDO::FETCH_OBJ);
+        return ;
     }
 
     /**
@@ -344,9 +343,8 @@ class Database
      *
      * @return object
      */
-    public function fetchOne()
+    private function fetchOne()
     {
-        $this->execute();
         return $this->statement->fetch(PDO::FETCH_OBJ);
     }
 
@@ -367,6 +365,6 @@ class Database
      */
     public function lastInsertId()
     {
-        return (int)$this->pdo->lastInsertId();
+        return (int) $this->pdo->lastInsertId();
     }
 }
