@@ -307,7 +307,7 @@ class Database
             return null;
         }
 
-        return Database::instance()->fetchOne()->$field;
+        return $this->statement->fetch(PDO::FETCH_OBJ)->$field;
     }
 
     public function getAll($table, $where = null, $order = null, $limit = null)
@@ -335,7 +335,7 @@ class Database
      */
     private function fetchAll()
     {
-        return ;
+        return $this->statement->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
