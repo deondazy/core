@@ -26,6 +26,49 @@ class DatabaseTest extends TestCase
          * @see https://www.sqlite.org/inmemorydb.html
          */
         $this->pdo = Database::instance()->connect('sqlite::memory:');
+
+        // Create a table
+        $this->createTable();
+
+        // Insert some data
+        $this->insertData();
+    }
+
+    /**
+     * Create a table for testing.
+     * 
+     * @return void
+     */
+    private function createTable()
+    {
+        Database::instance()->query(
+            "CREATE TABLE IF NOT EXISTS users 
+            (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+
+        Database::instance()->execute();
+    }
+
+    /**
+     * Insert some data for testing.
+     * 
+     * @return void
+     */
+    private function insertData()
+    {
+        Database::instance()->query(
+            "INSERT INTO users (name, email, password) VALUES 
+            ('John Doe', 'johndoe@email.com', 'password'),
+            ('Jane Doe', 'janedoe@email.com', 'password')"
+        );
+
+        Database::instance()->execute();
     }
 
     /**
@@ -70,5 +113,53 @@ class DatabaseTest extends TestCase
         $this->assertInstanceOf('PDOStatement', Database::instance()->query('SELECT 1'));
     }
 
-    
+    /**
+     * @covers \Deondazy\Core\Database::select
+     */
+    public function testSelect()
+    {
+        $this->assertEquals('John Doe', Database::instance()
+            ->select('users')
+            ->where(['name' => 'John Doe'])
+            ->fetchOne()
+            ->name
+        );
+    }
+
+    /**
+     * @covers \Deondazy\Core\Database::insert
+     */
+    public function testInsert()
+    {
+        $this->assertNotEquals(0, Database::instance()->insert('users', [
+            'name' => 'Sam Smith',
+            'email' => 'samsmith@email.com',
+            'password' => 'password'
+        ]));
+    }
+
+    /**
+     * @covers \Deondazy\Core\Database::update
+     */
+    public function testUpdate()
+    {
+        $this->assertEquals(1, Database::instance()
+            ->update('users')
+            ->set(['email' => 'mikesmith@email.com'])
+            ->where(['id' => 1])
+            ->run()
+        );
+    }
+
+    /**
+     * @covers \Deondazy\Core\Database::delete
+     */
+    public function testDelete()
+    {
+        $this->assertEquals(1, Database::instance()
+            ->delete('users')
+            ->where(['email' => 'mikesmith@email.com'])
+            ->run()
+        );
+    }
 }
