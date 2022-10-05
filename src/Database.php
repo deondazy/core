@@ -38,6 +38,20 @@ class Database
     protected $lastQuery;
 
     /**
+     * The last Query data.
+     * 
+     * @var array
+     */
+    protected $lastData;
+
+    /**
+     * The last WHERE clause data.
+     * 
+     * @var array
+     */
+    protected $lastWhereData;
+
+    /**
      * Connection options.
      *
      * @var array
@@ -166,7 +180,7 @@ class Database
      *
      * @return bool
      */
-    public function bind($param, $value, $type = null)
+    private function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {
@@ -206,15 +220,52 @@ class Database
         } catch (PDOException $e) {
             throw new DatabaseException($e->getMessage());
         }
+
+        return false;
     }
 
     /**
-     * Insert Query
+     * The WHERE clause.
+     * 
+     * @param array $where
+     * 
+     * @return string
+     */
+    private function whereClause($where)
+    {
+        $whereClause = '';
+        if (!empty($where)) {
+            $whereClause = ' WHERE ';
+            $whereClause .= implode(' AND ', array_map(function ($key) {
+                return $key . ' = :' . $key;
+            }, array_keys($where)));
+        }
+        return $whereClause;
+    }
+
+    /**
+     * Bind the data inputs with the query placeholders.
+     * 
+     * @param array $bindData
+     * 
+     * @return void
+     */
+    private function bindData($bindData)
+    {
+        if (!empty($bindData)) {
+            foreach ($bindData as $key => $value) {
+                $this->bind(':' . $key, $value);
+            }
+        }
+    }
+
+    /**
+     * Insert a row into the database.
      *
-     * @param string $table Table to run the query on
-     * @param array $data Array of data to insert
-     *
-     * @return int Number of rows inserted
+     * @param string $table The table name
+     * @param array $data The data to insert
+     * 
+     * @return int The last inserted ID
      */
     public function insert($table, array $data)
     {
@@ -239,37 +290,122 @@ class Database
 
         $this->execute();
 
-        return $this->rowCount();
+        return $this->lastInsertId();
     }
 
     /**
-     * Update Query
-     *
-     * @param string $table Table to update
-     * @param string $id Id of the item to update
-     * @param array $data Array of data to update
-     *
-     * @return int Number of rows updated
+     * Update a row in the database.
+     * 
+     * Return partial last query so we can use it in the next query
+     * 
+     * @param string $table The table name
+     * 
+     * @return Database
      */
-    public function update($table, array $data, $id)
+    public function update($table)
     {
-        $set = '';
+        $this->lastQuery = "UPDATE {$table}";
+        return Database::instance();
+    }
+
+    /**
+     * Set the data to update.
+     * 
+     * @param array $data The data to update
+     * 
+     * @return Database
+     */
+    public function set(array $data)
+    {
+        $setClause = ' SET ';
+
+        // Construct the SET part of the query
         foreach ($data as $column => $value) {
-            // use column names as named parameters
-            $set .= "{$column} = :{$column}, ";
-        }
-        $set = rtrim($set, ', '); // remove last comma(,)
-
-        // Construct the query
-        $this->query("UPDATE {$table} SET {$set} WHERE id = :id");
-
-        $this->bind(':id', $id);
-
-        // Bind the {$set} parameters
-        foreach ($data as $param => $value) {
-            $this->bind(":{$param}", $value);
+            $setClause .= "{$column} = :{$column}, ";
         }
 
+        // Remove the last comma(,) from the SET part of the query
+        $setClause = rtrim($setClause, ', ');
+
+        $this->lastQuery .= $setClause;
+        $this->lastData = $data;
+
+        return Database::instance();
+    }
+
+    /**
+     * Set the where clause.
+     * 
+     * @param array $where The where clause
+     * 
+     * @return Database
+     */
+    public function where(array $where)
+    {
+        $this->lastQuery .= $this->whereClause($where);
+        $this->lastWhereData = $where;
+        return Database::instance();
+    }
+
+    /**
+     * ORDER BY clause.
+     * 
+     * @param string $column The column name
+     * @param string $order The order type
+     * 
+     * @return Database
+     */
+    public function orderBy($column, $order = 'ASC')
+    {
+        $this->lastQuery .= " ORDER BY {$column} {$order}";
+        return Database::instance();
+    }
+
+    /**
+     * LIMIT clause.
+     * 
+     * @param int $limit The limit
+     * 
+     * @return Database
+     */
+    public function limit($limit)
+    {
+        $this->lastQuery .= " LIMIT {$limit}";
+        return Database::instance();
+    }
+
+    /**
+     * OFFSET clause.
+     * 
+     * @param int $offset The offset
+     * 
+     * @return Database
+     */
+    public function offset($offset)
+    {
+        $this->lastQuery .= " OFFSET {$offset}";
+        return Database::instance();
+    }
+
+    /**
+     * Execute the last query.
+     * 
+     * @param array $data The data to update
+     * 
+     * @return int The number of affected rows
+     */
+    public function run()
+    {
+        // Prepare the query
+        $this->query($this->lastQuery);
+
+        // Bind the data parameters
+        $this->bindData($this->lastData);
+
+        // Bind the where clause parameter
+        $this->bindData($this->lastWhereData);
+
+        // Execute the query
         $this->execute();
 
         return $this->rowCount();
@@ -277,74 +413,69 @@ class Database
 
     /**
      * Delete Query
+     * 
+     * Return partial last query so we can use it in the next query
      *
      * @param string $table Table to update
-     * @param string $id Id of the item to update
-     *
-     * @return int Number of rows deleted
+     * 
+     * @return Database
      */
-    public function delete($table, $id)
+    public function delete($table)
     {
-        $this->query("DELETE FROM {$table} WHERE id = :id");
-        $this->bind(':id', $id);
-        $this->execute();
-        return $this->rowCount();
+        $this->lastQuery = "DELETE FROM {$table}";
+        return Database::instance();
     }
 
     /**
-     * Get result of a single entry column
+     * Get a single row from the database.
+     * 
+     * Return partial last query so we can use it in the next query
      *
-     * @param string $field
-     * @param int $id
-     * @return string
+     * @param string $table Table to run the query on
+     * 
+     * @return Database
      */
-    public function get($table, $field, $id)
+    public function select($table)
     {
-        $query = Database::instance()->query("SELECT $field FROM {$table} WHERE id = ?");
-        $query->execute([$id]);
-
-        if (Database::instance()->rowCount() == 0) {
-            return null;
-        }
-
-        return $this->statement->fetch(PDO::FETCH_OBJ)->$field;
-    }
-
-    public function getAll($table, $where = null, $order = null, $limit = null)
-    {
-        $query = "SELECT * FROM {$table} ";
-
-        if (!is_null($where)) {
-            $query .= "WHERE {$where} ";
-        }
-        if (!is_null($order)) {
-            $query .= "ORDER BY {$order} ";
-        }
-        if (!is_null($limit)) {
-            $query .= "LIMIT {$limit}";
-        }
-
-        $this->query($query);
-        return $this->statement->fetchAll(PDO::FETCH_OBJ);
+        $this->lastQuery = "SELECT * FROM {$table}";
+        return Database::instance();
     }
 
     /**
-     * Execute prepared statement and fetch array of all the result set rows.
-     *
+     * Fetch all rows from the database.
+     * 
      * @return array
      */
-    private function fetchAll()
+    public function fetchAll()
     {
+        // Prepare the query
+        $this->query($this->lastQuery);
+
+        // Bind the where clause parameter
+        $this->bindData($this->lastWhereData);
+
+        // Execute the query
+        $this->execute();
+
         return $this->statement->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
-     * Execute the prepared statement and fetch a single row from the result set.
+     * Fetch a single row from the database.
      *
      * @return object
      */
-    private function fetchOne()
+    public function fetchOne()
     {
+        // Prepare the query
+        $this->query($this->lastQuery);
+
+        // Bind the where clause parameter
+        $this->bindData($this->lastWhereData);
+
+        // Execute the query
+        $this->execute();
+
         return $this->statement->fetch(PDO::FETCH_OBJ);
     }
 
@@ -353,7 +484,7 @@ class Database
      *
      * @return int
      */
-    public function rowCount()
+    private function rowCount()
     {
         return $this->statement->rowCount();
     }
@@ -363,7 +494,7 @@ class Database
      *
      * @return int
      */
-    public function lastInsertId()
+    private function lastInsertId()
     {
         return (int) $this->pdo->lastInsertId();
     }
