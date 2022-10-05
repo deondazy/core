@@ -16,8 +16,7 @@
         }
     ],
     "require": {
-        "filp/whoops": "^2.14",
-        "nikic/fast-route": "^1.3"
+        "filp/whoops": "^2.14"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
