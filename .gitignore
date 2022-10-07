@@ -1,5 +1,9 @@
 /vendor/
+/cache
+/node_modules
 **/.DS_Store
 composer.lock
+package-lock.json
+.env
 .phpunit.cache
 test.php
