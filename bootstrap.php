@@ -6,7 +6,7 @@
 
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
-use Deondazy\Core\Exception\InvalidRequirementException;
+use Deondazy\Core\Exceptions\InvalidRequirementException;
 
 // Define the app version
 define('CORE_VERSION', '1.0.0');
