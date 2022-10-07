@@ -1,3 +1,14 @@
+DirectoryIndex index.php
+
+# Enable apache rewrite module
 RewriteEngine On
-RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.webp|\.gif|\.jpeg|\.zip|\.css|\.svg|\.js)$
-RewriteRule (.*) routes.php [QSA,L]
+
+# Set the rewrite base
+RewriteBase /
+
+# Deliver the file or directory if it exists
+RewriteCond %{REQUEST_URI}  !-f
+RewriteCond %{REQUEST_URI}  !-d
+
+# Send the request to index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
