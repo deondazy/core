@@ -1,17 +1,9 @@
 <?php
 
-use Deondazy\Core\Controllers\ContactController;
+use Deondazy\Core\Controllers\HomepageController;
 
-$router->get('/', function() {
-    echo 'Hello World';
-});
-
-$router->get('/about', function() {
-    echo 'About Page';
-});
-
-$router->get('/contact', ContactController::class . '@index');
+$router->get('/', HomepageController::class . '@index');
 
 $router->notFoundHandler(function() {
-    require_once __DIR__ . '/../views/404.php';
+    require_once __DIR__ . '/../views/404.html';
 });

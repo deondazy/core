@@ -17,6 +17,9 @@ define('CORE_PHP', '7.4');
 // Define installation root path
 define('CORE_ROOT', __DIR__);
 
+// Define Public root path
+define('CORE_PUBLIC', CORE_ROOT . '/public');
+
 // Require Autoloader
 require_once CORE_ROOT . '/vendor/autoload.php';
 
