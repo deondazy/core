@@ -2,7 +2,7 @@
 
 namespace Deondazy\Core;
 
-use Deondazy\Core\Exception\DatabaseException;
+use Deondazy\Core\Exceptions\DatabaseException;
 use PDO;
 use PDOStatement;
 use PDOException;
