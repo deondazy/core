@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Tests
 
 on:
   push:
@@ -10,12 +10,20 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  tests:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ "7.4" ]
+
+    name: PHP ${{ matrix.php }}
+
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
@@ -29,11 +37,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --ignore-platform-reqs
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist --no-interaction --no-progress
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+    - name: Copy environment file
+      run: cp .env.example .env
 
-    # - name: Run test suite
-    #   run: composer run-script test
+    - name: Execute tests
+      run: vendor/bin/phpunit
