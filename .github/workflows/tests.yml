@@ -1,16 +1,41 @@
-language: php
-php:
-  - 7.4
-os: linux
+name: Tests
 
-before_script:
-  - rm -rf composer.lock
-  - composer install
-  - cp .env.example .env
-script:
-  - mkdir -p build/logs
-  - vendor/bin/phpunit -c phpunit.xml
-after_success:
-  - travis_retry php vendor/bin/coveralls
-  # or enable logging
-  - travis_retry php vendor/bin/coveralls -v
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: ['7.4', 8.0, 8.1]
+
+    name: PHP ${{ matrix.php }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Copy environment file
+        run: cp .env.example .env
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
