@@ -28,7 +28,7 @@ jobs:
         run: composer install --prefer-dist --no-interaction --no-progress
 
       - name: PHPUnit Tests
-        uses: php-actions/phpunit@v3
+        uses: php-actions/phpunit@v2
         env:
           TEST_NAME: Tests
           XDEBUG_MODE: coverage
