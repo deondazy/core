@@ -29,6 +29,8 @@ jobs:
 
       - name: PHPUnit Tests
         run: vendor/bin/phpunit
+        env:
+          XDEBUG_MODE: coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
