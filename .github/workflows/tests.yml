@@ -22,10 +22,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Composer dependencies
-        uses: php-actions/composer@v6
+        run: composer install --prefer-dist --no-interaction --no-progress
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
