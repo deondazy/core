@@ -6,4 +6,5 @@ composer.lock
 package-lock.json
 .env
 .phpunit.cache
+coverage.xml
 test.php
