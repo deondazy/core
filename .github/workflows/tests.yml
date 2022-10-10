@@ -29,7 +29,6 @@ jobs:
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
-        run: vendor/bin/phpunit
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
