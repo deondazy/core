@@ -24,6 +24,6 @@
         "phpunit/phpunit": "^9.5"
     },
     "scripts": {
-        "test-php": "vendor/bin/phpunit --colors=always --verbose --coverage-text"
+        "test-php": "vendor/bin/phpunit --colors=always --verbose --coverage-text --coverage-clover coverage.xml"
     }
 }
