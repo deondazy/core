@@ -24,7 +24,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup PHP
+      - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -38,4 +38,7 @@ jobs:
         run: cp .env.example .env
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: composer test-php
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
