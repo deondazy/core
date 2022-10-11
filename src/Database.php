@@ -10,11 +10,25 @@ use PDOException;
 class Database
 {
     /**
-     * Database instance.
-     *
-     * @var Database
+     * The data source name.
+     * 
+     * @var string
      */
-    private static $instance;
+    private $dsn;
+
+    /**
+     * The database username.
+     * 
+     * @var string
+     */
+    private $username;
+
+    /**
+     * The database password.
+     * 
+     * @var string
+     */
+    private $password;
 
     /**
      * The active PDO connection.
@@ -35,21 +49,21 @@ class Database
      *
      * @var string
      */
-    protected $lastQuery;
+    private $lastQuery;
 
     /**
      * The last Query data.
      * 
      * @var array
      */
-    protected $lastData;
+    private $lastData;
 
     /**
      * The last WHERE clause data.
      * 
      * @var array
      */
-    protected $lastWhereData;
+    private $lastWhereData;
 
     /**
      * Connection options.
@@ -64,34 +78,22 @@ class Database
     ];
 
     /**
-     * This class cannot be instantiated
+     * Set up the database connection credentials.
+     * 
+     * @param string $dsn The data source name.
+     * @param string $username The database username.
+     * @param string $password The database password.
      * 
      * @return void
      */
-    private function __construct()
-    {
-    }
-
-    /**
-     * This class cannot be cloned
-     * 
-     * @return void
-     */
-    private function __clone()
-    {
-    }
-
-    /**
-     * Database object instance
-     * 
-     * @return Database instance
-     */
-    public static function instance()
-    {
-        if (empty(static::$instance)) {
-            static::$instance = new static();
-        }
-        return static::$instance;
+    public function __construct(
+        string $dsn, 
+        ?string $username = null, 
+        ?string $password = null
+    ) {
+        $this->dsn = $dsn;
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /**
@@ -105,7 +107,7 @@ class Database
      *
      * @return PDO
      */
-    public function connect($dsn, $username = null, $password = null)
+    public function connect(): PDO
     {
         // Return early if already connected
         if ($this->isConnected()) {
@@ -113,15 +115,15 @@ class Database
         }
 
         // If passed DSN is an instance of PDO, use it directly
-        if ($dsn instanceof PDO) {
-            $this->pdo = $dsn;
+        if ($this->dsn instanceof PDO) {
+            $this->pdo = $this->dsn;
             return $this->pdo;
         }
         
         $options = $this->options;
 
         try {
-            $this->pdo = new PDO($dsn, $username, $password, $options);
+            $this->pdo = new PDO($this->dsn, $this->username, $this->password, $this->options);
         } catch (PDOException $e) {
             throw new DatabaseException($e->getMessage());
         }
@@ -161,10 +163,6 @@ class Database
     {
         try {
             $this->statement = $this->pdo->prepare($query);
-
-            if ($this->statement instanceof PDOStatement) {
-                $this->lastQuery = $this->statement->queryString;
-            }
         } catch (PDOException $e) {
             throw new DatabaseException($e->getMessage());
         }
@@ -180,7 +178,7 @@ class Database
      *
      * @return bool
      */
-    private function bind($param, $value, $type = null)
+    public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {
@@ -252,11 +250,26 @@ class Database
      */
     private function bindData($bindData)
     {
-        if (!empty($bindData)) {
-            foreach ($bindData as $key => $value) {
-                $this->bind(':' . $key, $value);
-            }
+        if (empty($bindData)) {
+            return;
         }
+
+        foreach ($bindData as $key => $value) {
+            $this->bind(':' . $key, $value);
+        }
+    }
+
+    /**
+     * Run a raw query against the database.
+     * 
+     * @param string $query
+     * 
+     * @return Database
+     */
+    public function rawQuery($query)
+    {
+        $this->lastQuery = $query;
+        return $this;
     }
 
     /**
@@ -305,7 +318,7 @@ class Database
     public function update($table)
     {
         $this->lastQuery = "UPDATE {$table}";
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -330,7 +343,7 @@ class Database
         $this->lastQuery .= $setClause;
         $this->lastData = $data;
 
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -344,7 +357,7 @@ class Database
     {
         $this->lastQuery .= $this->whereClause($where);
         $this->lastWhereData = $where;
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -358,7 +371,7 @@ class Database
     public function orderBy($column, $order = 'ASC')
     {
         $this->lastQuery .= " ORDER BY {$column} {$order}";
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -371,7 +384,7 @@ class Database
     public function limit($limit)
     {
         $this->lastQuery .= " LIMIT {$limit}";
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -384,7 +397,7 @@ class Database
     public function offset($offset)
     {
         $this->lastQuery .= " OFFSET {$offset}";
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -423,7 +436,7 @@ class Database
     public function delete($table)
     {
         $this->lastQuery = "DELETE FROM {$table}";
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -438,7 +451,7 @@ class Database
     public function select($table)
     {
         $this->lastQuery = "SELECT * FROM {$table}";
-        return Database::instance();
+        return $this;
     }
 
     /**
@@ -484,7 +497,7 @@ class Database
      *
      * @return int
      */
-    private function rowCount()
+    public function rowCount()
     {
         return $this->statement->rowCount();
     }
@@ -494,7 +507,7 @@ class Database
      *
      * @return int
      */
-    private function lastInsertId()
+    public function lastInsertId()
     {
         return (int) $this->pdo->lastInsertId();
     }
