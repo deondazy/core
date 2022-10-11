@@ -37,4 +37,4 @@ $dotenv = Dotenv\Dotenv::createImmutable(CORE_ROOT);
 $dotenv->safeLoad();
 
 // Load Database connection
-$database = Deondazy\Core\Database::instance()->connect("mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}", $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+// $database = Deondazy\Core\Database::instance()->connect("mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}", $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
