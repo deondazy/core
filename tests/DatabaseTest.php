@@ -11,27 +11,46 @@ use PHPUnit\Framework\TestCase;
  */
 class DatabaseTest extends TestCase
 {
-    protected $pdo;
+    private $database;
+
+    private $data = [
+        1  => 'John',
+        2  => 'Mike',
+        3  => 'Fred',
+        4  => 'Jane',
+        5  => 'Mary',
+        6  => 'Scott',
+        7  => 'Sara',
+        8  => 'Sally',
+        9  => 'Sam',
+        10 => 'Sue',
+    ];
 
     public function setUp(): void
     {
         if (! extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped("Need 'pdo_sqlite' to test in memory.");
         }
-
-        /**
-         * Using SQLite in-memory database for testing
-         * so we don't pollute the real database with test data.
-         * 
-         * @see https://www.sqlite.org/inmemorydb.html
-         */
-        $this->pdo = Database::instance()->connect('sqlite::memory:');
+        
+        // Set the PDO object
+        $this->database = $this->getDatabase();
 
         // Create a table
         $this->createTable();
 
         // Insert some data
         $this->insertData();
+    }
+
+    private function getDatabase()
+    {
+        /**
+         * Using SQLite in-memory database for testing
+         * so we don't pollute the real database with test data.
+         * 
+         * @see https://www.sqlite.org/inmemorydb.html
+         */
+        return new Database('sqlite::memory:');
     }
 
     /**
@@ -41,18 +60,14 @@ class DatabaseTest extends TestCase
      */
     private function createTable()
     {
-        Database::instance()->query(
-            "CREATE TABLE IF NOT EXISTS users 
-            (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )"
-        );
+        $sql = 'CREATE TABLE users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name VARCHAR(5) NOT NULL
+        )';
 
-        Database::instance()->execute();
+        $this->database->connect();
+        $this->database->query($sql);
+        $this->database->execute();
     }
 
     /**
@@ -62,21 +77,12 @@ class DatabaseTest extends TestCase
      */
     private function insertData()
     {
-        Database::instance()->query(
-            "INSERT INTO users (name, email, password) VALUES 
-            ('John Doe', 'johndoe@email.com', 'password'),
-            ('Jane Doe', 'janedoe@email.com', 'password')"
-        );
-
-        Database::instance()->execute();
-    }
-
-    /**
-     * @covers \Deondazy\Core\Database::instance
-     */
-    public function testInstance()
-    {
-        $this->assertInstanceOf(Database::class, Database::instance());
+        foreach ($this->data as $id => $name) {
+            $this->database->query('INSERT INTO users (id, name) VALUES (:id, :name)');
+            $this->database->bind(':id', $id);
+            $this->database->bind(':name', $name);
+            $this->database->execute();
+        }
     }
 
     /**
@@ -84,7 +90,9 @@ class DatabaseTest extends TestCase
      */
     public function testConnect()
     {
-        $this->assertInstanceOf('PDO', Database::instance()->connect($this->pdo));
+        $this->database->connect();
+
+        $this->assertTrue($this->database->isConnected());
     }
 
     /**
@@ -92,7 +100,11 @@ class DatabaseTest extends TestCase
      */
     public function testIsConnected()
     {
-        $this->assertTrue(Database::instance()->isConnected());
+        $this->assertTrue($this->database->isConnected());
+
+        $this->database->close();
+
+        $this->assertFalse($this->database->isConnected());
     }
 
     /**
@@ -100,9 +112,13 @@ class DatabaseTest extends TestCase
      */
     public function testClose()
     {
-        Database::instance()->close();
+        $this->database->connect();
 
-        $this->assertFalse(Database::instance()->isConnected());
+        $this->assertTrue($this->database->isConnected());
+
+        $this->database->close();
+
+        $this->assertFalse($this->database->isConnected());
     }
 
     /**
@@ -110,20 +126,15 @@ class DatabaseTest extends TestCase
      */
     public function testQuery()
     {
-        $this->assertInstanceOf('PDOStatement', Database::instance()->query('SELECT 1'));
+        $this->assertInstanceOf('PDOStatement', $this->database->query('SELECT 1'));
     }
 
     /**
-     * @covers \Deondazy\Core\Database::select
+     * @covers \Deondazy\Core\Database::rawQuery
      */
-    public function testSelect()
+    public function testRawQuery()
     {
-        $this->assertEquals('John Doe', Database::instance()
-            ->select('users')
-            ->where(['name' => 'John Doe'])
-            ->fetchOne()
-            ->name
-        );
+        $this->assertEquals(10, count($this->database->rawQuery('SELECT * FROM users')->fetchAll()));
     }
 
     /**
@@ -131,11 +142,25 @@ class DatabaseTest extends TestCase
      */
     public function testInsert()
     {
-        $this->assertNotEquals(0, Database::instance()->insert('users', [
-            'name' => 'Sam Smith',
-            'email' => 'samsmith@email.com',
-            'password' => 'password'
-        ]));
+        $this->database
+            ->insert('users', [
+            'name' => 'Smith',
+        ]);
+
+        $this->assertEquals(11, count($this->database
+            ->select('users')
+            ->fetchAll()
+        ));
+
+        $this->database
+            ->insert('users', [
+            'name' => 'Manny',
+        ], true);
+
+        $this->assertEquals(12, count($this->database
+            ->select('users')
+            ->fetchAll()
+        ));
     }
 
     /**
@@ -143,11 +168,72 @@ class DatabaseTest extends TestCase
      */
     public function testUpdate()
     {
-        $this->assertEquals(1, Database::instance()
+        $this->database
             ->update('users')
-            ->set(['email' => 'mikesmith@email.com'])
+            ->set(['name' => 'Jude'])
             ->where(['id' => 1])
-            ->run()
+            ->run();
+
+        $this->assertEquals('Jude', $this->database
+            ->select('users')
+            ->where(['id' => 1])
+            ->fetchOne()
+            ->name
+        );
+
+        $this->database
+            ->update('users')
+            ->set(['name' => 'Matin'])
+            ->where(['id' => 5])
+            ->run();
+
+        $this->assertEquals('Matin', $this->database
+            ->select('users')
+            ->where(['id' => 5])
+            ->fetchOne()
+            ->name
+        );
+    }
+
+    /**
+     * @covers \Deondazy\Core\Database::orderBy
+     */
+    public function testOrderBy()
+    {
+        $this->assertEquals(1, $this->database
+            ->select('users')
+            ->orderBy('id', 'ASC')
+            ->fetchOne()
+            ->id
+        );
+
+        $this->assertEquals(10, $this->database
+            ->select('users')
+            ->orderBy('id', 'DESC')
+            ->fetchOne()
+            ->id
+        );
+    }
+
+    /**
+     * @covers \Deondazy\Core\Database::offset
+     */
+    public function testOffset()
+    {
+        $this->assertEquals(1, $this->database
+            ->select('users')
+            ->limit(1)
+            ->offset(0)
+            ->fetchOne()
+            ->id
+        );
+
+        $this->assertEquals(2, $this->database
+            ->select('users')
+            ->limit(1)
+            ->offset(1)
+            ->fetchOne()
+            ->id
         );
     }
 
@@ -156,10 +242,26 @@ class DatabaseTest extends TestCase
      */
     public function testDelete()
     {
-        $this->assertEquals(1, Database::instance()
+        $this->database
             ->delete('users')
-            ->where(['email' => 'mikesmith@email.com'])
-            ->run()
+            ->run();
+
+        $this->assertEquals(0, count($this->database
+            ->select('users')
+            ->fetchAll()
+        ));
+    }
+
+    /**
+     * @covers \Deondazy\Core\Database::select
+     */
+    public function testSelect()
+    {
+        $this->assertEquals('John', $this->database
+            ->select('users')
+            ->where(['name' => 'John'])
+            ->fetchOne()
+            ->name
         );
     }
 }
