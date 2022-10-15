@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665454906">
-  <project timestamp="1665454906">
+<coverage generated="1665871166">
+  <project timestamp="1665871166">
     <file name="/Users/deondazy/Sites/core.dev/src/Controllers/Controller.php">
       <class name="Deondazy\Core\Controllers\Controller" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
@@ -21,8 +21,32 @@
       <line num="9" type="stmt" count="0"/>
       <metrics loc="11" ncloc="11" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
-    <file name="/Users/deondazy/Sites/core.dev/src/Database.php">
-      <class name="Deondazy\Core\Database" namespace="global">
+    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/DatabaseException.php">
+      <class name="Deondazy\Core\Exceptions\DatabaseException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/DeondazyCoreException.php">
+      <class name="Deondazy\Core\Exceptions\DeondazyCoreException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/InvalidArgumentException.php">
+      <class name="Deondazy\Core\Exceptions\InvalidArgumentException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/InvalidRequirementException.php">
+      <class name="Deondazy\Core\Exceptions\InvalidRequirementException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/Users/deondazy/Sites/core.dev/src/Models/Database.php">
+      <class name="Deondazy\Core\Models\Database" namespace="global">
         <metrics complexity="41" methods="24" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="86" elements="123" coveredelements="106"/>
       </class>
       <line num="89" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
@@ -150,43 +174,6 @@
       <line num="512" type="stmt" count="1"/>
       <metrics loc="515" ncloc="278" classes="1" methods="24" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="86" elements="123" coveredelements="106"/>
     </file>
-    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/DatabaseException.php">
-      <class name="Deondazy\Core\Exceptions\DatabaseException" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/DeondazyCoreException.php">
-      <class name="Deondazy\Core\Exceptions\DeondazyCoreException" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/InvalidArgumentException.php">
-      <class name="Deondazy\Core\Exceptions\InvalidArgumentException" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/Users/deondazy/Sites/core.dev/src/Exceptions/InvalidRequirementException.php">
-      <class name="Deondazy\Core\Exceptions\InvalidRequirementException" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/Users/deondazy/Sites/core.dev/src/Helpers.php">
-      <class name="Deondazy\Core\Helpers\Helpers" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
-      </class>
-      <line num="7" type="method" name="dd" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="9" type="stmt" count="0"/>
-      <line num="10" type="stmt" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <line num="12" type="stmt" count="0"/>
-      <line num="15" type="method" name="publicPath" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <metrics loc="19" ncloc="19" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
-    </file>
     <file name="/Users/deondazy/Sites/core.dev/src/Router.php">
       <class name="Deondazy\Core\Router" namespace="global">
         <metrics complexity="16" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="0" elements="36" coveredelements="0"/>
@@ -229,6 +216,6 @@
       <line num="95" type="stmt" count="0"/>
       <metrics loc="153" ncloc="112" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="0" elements="36" coveredelements="0"/>
     </file>
-    <metrics files="9" loc="755" ncloc="477" classes="5" methods="37" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="137" coveredstatements="86" elements="174" coveredelements="106"/>
+    <metrics files="8" loc="736" ncloc="458" classes="4" methods="35" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="132" coveredstatements="86" elements="167" coveredelements="106"/>
   </project>
 </coverage>

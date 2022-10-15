@@ -2,12 +2,12 @@
 
 namespace Deondazy\Tests;
 
-use Deondazy\Core\Database;
+use Deondazy\Core\Models\Database;
 use Deondazy\Core\Exception\DatabaseException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Deondazy\Core\Database
+ * @covers \Deondazy\Core\Models\Database
  */
 class DatabaseTest extends TestCase
 {
@@ -86,7 +86,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::connect
+     * @covers \Deondazy\Core\Models\Database::connect
      */
     public function testConnect()
     {
@@ -96,7 +96,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::isConnected
+     * @covers \Deondazy\Core\Models\Database::isConnected
      */
     public function testIsConnected()
     {
@@ -108,7 +108,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::close
+     * @covers \Deondazy\Core\Models\Database::close
      */
     public function testClose()
     {
@@ -122,7 +122,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::query
+     * @covers \Deondazy\Core\Models\Database::query
      */
     public function testQuery()
     {
@@ -130,7 +130,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::rawQuery
+     * @covers \Deondazy\Core\Models\Database::rawQuery
      */
     public function testRawQuery()
     {
@@ -138,7 +138,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::insert
+     * @covers \Deondazy\Core\Models\Database::insert
      */
     public function testInsert()
     {
@@ -164,7 +164,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::update
+     * @covers \Deondazy\Core\Models\Database::update
      */
     public function testUpdate()
     {
@@ -196,7 +196,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::orderBy
+     * @covers \Deondazy\Core\Models\Database::orderBy
      */
     public function testOrderBy()
     {
@@ -216,7 +216,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::offset
+     * @covers \Deondazy\Core\Models\Database::offset
      */
     public function testOffset()
     {
@@ -238,7 +238,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::delete
+     * @covers \Deondazy\Core\Models\Database::delete
      */
     public function testDelete()
     {
@@ -253,7 +253,7 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database::select
+     * @covers \Deondazy\Core\Models\Database::select
      */
     public function testSelect()
     {
