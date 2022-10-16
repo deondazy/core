@@ -7,7 +7,7 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-terser');
 const imagemin = require('gulp-imagemin');
 const cleanCSS = require('gulp-clean-css');
-const purgecss = require('gulp-purgecss');/
+const purgecss = require('gulp-purgecss');
 const autoprefixer = require('gulp-autoprefixer');
 //Note : Webp still not supported in major browsers including forefox
 //const webp = require('gulp-webp'); //For converting images to WebP format
