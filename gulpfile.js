@@ -1,13 +1,13 @@
-const { src, dest, task, watch, series, parallel } = require('gulp');
-const del = require('del'); //For Cleaning build/dist for fresh export
+const { src, dest, watch, series, parallel } = require('gulp');
+const del = require('del');
 const options = require("./config");
 
-const postcss = require('gulp-postcss'); //For Compiling tailwind utilities with tailwind config
-const concat = require('gulp-concat'); //For Concatinating js,css files
-const uglify = require('gulp-terser');//To Minify JS files
-const imagemin = require('gulp-imagemin'); //To Optimize Images
-const cleanCSS = require('gulp-clean-css');//To Minify CSS files
-const purgecss = require('gulp-purgecss');// Remove Unused CSS from Styles
+const postcss = require('gulp-postcss');
+const concat = require('gulp-concat');
+const uglify = require('gulp-terser');
+const imagemin = require('gulp-imagemin');
+const cleanCSS = require('gulp-clean-css');
+const purgecss = require('gulp-purgecss');/
 const autoprefixer = require('gulp-autoprefixer');
 //Note : Webp still not supported in major browsers including forefox
 //const webp = require('gulp-webp'); //For converting images to WebP format
