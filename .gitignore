@@ -8,3 +8,4 @@ package-lock.json
 .phpunit.cache
 test.php
 /.vscode
+/public/assets
