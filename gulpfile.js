@@ -9,22 +9,24 @@ const imagemin = require('gulp-imagemin');
 const cleanCSS = require('gulp-clean-css');
 const purgecss = require('gulp-purgecss');
 const autoprefixer = require('gulp-autoprefixer');
-//Note : Webp still not supported in major browsers including forefox
+// Note: Webp still not supported in major browsers including firefox
 //const webp = require('gulp-webp'); //For converting images to WebP format
 //const replace = require('gulp-replace'); //For Replacing img formats to webp in html
 const logSymbols = require('log-symbols'); //For Symbolic Console logs :) :P 
 
-function devStyles(){
-  const tailwindcss = require('tailwindcss'); 
-  return src(`${options.paths.src.css}/**/*.css`).pipe(dest(options.paths.src.css))
+function devStyles()
+{
+    const tailwindcss = require('tailwindcss');
+    
+    return src(`${options.paths.src.css}/**/*.css`).pipe(dest(options.paths.src.css))
     .pipe(postcss([
-      tailwindcss(options.config.tailwindjs),
-      require('autoprefixer'),
+        tailwindcss(options.config.tailwindjs),
+        require('autoprefixer'),
     ]))
     .pipe(concat({ path: 'styles.css'}))
     .pipe(autoprefixer({
-      browsers: ['last 99 versions'],
-      cascade: false
+        browsers: ['last 99 versions'],
+        cascade: false
     }))
     .pipe(dest(options.paths.dist.css));
 }
