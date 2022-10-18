@@ -17,15 +17,21 @@ Core is a simple light weight PHP MVC Framework, built to use for my PHP project
 
 1. Clone the repo:
 
-    `git clone https://github.com/deondazy/core.git`
+    ```sh
+    git clone https://github.com/deondazy/core.git
+    ```
 
 2. Install composer packages:
 
-    `composer install`
+    ```sh
+    composer install
+    ```
 
 3. Install NPM packages:
 
-    `npm install`
+    ```sh
+    npm install
+    ```
 
 4. Create a Database
 
