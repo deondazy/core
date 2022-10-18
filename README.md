@@ -44,9 +44,9 @@ Thank you for considering contributing to Deondazy Core framework! Any contribut
 If you have any suggestion that would improve this framework, please fork this repo and create a pull request. You can also open an issue with the tag "improvement". Please don't forget to give this project a star! Thanks again!
 
 1. Fork this repo
-2. Create a Feature Branch `git checkout -b feature/ImprovementFeature`
-3. Commit your changes `git commit -m 'Add some ImprovementFeature'`
-4. Push to the Branch `git push origin feature/ImprovementFeature`
+2. Create a Feature Branch (`git checkout -b feature/ImprovementFeature`)
+3. Commit your changes (`git commit -m 'Add some ImprovementFeature'`)
+4. Push to the Branch (`git push origin feature/ImprovementFeature`)
 5. Open a Pull Request
 
 ## License
