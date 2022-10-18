@@ -603,12 +603,6 @@ video {
 }
 .h-60 {
   height: 15rem;
-<<<<<<< HEAD:public/assets/css/styles.css
-}
-.h-96 {
-  height: 24rem;
-=======
->>>>>>> gulp:public/dist/assets/css/styles.css
 }
 .min-h-screen {
   min-height: 100vh;
