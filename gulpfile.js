@@ -1,6 +1,6 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const del = require('del');
-const options = require("./config");
+const options = require("./gulp.paths.config");
 
 const postcss = require('gulp-postcss');
 const concat = require('gulp-concat');
@@ -12,12 +12,12 @@ const autoprefixer = require('gulp-autoprefixer');
 // Note: Webp still not supported in major browsers including firefox
 //const webp = require('gulp-webp'); //For converting images to WebP format
 //const replace = require('gulp-replace'); //For Replacing img formats to webp in html
-const logSymbols = require('log-symbols'); //For Symbolic Console logs :) :P 
+const logSymbols = require('log-symbols'); //For Symbolic Console logs :) :P
 
 function devStyles()
 {
     const tailwindcss = require('tailwindcss');
-    
+
     return src(`${options.paths.src.css}/**/*.css`).pipe(dest(options.paths.src.css))
     .pipe(postcss([
         tailwindcss(options.config.tailwindjs),
@@ -59,7 +59,7 @@ function devClean(){
 function prodStyles(){
   return src(`${options.paths.dist.css}/**/*`)
   .pipe(purgecss({
-    content: ['views/**/*.{html,js}'],
+    content: ['app/Views/**/*.{html,js}'],
     defaultExtractor: content => {
       const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || []
       const innerMatches = content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
