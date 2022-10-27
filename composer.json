@@ -5,17 +5,23 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Deondazy\\Core\\": "src/",
+            "Deondazy\\Core\\": "core/",
+            "Deondazy\\App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Deondazy\\Tests\\": "tests/"
         }
     },
     "authors": [
         {
-            "name": "deondazy",
+            "name": "Deon Okonkwo",
             "email": "deondazy@gmail.com"
         }
     ],
     "require": {
+        "php": ">=7.4",
         "filp/whoops": "^2.14",
         "twig/twig": "^3.0",
         "vlucas/phpdotenv": "^5.4"
@@ -25,5 +31,11 @@
     },
     "scripts": {
         "test-php": "vendor/bin/phpunit --colors=always --verbose --coverage-text --coverage-clover coverage.xml"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4"
+        }
     }
 }
