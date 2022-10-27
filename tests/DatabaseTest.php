@@ -2,7 +2,7 @@
 
 namespace Deondazy\Tests;
 
-use Deondazy\Core\Models\Database;
+use Deondazy\Core\Database;
 use Deondazy\Core\Exception\DatabaseException;
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +31,7 @@ class DatabaseTest extends TestCase
         if (! extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped("Need 'pdo_sqlite' to test in memory.");
         }
-        
+
         // Set the PDO object
         $this->database = $this->getDatabase();
 
@@ -47,7 +47,7 @@ class DatabaseTest extends TestCase
         /**
          * Using SQLite in-memory database for testing
          * so we don't pollute the real database with test data.
-         * 
+         *
          * @see https://www.sqlite.org/inmemorydb.html
          */
         return new Database('sqlite::memory:');
@@ -55,7 +55,7 @@ class DatabaseTest extends TestCase
 
     /**
      * Create a table for testing.
-     * 
+     *
      * @return void
      */
     private function createTable()
@@ -72,7 +72,7 @@ class DatabaseTest extends TestCase
 
     /**
      * Insert some data for testing.
-     * 
+     *
      * @return void
      */
     private function insertData()
