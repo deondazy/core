@@ -21,6 +21,7 @@
     <coverage cacheDirectory=".phpunit.cache/code-coverage"
               processUncoveredFiles="true">
         <include>
+            <directory suffix=".php">./core</directory>
             <directory suffix=".php">./app</directory>
         </include>
     </coverage>
