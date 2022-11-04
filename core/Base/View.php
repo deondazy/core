@@ -28,11 +28,50 @@ class View
      */
     public function get(string $template, array $data = []): string
     {
+        // If template has an extension, remove it
+        if (strpos($template, '.') !== false) {
+            $extension = explode('.', $template)[1];
+            $templateName = trim(str_replace($extension, '', $template), '.');
+        } else {
+            // If template has no extension, use it
+            $templateName = $template;
+        }
+
+        // Get the twig config file
+        $config = YamlConfig::load('twig');
+
+        // Get supported template extensions
+        $extensions = $config['extensions'];
+
+        // Find the file that matches the template name
+        $templateFile = $this->findTemplateFile($templateName, $extensions);
+
         $loader = new FilesystemLoader(CORE_VIEWS);
-        $twig = new Environment($loader, YamlConfig::load('twig'));
+        $twig = new Environment($loader, $config);
         $twig->addExtension(new DebugExtension());
 
-        return $twig->render($template, $data);
+        return $twig->render($templateFile, $data);
+    }
+
+    /**
+     * Find the template file
+     *
+     * @param string $templateName
+     * @param array $extensions
+     *
+     * @return string
+     *
+     * @throws FileNotFoundException
+     */
+    private function findTemplateFile(string $templateName, array $extensions): string
+    {
+        foreach ($extensions as $extension) {
+            if (file_exists(CORE_VIEWS . DS . $templateName . $extension)) {
+                return $templateName . $extension;
+            }
+        }
+
+        throw new FileNotFoundException("No template file found for $templateName");
     }
 
     /**
