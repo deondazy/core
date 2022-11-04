@@ -33,7 +33,8 @@ class YamlConfig
      *
      * @return array
      *
-     * @throws ParseException|FileNotFoundException
+     * @throws ParseException
+     * @throws FileNotFoundException
      */
     public function get(string $yamlFile): array
     {
