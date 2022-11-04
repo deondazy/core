@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $this->render('index.html', ['title' => 'Deondazy Core']);
+        $this->render('index', ['title' => 'Deondazy Core']);
     }
 }
