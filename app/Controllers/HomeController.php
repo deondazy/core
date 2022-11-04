@@ -2,12 +2,12 @@
 
 namespace Deondazy\App\Controllers;
 
-use Deondazy\Core\Controller;
+use Deondazy\Core\Base\Controller;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $this->view('index.html', ['title' => 'Deondazy Core']);
+        $this->render('index.html', ['title' => 'Deondazy Core']);
     }
 }
