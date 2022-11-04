@@ -9,3 +9,4 @@ package-lock.json
 test.php
 /.vscode
 /public/assets
+.idea
