@@ -23,6 +23,7 @@
     "require": {
         "php": ">=7.4",
         "filp/whoops": "^2.14",
+        "symfony/yaml": "^5.4",
         "twig/twig": "^3.0",
         "vlucas/phpdotenv": "^5.4"
     },
