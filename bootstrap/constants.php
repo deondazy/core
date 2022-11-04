@@ -23,6 +23,9 @@ define('DS', DIRECTORY_SEPARATOR);
 // Define Public root path
 define('CORE_PUBLIC', CORE_ROOT . DS . 'public');
 
+// Define the Views root path
+define('CORE_VIEWS', CORE_ROOT . DS . 'app' . DS . 'Views');
+
 // Define the config path
 define('CORE_CONFIG', CORE_ROOT . DS . 'config');
 
