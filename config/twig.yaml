@@ -18,3 +18,9 @@ autoescape: 'name'
 
 # A flag that indicates which optimizations to apply (default to -1 -- all optimizations are enabled; set it to 0 to disable).
 optimizations: -1
+
+# Supported template file extensions. Default to .html (not a Twig configuration option)
+extensions:
+  - .html
+  - .twig
+  - .html.twig
