@@ -17,8 +17,14 @@ define('CORE_PHP', '7.4');
 // Define installation root path
 define('CORE_ROOT', dirname(dirname(__FILE__)));
 
+// Define directory separator
+define('DS', DIRECTORY_SEPARATOR);
+
 // Define Public root path
-define('CORE_PUBLIC', CORE_ROOT . '/public');
+define('CORE_PUBLIC', CORE_ROOT . DS . 'public');
+
+// Define the config path
+define('CORE_CONFIG', CORE_ROOT . DS . 'config');
 
 // Define the app name
 define('APP_NAME', $_ENV['APP_NAME']);
