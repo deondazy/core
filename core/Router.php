@@ -6,72 +6,219 @@ use Deondazy\Core\Exceptions\InvalidArgumentException;
 
 class Router
 {
-    private array $handlers;
+    /**
+     * The registered routes
+     *
+     * @var array
+     */
+    private array $routes = [];
 
+    /**
+     * The not found handler
+     *
+     * @var callable
+     */
     private $notFoundHandler;
 
+    /**
+     * The GET request method
+     *
+     * @var string
+     */
     private const GET = 'GET';
+
+    /**
+     * The POST request method
+     *
+     * @var string
+     */
     private const POST = 'POST';
+
+    /**
+     * The PUT request method
+     *
+     * @var string
+     */
     private const PUT = 'PUT';
+
+    /**
+     * The PATCH request method
+     *
+     * @var string
+     */
     private const PATCH = 'PATCH';
+
+    /**
+     * The DELETE request method
+     *
+     * @var string
+     */
     private const DELETE = 'DELETE';
 
-
-    public function get(string $path, $handler): void
+    /**
+     * Register a GET route
+     *
+     * @param string $path
+     * @param \Closure|array|null|string $handler
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function get($path, $handler = null)
     {
-        $this->addHandler(self::GET, $path, $handler);
+        $this->addRoute(self::GET, $path, $handler);
     }
 
-    public function post(string $path, $handler): void
+    /**
+     * Register a POST route
+     *
+     * @param string $path
+     * @param \Closure|array|null|string $handler
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function post($path, $handler = null)
     {
-        $this->addHandler(self::POST, $path, $handler);
+        $this->addRoute(self::POST, $path, $handler);
     }
 
-    public function put(string $path, $handler): void
+    /**
+     * Register a PUT route
+     *
+     * @param string $path
+     * @param \Closure|array|null|string $handler
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function put($path, $handler = null)
     {
-        $this->addHandler(self::PUT, $path, $handler);
+        $this->addRoute(self::PUT, $path, $handler);
     }
 
-    public function patch(string $path, $handler): void
+    /**
+     * Register a PATCH route
+     *
+     * @param string $path
+     * @param \Closure|array|null|string $handler
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function patch($path, $handler = null)
     {
-        $this->addHandler(self::PATCH, $path, $handler);
+        $this->addRoute(self::PATCH, $path, $handler);
     }
 
-    public function delete(string $path, $handler): void
+    /**
+     * Register a DELETE route
+     *
+     * @param string $path
+     * @param \Closure|array|null|string $handler
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function delete($path, $handler = null)
     {
-        $this->addHandler(self::DELETE, $path, $handler);
+        $this->addRoute(self::DELETE, $path, $handler);
     }
 
-    public function notFoundHandler($handler): void
+    /**
+     * Set the not found handler
+     *
+     * @param \Closure $handler
+     *
+     * @return void
+     */
+    public function notFoundHandler($handler)
     {
         $this->notFoundHandler = $handler;
     }
 
-    private function addHandler(string $method, string $path, $handler): void
+    /**
+     * Add a route to the routes array
+     *
+     * @param string $method
+     * @param string $path
+     * @param \Closure|array|null|string $handler
+     *
+     * @return void
+     */
+    private function addRoute($method, $path, $handler = null)
     {
-        $this->handlers[$method . $path] = [
-            'path'    => $path,
+        $this->routes[$method . $path] = [
             'method'  => $method,
+            'path'    => $path,
             'handler' => $handler,
         ];
     }
 
-    public function run()
+    /**
+     * Match the route path parameter with the request url parameter
+     *
+     * @param array $routePath
+     * @param array $urlPath
+     *
+     * @return array
+     *
+     * @throws InvalidArgumentException
+     */
+    private function getParameters(array $routePath, array $urlPath)
     {
-        $requestUri = parse_url($_SERVER['REQUEST_URI']);
-        $requestPath = $requestUri['path'];
-        $requestPath = $requestPath === '/' ? $requestPath : rtrim($requestPath, '/');
-        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        $parameters = [];
 
-        $callback = null;
-
-        foreach ($this->handlers as $handler) {
-            if ($handler['path'] === $requestPath && $handler['method'] === $requestMethod) {
-                $callback = $handler['handler'];
-                break;
+        foreach ($routePath as $key => $value) {
+            if (strpos($value, '$') !== false && isset($urlPath[$key])) {
+                $parameters[substr($value, 1)] = $urlPath[$key];
             }
         }
 
+        return $parameters;
+    }
+
+    /**
+     * Run the router
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function run()
+    {
+        $requestUri    = parse_url($_SERVER['REQUEST_URI']);
+        $requestPath   = $requestUri['path'];
+        $requestPath   = ($requestPath === '/') ? $requestPath: rtrim($requestPath, '/');
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        $callback      = null;
+        $parameters    = [];
+
+        foreach ($this->routes as $route) {
+            $routePart = explode('/', $route['path']);
+            $urlPart = explode('/', $requestPath);
+
+            array_shift($routePart);
+            array_shift($urlPart);
+
+            // Check if the route path and the request url path are the same
+            if (count($routePart) === count($urlPart) && $routePart[0] === $urlPart[0]) {
+                // Check if the route method and the request method are the same
+                if ($route['method'] === $requestMethod) {
+                    $callback = $route['handler'];
+                    $parameters = $this->getParameters($routePart, $urlPart);
+                    break;
+                }
+            }
+        }
+
+        // If callback is a string, it means that the handler is a controller
         if (is_string($callback)) {
             $callback = explode('@', $callback);
 
@@ -81,73 +228,29 @@ class Router
 
             $controller = new $callback[0]();
             $callback = [$controller, $callback[1]];
-        }
 
-        if (!$callback) {
-            header('HTTP/1.0 404 Not Found');
-
-            if (!empty($this->notFoundHandler)) {
-                $callback = $this->notFoundHandler;
+            if (!is_callable($callback)) {
+                throw new InvalidArgumentException('Invalid callback');
             }
         }
 
-        call_user_func_array($callback, [
-            array_merge($_GET, $_POST),
-        ]);
+        // if callback is an array, it means that the handler is a controller
+        if (is_array($callback)) {
+            $controller = new $callback[0]();
+            $callback = [$controller, $callback[1]];
+
+            if (!is_callable($callback)) {
+                throw new InvalidArgumentException('Invalid callback');
+            }
+        }
+
+        // If callback is null, it means we have a 404
+        if (is_null($callback)) {
+            header('HTTP/1.0 404 Not Found');
+
+            $callback = $this->notFoundHandler;
+        }
+
+        echo call_user_func_array($callback, $parameters);
     }
-
-    // TODO: Remove this method
-    // private function route(string $path, $handler)
-    // {
-    //     $ROOT = CORE_ROOT;
-
-
-    //     if ($path == "/404") {
-    //         include_once("$ROOT/$handler");
-    //         exit();
-    //     }
-
-    //     $request_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
-    //     $request_url = rtrim($request_url, '/');
-    //     $request_url = strtok($request_url, '?');
-
-    //     $path_parts = explode('/', $path);
-
-    //     $request_url_parts = explode('/', $request_url);
-
-    //     array_shift($path_parts);
-    //     array_shift($request_url_parts);
-
-    //     if ($path_parts[0] == '' && count($request_url_parts) == 0) {
-    //         include_once("$ROOT/$handler");
-    //         exit();
-    //     }
-
-    //     if (count($path_parts) != count($request_url_parts)) {
-    //         return;
-    //     }
-
-    //     $parameters = [];
-
-    //     for ($__i__ = 0; $__i__ < count($path_parts); $__i__++) {
-    //         $path_part = $path_parts[$__i__];
-
-    //         if (preg_match("/^[$]/", $path_part)) {
-    //             $path_part = ltrim($path_part, '$');
-    //             array_push($parameters, $request_url_parts[$__i__]);
-    //             $$path_part = $request_url_parts[$__i__];
-    //         } else if ($path_parts[$__i__] != $request_url_parts[$__i__]) {
-    //             return;
-    //         }
-    //     }
-
-    //     // Callback function
-    //     if (is_callable($handler)) {
-    //         call_user_func($handler);
-    //         exit();
-    //     }
-
-    //     include_once("$ROOT/$handler");
-    //     exit();
-    // }
 }
