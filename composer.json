@@ -32,8 +32,13 @@
             "Deondazy\\Tests\\": "tests/"
         }
     },
-
     "scripts": {
         "test-php": "vendor/bin/phpunit --colors=always --verbose --coverage-text --coverage-clover coverage.xml"
     },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
