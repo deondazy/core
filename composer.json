@@ -1,6 +1,6 @@
 {
     "name": "deondazy/core",
-    "description": "Simple PHP MVC Library",
+    "description": "The Deondazy Core PHP MVC Framework",
     "type": "project",
     "license": "MIT",
     "autoload": {
