@@ -3,11 +3,11 @@ services:
   core.php:
     build:
       context: ./
-      dockerfile: ./config/docker/Dockerfile
-    image: core-7.4/php
+      dockerfile: ./docker/Dockerfile
+    image: core-8.1/php
     volumes:
       - .:/var/www/html
-      - ./config/docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
     networks:
       - core
   nginx:
@@ -17,7 +17,7 @@ services:
       - "443:443"
     volumes:
       - .:/var/www/html
-      - ./config/docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - core
   mysql:
@@ -31,7 +31,7 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - core-mysql:/var/lib/mysql/
-      - ./config/docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - core
 networks:
