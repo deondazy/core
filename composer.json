@@ -4,6 +4,13 @@
     "type": "project",
     "keywords": ["framework", "deondazy", "core", "mvc"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Deon Okonkwo",
+            "email": "deondazy@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Deondazy\\Core\\": "core/",
@@ -15,12 +22,6 @@
             "Deondazy\\Tests\\": "tests/"
         }
     },
-    "authors": [
-        {
-            "name": "Deon Okonkwo",
-            "email": "deondazy@gmail.com"
-        }
-    ],
     "require": {
         "php": ">=7.4",
         "filp/whoops": "^2.14",
