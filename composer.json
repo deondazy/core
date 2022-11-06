@@ -2,6 +2,7 @@
     "name": "deondazy/core",
     "description": "The Deondazy Core PHP MVC Framework",
     "type": "project",
+    "keywords": ["framework", "deondazy", "core", "mvc"],
     "license": "MIT",
     "autoload": {
         "psr-4": {
