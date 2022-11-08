@@ -11,8 +11,6 @@ services:
     volumes:
       - .:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - ./docker/php/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
-
     networks:
       - core
   nginx:
