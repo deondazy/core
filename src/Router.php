@@ -194,7 +194,7 @@ class Router
     {
         $requestUri    = parse_url($_SERVER['REQUEST_URI']);
         $requestPath   = $requestUri['path'];
-        $requestPath   = ($requestPath === '/') ? $requestPath: rtrim($requestPath, '/');
+        $requestPath   = ($requestPath === '/') ? $requestPath : rtrim($requestPath, '/');
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $callback      = null;
