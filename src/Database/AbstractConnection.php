@@ -95,7 +95,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return PDOStatement
      */
-    public function prepare($statement, $driverOptions = [])
+    public function prepare($statement, $driverOptions = []): PDOStatement
     {
         $this->connect();
         return $this->connection->prepare($statement, $driverOptions);
@@ -131,11 +131,11 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @param string $statement
      * @param int|null $fetchMode
-     * @param mixed|null $fetchArgument
+     * @param mixed $fetchArgument
      *
      * @return PDOStatement|false
      */
-    public function query(string $statement, int $fetchMode = null, mixed ...$fetchArgument)
+    public function query(string $statement, ?int $fetchMode = null, mixed ...$fetchArgument): PDOStatement|false
     {
         $this->connect();
         return $this->connection->query($statement, $fetchMode, ...$fetchArgument);
@@ -152,7 +152,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return string|false
      */
-    public function quote($value, $parameterType = PDO::PARAM_STR)
+    public function quote($value, $parameterType = PDO::PARAM_STR): string|false
     {
         $this->connect();
 
@@ -248,9 +248,9 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @param string|null $name
      *
-     * @return string|bool
+     * @return string|false
      */
-    public function lastInsertId($name = null)
+    public function lastInsertId(?string $name = null): string|false
     {
         $this->connect();
 
@@ -266,7 +266,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return bool
      */
-    public function beginTransaction()
+    public function beginTransaction(): bool
     {
         $this->connect();
         return $this->connection->beginTransaction();
@@ -277,7 +277,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return bool
      */
-    public function commit()
+    public function commit(): bool
     {
         $this->connect();
         return $this->connection->commit();
@@ -288,7 +288,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return bool
      */
-    public function rollBack()
+    public function rollBack(): bool
     {
         $this->connect();
         return $this->connection->rollBack();
@@ -299,7 +299,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return bool
      */
-    public function inTransaction()
+    public function inTransaction(): bool
     {
         $this->connect();
         return $this->connection->inTransaction();
@@ -310,7 +310,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return string|null
      */
-    public function errorCode()
+    public function errorCode(): ?string
     {
         $this->connect();
         return $this->connection->errorCode();
@@ -321,7 +321,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return array
      */
-    public function errorInfo()
+    public function errorInfo(): array
     {
         $this->connect();
         return $this->connection->errorInfo();
@@ -332,9 +332,9 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @param string $statement
      *
-     * @return int|bool
+     * @return int|false
      */
-    public function exec($statement)
+    public function exec($statement): int|false
     {
         $this->connect();
         return $this->connection->exec($statement);
@@ -348,7 +348,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return bool
      */
-    public function setAttribute($attribute, $value)
+    public function setAttribute($attribute, $value): bool
     {
         $this->connect();
         return $this->connection->setAttribute($attribute, $value);
@@ -361,21 +361,10 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return mixed
      */
-    public function getAttribute($attribute)
+    public function getAttribute($attribute): mixed
     {
         $this->connect();
         return $this->connection->getAttribute($attribute);
-    }
-
-    /**
-     * Check if a connection is still alive.
-     *
-     * @return bool
-     */
-    public function ping()
-    {
-        $this->connect();
-        return $this->connection->ping();
     }
 
     /**
@@ -383,7 +372,7 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
      *
      * @return array
      */
-    public static function getAvailableDrivers()
+    public static function getAvailableDrivers(): array
     {
         return self::getAvailableDrivers();
     }
