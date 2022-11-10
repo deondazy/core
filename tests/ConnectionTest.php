@@ -3,6 +3,7 @@
 namespace Deondazy\Tests;
 
 use Deondazy\Core\Database\Connection;
+use Deondazy\Core\Database\AbstractConnection;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -90,6 +91,11 @@ class ConnectionTest extends TestCase
 
     /**
      * @covers \Deondazy\Core\Database\Connection::connect
+     * @covers \Deondazy\Core\Database\AbstractConnection::exec
+     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers \Deondazy\Core\Database\AbstractConnection::isConnected
+     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testConnect(): void
     {
@@ -100,6 +106,11 @@ class ConnectionTest extends TestCase
 
     /**
      * @covers \Deondazy\Core\Database\Connection::disconnect
+     * @covers \Deondazy\Core\Database\AbstractConnection::exec
+     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers \Deondazy\Core\Database\AbstractConnection::isConnected
+     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testDisconnect(): void
     {
@@ -114,6 +125,10 @@ class ConnectionTest extends TestCase
 
     /**
      * @covers \Deondazy\Core\Database\Connection::getConnection
+     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers \Deondazy\Core\Database\AbstractConnection::exec
+     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
      */
     public function testGetConnection(): void
     {
