@@ -22,7 +22,7 @@ Dotenv::createImmutable(dirname(dirname(__FILE__)))->safeLoad();
 require_once __DIR__.'/constants.php';
 
 // Use Whoops for error handling
-$whoops = new Run;
+$whoops = new Run();
 $whoops->pushHandler(new PrettyPageHandler);
 $whoops->register();
 
