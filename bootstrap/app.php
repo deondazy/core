@@ -23,7 +23,7 @@ require_once __DIR__ . '/constants.php';
 
 // Use Whoops for error handling
 $whoops = new Run();
-$whoops->pushHandler(new PrettyPageHandler);
+$whoops->pushHandler(new PrettyPageHandler());
 $whoops->register();
 
 // Check if the current PHP version is compatible with the app
