@@ -85,13 +85,6 @@ interface PdoInterface
     public static function getAvailableDrivers();
 
     /**
-     * Check if a connection is still alive.
-     *
-     * @return bool
-     */
-    public function ping();
-
-    /**
      * Prepare an SQL statement.
      *
      * @param string $statement
