@@ -13,7 +13,7 @@ use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 
 // Require Autoloader
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Load environment variables
 Dotenv::createImmutable(dirname(dirname(__FILE__)))->safeLoad();
