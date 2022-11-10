@@ -19,7 +19,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 Dotenv::createImmutable(dirname(dirname(__FILE__)))->safeLoad();
 
 // Require the constants file
-require_once __DIR__.'/constants.php';
+require_once __DIR__ . '/constants.php';
 
 // Use Whoops for error handling
 $whoops = new Run();
