@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Deondazy Core Bootstrap File
  *
