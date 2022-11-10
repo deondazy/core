@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1667886542">
-  <project timestamp="1667886542">
+<coverage generated="1667954792">
+  <project timestamp="1667954792">
     <file name="/var/www/html/app/Controllers/HomeController.php">
       <class name="Deondazy\App\Controllers\HomeController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
