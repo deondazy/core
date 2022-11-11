@@ -182,16 +182,16 @@ class Builder
     public function get()
     {
         if (!empty($this->where)) {
-            $this->statement .= $this->where;
+            $this->query .= $this->where;
         }
 
-        $statement = $this->connection->prepare($this->statement);
-        $statement->execute($this->bindings);
+        $this->statement = $this->connection->prepare($this->query);
+        $this->statement->execute($this->bindings);
 
-        if ($statement->rowCount() > 1) {
-            return $statement->fetchAll(\PDO::FETCH_OBJ);
+        if ($this->statement->rowCount() > 1) {
+            return $this->statement->fetchAll(\PDO::FETCH_OBJ);
         }
 
-        return $statement->fetch(\PDO::FETCH_OBJ);
+        return $this->statement->fetch(\PDO::FETCH_OBJ);
     }
 }
