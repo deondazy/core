@@ -28,9 +28,9 @@ class Builder
     protected $query;
 
     /**
-     * The query statement.
+     * The prepared PDOStatement.
      *
-     * @var string
+     * @var \PDOStatement
      */
     protected $statement;
 
