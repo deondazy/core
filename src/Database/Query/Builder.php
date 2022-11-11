@@ -105,11 +105,11 @@ class Builder
         $whereClause = "";
 
         if (!empty($this->where)) {
-            $whereClause = " {$chainOperator} `{$column}` {$operator} :{$column}";
-            $this->bindings[$column] = $value;
+            $whereClause = " {$chainOperator} `{$column}` {$operator} ?";
+            $this->bindings[] =  $value;
         } else {
-            $whereClause = " WHERE `{$column}` {$operator} :{$column}";
-            $this->bindings[$column] =  $value;
+            $whereClause = " WHERE `{$column}` {$operator} ?";
+            $this->bindings[] =  $value;
         }
 
         return $this->where .= $whereClause;
@@ -172,6 +172,9 @@ class Builder
             $this->statement .= $this->where;
         }
 
-        return $this->connection->fetchAll($this->statement, $this->bindings);
+        $statement = $this->connection->prepare($this->statement);
+        $statement->execute($this->bindings);
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
