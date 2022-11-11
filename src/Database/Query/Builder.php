@@ -112,7 +112,7 @@ class Builder
     {
         // Check if the operator is supported.
         if (!in_array($operator, $this->operators)) {
-            throw new \InvalidArgumentException("Operator {$operator} is not supported.");
+            throw new InvalidArgumentException("Operator {$operator} is not supported.");
         }
 
         $whereClause = "";
@@ -137,7 +137,7 @@ class Builder
      *
      * @return $this
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function where(string $column, string $operator, string $value)
     {
@@ -154,7 +154,7 @@ class Builder
      *
      * @return $this
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function orWhere(string $column, string $operator, string $value)
     {
