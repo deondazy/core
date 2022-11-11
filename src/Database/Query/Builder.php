@@ -170,7 +170,6 @@ class Builder
     public function rawWhere(string $whereClause)
     {
         $this->where = " WHERE {$whereClause}";
-
         return $this;
     }
 
