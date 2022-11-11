@@ -162,6 +162,21 @@ class Builder
     }
 
     /**
+     * Set a raw where clause.
+     *
+     * @param string $whereClause
+     *
+     * @return $this
+     */
+    public function rawWhere(string $whereClause)
+    {
+        $this->where = " WHERE {$whereClause}";
+
+        return $this;
+    }
+
+
+    /**
      * Fetch all the results from the database.
      *
      * @return array
