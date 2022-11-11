@@ -9,7 +9,7 @@ class Builder
     /**
      * The database connection instance.
      *
-     * @var \Deondazy\Core\Database\Connection
+     * @var Deondazy\Core\Database\Connection
      */
     protected $connection;
 
