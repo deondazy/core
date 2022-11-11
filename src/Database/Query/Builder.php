@@ -140,7 +140,6 @@ class Builder
     public function where(string $column, string $operator, string $value)
     {
         $this->setWhereClause('AND', $column, $operator, $value);
-
         return $this;
     }
 
