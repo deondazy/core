@@ -3,6 +3,7 @@
 namespace Deondazy\Core\Database\Query;
 
 use PDOStatement;
+use InvalidArgumentException;
 use Deondazy\Core\Database\Connection;
 
 class Builder
