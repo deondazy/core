@@ -91,6 +91,31 @@ class Builder
     }
 
     /**
+     * Set the where clause.
+     *
+     * @param string $chainOperator
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     *
+     * @return string $whereClause
+     */
+    protected function setWhereClause($chainOperator, $column, $operator, $value)
+    {
+        $whereClause = "";
+
+        if (!empty($this->where)) {
+            $whereClause = " {$chainOperator} `{$column}` {$operator} :{$column}";
+            $this->bindings[$column] = $value;
+        } else {
+            $whereClause = " WHERE `{$column}` {$operator} :{$column}";
+            $this->bindings[$column] =  $value;
+        }
+
+        return $this->where .= $whereClause;
+    }
+
+    /**
      * Set the where clause for the query.
      *
      * @param string $column
@@ -98,6 +123,8 @@ class Builder
      * @param string $value
      *
      * @return $this
+     *
+     * @throws \InvalidArgumentException
      */
     public function where(string $column, string $operator, string $value)
     {
@@ -106,17 +133,30 @@ class Builder
             throw new \InvalidArgumentException("Operator {$operator} is not supported.");
         }
 
-        $whereClause = "";
+        $this->setWhereClause('AND', $column, $operator, $value);
 
-        if (!empty($this->where)) {
-            $whereClause = " AND `{$column}` {$operator} :{$column}";
-            $this->bindings[$column] = $value;
-        } else {
-            $whereClause = " WHERE `{$column}` {$operator} :{$column}";
-            $this->bindings = [$column =>  $value];
+        return $this;
+    }
+
+    /**
+     * Chain the where clause with an OR operator.
+     *
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     *
+     * @return $this
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function orWhere(string $column, string $operator, string $value)
+    {
+        // Check if the operator is supported.
+        if (!in_array($operator, $this->operators)) {
+            throw new \InvalidArgumentException("Operator {$operator} is not supported.");
         }
 
-        $this->where .= $whereClause;
+        $this->setWhereClause('OR', $column, $operator, $value);
 
         return $this;
     }
