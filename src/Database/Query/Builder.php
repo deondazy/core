@@ -157,7 +157,6 @@ class Builder
     public function orWhere(string $column, string $operator, string $value)
     {
         $this->setWhereClause('OR', $column, $operator, $value);
-
         return $this;
     }
 
