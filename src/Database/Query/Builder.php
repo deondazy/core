@@ -102,6 +102,11 @@ class Builder
      */
     protected function setWhereClause($chainOperator, $column, $operator, $value)
     {
+        // Check if the operator is supported.
+        if (!in_array($operator, $this->operators)) {
+            throw new \InvalidArgumentException("Operator {$operator} is not supported.");
+        }
+
         $whereClause = "";
 
         if (!empty($this->where)) {
@@ -128,11 +133,6 @@ class Builder
      */
     public function where(string $column, string $operator, string $value)
     {
-        // Check if the operator is supported.
-        if (!in_array($operator, $this->operators)) {
-            throw new \InvalidArgumentException("Operator {$operator} is not supported.");
-        }
-
         $this->setWhereClause('AND', $column, $operator, $value);
 
         return $this;
@@ -151,11 +151,6 @@ class Builder
      */
     public function orWhere(string $column, string $operator, string $value)
     {
-        // Check if the operator is supported.
-        if (!in_array($operator, $this->operators)) {
-            throw new \InvalidArgumentException("Operator {$operator} is not supported.");
-        }
-
         $this->setWhereClause('OR', $column, $operator, $value);
 
         return $this;
