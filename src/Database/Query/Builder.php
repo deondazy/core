@@ -31,7 +31,7 @@ class Builder
     /**
      * The prepared PDOStatement.
      *
-     * @var \PDOStatement
+     * @var PDOStatement
      */
     protected $statement;
 
