@@ -93,7 +93,6 @@ class Builder
     public function select($columns = '*')
     {
         $this->statement = "SELECT {$columns} FROM {$this->table}";
-
         return $this;
     }
 
