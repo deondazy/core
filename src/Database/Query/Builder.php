@@ -21,6 +21,13 @@ class Builder
     protected $table;
 
     /**
+     * The SQL query string.
+     *
+     * @var string
+     */
+    protected $query;
+
+    /**
      * The query statement.
      *
      * @var string
