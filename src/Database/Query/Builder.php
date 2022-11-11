@@ -196,4 +196,18 @@ class Builder
 
         return $this->statement->fetch(\PDO::FETCH_OBJ);
     }
+
+    /**
+     * Dump the SQl prepared command.
+     *
+     * @return string
+     */
+    public function dump()
+    {
+        ob_start();
+        $this->statement->debugDumpParams();
+        $output = ob_get_contents() ?: '';
+        ob_end_clean();
+        return '<pre>' . htmlspecialchars($output) . '</pre>';
+    }
 }
