@@ -39,9 +39,9 @@ class Builder
     /**
      * The where clause.
      *
-     * @var string
+     * @var array
      */
-    protected $where;
+    protected $where = [];
 
     /**
      * The database query bindings.
