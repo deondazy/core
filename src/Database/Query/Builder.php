@@ -185,6 +185,10 @@ class Builder
         $statement = $this->connection->prepare($this->statement);
         $statement->execute($this->bindings);
 
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        if ($statement->rowCount() > 1) {
+            return $statement->fetchAll(\PDO::FETCH_OBJ);
+        }
+
+        return $statement->fetch(\PDO::FETCH_OBJ);
     }
 }
