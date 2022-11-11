@@ -2,6 +2,7 @@
 
 namespace Deondazy\Core\Database\Query;
 
+use PDOStatement;
 use Deondazy\Core\Database\Connection;
 
 class Builder
