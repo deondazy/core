@@ -2,6 +2,7 @@
 
 namespace Deondazy\Tests;
 
+use PDO;
 use stdClass;
 use PHPUnit\Framework\TestCase;
 use Deondazy\Core\Database\Connection;
@@ -377,5 +378,17 @@ class ConnectionTest extends TestCase
     {
         $this->assertSame('00000', $this->connection->errorCode());
         $this->assertSame(['00000', null, null], $this->connection->errorInfo());
+    }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::setAttribute
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testSetAttribute()
+    {
+        $this->assertTrue($this->connection->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL));
     }
 }
