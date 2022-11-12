@@ -10,13 +10,6 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
-     * The prepared PDOStatement.
-     *
-     * @var PDOStatement
-     */
-    protected $statement;
-
-    /**
      * The where clause.
      *
      * @var array
