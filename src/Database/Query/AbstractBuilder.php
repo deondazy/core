@@ -118,7 +118,8 @@ abstract class AbstractBuilder
      * @var array
      */
     protected $operators = [
-        '=', '!=', '<', '>', '<=', '>=', '<>', 'LIKE', 'NOT LIKE', 'IS NULL', 'IS NOT NULL', 'IN', 'NOT IN', 'BETWEEN'
+        '=', '!=', '<', '>', '<=', '>=', '<>', 'LIKE', 'NOT LIKE', 'IS NULL',
+        'IS NOT NULL', 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN',
     ];
 
     /**
