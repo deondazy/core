@@ -5,7 +5,7 @@ namespace Deondazy\Core\Database\Query;
 use PDOStatement;
 use Deondazy\Core\Database\Connection;
 
-abstract class AbstractConnection
+abstract class AbstractBuilder
 {
     /**
      * The database connection.
