@@ -2,9 +2,10 @@
 
 namespace Deondazy\Tests;
 
+use stdClass;
 use PHPUnit\Framework\TestCase;
 use Deondazy\Core\Database\Connection;
-use Deondazy\Core\Database\AbstractConnection;
+use Deondazy\Core\Database\Exceptions\BadValueException;
 use Deondazy\Core\Database\Exceptions\DatabaseException;
 
 /**
@@ -311,5 +312,43 @@ class ConnectionTest extends TestCase
             'name' => 'John',
         ];
         $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testBindValues()
+    {
+        $query = "SELECT * FROM users WHERE id = :id";
+
+        // PDO::PARAM_INT
+        $statement = $this->connection->prepareQueryWithValues($query, ['id' => 1]);
+        $this->assertInstanceOf('PDOStatement', $statement);
+
+        // PDO::PARAM_BOOL
+        $statement = $this->connection->prepareQueryWithValues($query, ['id' => true]);
+        $this->assertInstanceOf('PDOStatement', $statement);
+
+        // PDO::PARAM_NULL
+        $statement = $this->connection->prepareQueryWithValues($query, ['id' => null]);
+        $this->assertInstanceOf('PDOStatement', $statement);
+
+        // string (not a special type)
+        $statement = $this->connection->prepareQueryWithValues($query, ['id' => 'abc']);
+        $this->assertInstanceOf('PDOStatement', $statement);
+
+        // float (also not a special type)
+        $statement = $this->connection->prepareQueryWithValues($query, ['id' => 123.456]);
+        $this->assertInstanceOf('PDOStatement', $statement);
+
+        // non-bindable
+        $this->expectException(
+            BadValueException::class,
+            "Cannot bind value of type 'object' to placeholder 'id'"
+        );
+        $statement = $this->connection->prepareQueryWithValues($query, ['id' => new stdClass()]);
     }
 }
