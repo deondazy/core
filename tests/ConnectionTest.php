@@ -167,4 +167,24 @@ class ConnectionTest extends TestCase
 
         $this->assertEquals('sqlite::memory:', $this->connection->__debugInfo()['dsn']);
     }
+
+    /**
+     * @covers \Deondazy\Core\Database\AbstractConnection::exec
+     * @covers \Deondazy\Core\Database\AbstractConnection::__call
+     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testCall(): void
+    {
+        if (defined('HHVM_VERSION')) {
+            $this->markTestSkipped('HHVM blows up on this test.');
+            return;
+        }
+
+        $this->connection->sqliteCreateFunction('foo', function () {
+        });
+        $this->expectException('BadMethodCallException');
+        $this->connection->sqliteNoSuchMethod();
+    }
 }
