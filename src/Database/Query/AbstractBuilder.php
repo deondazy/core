@@ -156,4 +156,56 @@ abstract class AbstractBuilder
     {
         $this->query = "SELECT {$this->select} FROM {$this->table}";
     }
+
+    /**
+     * Compose the where clause conditions.
+     *
+     * return void
+     */
+    protected function composeWhereClauseConditions()
+    {
+        if (!empty($this->where)) {
+            foreach ($this->where as $i => $where) {
+                if (in_array($where['operator'], ['IS NULL', 'IS NOT NULL'])) {
+                    $whereRaw = "{$where['column']} {$where['operator']}";
+                } elseif (in_array($where['operator'], ['IN', 'NOT IN'])) {
+                    $in = '';
+                    $column = str_replace('.', '', $where['column']);
+
+                    foreach ($where['value'] as $x => $item) {
+                        $key = "{$column} in {$x}";
+                        $in .= ":{$key}, ";
+                        $this->bindings[$key] = $item;
+                    }
+                    $in = rtrim($in, ', ');
+                    $whereRaw = "{$where['column']} {$where['operator']} ({$in})";
+                } elseif (in_array($where['operator'], ['BETWEEN', 'NOT BETWEEN'])) {
+                    $column = str_replace('.', '', $where['column']);
+                    $whereRaw = "{$where['column']} {$where['operator']} :{$column}_btw0 AND :{$column}_btw1";
+                    $this->bindings["{$column}_btw0"] = $where['value'][0];
+                    $this->bindings["{$column}_btw1"] = $where['value'][1];
+                } elseif ($where['clause'] === '') {
+                    $whereRaw = $where['column'];
+                    $this->bindings = array_merge($this->bindings, $where['value']);
+                } else {
+                    $column          = str_replace('.', '', $where['column']) . $i;
+                    $whereRaw       = "{$where['column']} {$where['operator']} :{$column}";
+                    $this->bindings[$column] = $where['value'];
+                }
+
+                if ($where['clause'] !== '') {
+                    if ($i == 0) {
+                        $this->query .= " WHERE {$whereRaw}";
+                    } else {
+                        $this->query .= " {$where['clause']} ";
+                        $this->query .= $where['startParentheses'] ? '(' : '';
+                        $this->query .= $whereRaw;
+                        $this->query .= $where['endParentheses'] ? ')' : '';
+                    }
+                } else {
+                    $this->query .= " {$whereRaw} ";
+                }
+            }
+        }
+    }
 }
