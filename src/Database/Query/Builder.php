@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Deondazy\Core\Database\Connection;
 use Deondazy\Core\Database\Query\AbstractBuilder;
 
-class Builder
+class Builder extends AbstractBuilder
 {
     /**
      * The database connection instance.
