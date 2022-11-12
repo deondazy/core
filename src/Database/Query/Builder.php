@@ -10,6 +10,20 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
+     * Prefix parentheses in the query.
+     *
+     * @var bool
+     */
+    protected $startParentheses = false;
+
+    /**
+     * Suffix parentheses in the query.
+     *
+     * @var bool
+     */
+    protected $endParentheses = false;
+    
+    /**
      * Run a select query on the database.
      *
      * @param string $columns
