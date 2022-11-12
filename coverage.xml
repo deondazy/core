@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668276762">
-  <project timestamp="1668276762">
+<coverage generated="1668281133">
+  <project timestamp="1668281133">
     <file name="/var/www/html/app/Controllers/HomeController.php">
       <class name="Deondazy\App\Controllers\HomeController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
@@ -11,7 +11,7 @@
     </file>
     <file name="/var/www/html/app/Controllers/UserController.php">
       <class name="Deondazy\App\Controllers\UserController" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
       </class>
       <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="11" type="stmt" count="0"/>
@@ -24,11 +24,12 @@
       <line num="19" type="stmt" count="0"/>
       <line num="20" type="stmt" count="0"/>
       <line num="21" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="31" type="method" name="show" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
-      <metrics loc="41" ncloc="40" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="33" type="method" name="show" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <metrics loc="43" ncloc="42" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Base/Controller.php">
       <class name="Deondazy\Core\Base\Controller" namespace="global">
@@ -93,114 +94,116 @@
     </file>
     <file name="/var/www/html/src/Database/AbstractConnection.php">
       <class name="Deondazy\Core\Database\AbstractConnection" namespace="global">
-        <metrics complexity="33" methods="23" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="36" elements="91" coveredelements="48"/>
+        <metrics complexity="33" methods="22" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="68" elements="93" coveredelements="88"/>
       </class>
-      <line num="29" type="method" name="__call" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="31" type="stmt" count="1"/>
-      <line num="33" type="stmt" count="1"/>
+      <line num="30" type="method" name="__call" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="32" type="stmt" count="1"/>
       <line num="34" type="stmt" count="1"/>
-      <line num="37" type="stmt" count="1"/>
-      <line num="59" type="method" name="getConnection" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="61" type="stmt" count="1"/>
-      <line num="69" type="method" name="isConnected" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="71" type="stmt" count="2"/>
-      <line num="82" type="method" name="runQuery" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="84" type="stmt" count="7"/>
-      <line num="85" type="stmt" count="7"/>
-      <line num="86" type="stmt" count="7"/>
-      <line num="87" type="stmt" count="7"/>
-      <line num="98" type="method" name="prepare" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="100" type="stmt" count="1"/>
-      <line num="101" type="stmt" count="1"/>
-      <line num="115" type="method" name="prepareQueryWithValues" visibility="public" complexity="3" crap="3" count="7"/>
-      <line num="117" type="stmt" count="7"/>
-      <line num="118" type="stmt" count="1"/>
-      <line num="121" type="stmt" count="7"/>
-      <line num="122" type="stmt" count="7"/>
-      <line num="123" type="stmt" count="7"/>
-      <line num="124" type="stmt" count="7"/>
-      <line num="126" type="stmt" count="7"/>
-      <line num="138" type="method" name="query" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="140" type="stmt" count="0"/>
-      <line num="141" type="stmt" count="0"/>
-      <line num="155" type="method" name="quote" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="157" type="stmt" count="0"/>
-      <line num="159" type="stmt" count="0"/>
-      <line num="162" type="stmt" count="0"/>
-      <line num="163" type="stmt" count="0"/>
-      <line num="167" type="stmt" count="0"/>
-      <line num="168" type="stmt" count="0"/>
-      <line num="170" type="stmt" count="0"/>
-      <line num="181" type="method" name="fetchAffectedRows" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="183" type="stmt" count="0"/>
-      <line num="184" type="stmt" count="0"/>
-      <line num="195" type="method" name="fetchOne" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="197" type="stmt" count="0"/>
-      <line num="198" type="stmt" count="0"/>
-      <line num="209" type="method" name="fetchAll" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="211" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="60" type="method" name="getConnection" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="70" type="method" name="isConnected" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="72" type="stmt" count="2"/>
+      <line num="83" type="method" name="runQuery" visibility="public" complexity="1" crap="1" count="17"/>
+      <line num="85" type="stmt" count="17"/>
+      <line num="86" type="stmt" count="17"/>
+      <line num="87" type="stmt" count="17"/>
+      <line num="88" type="stmt" count="17"/>
+      <line num="99" type="method" name="prepare" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="101" type="stmt" count="3"/>
+      <line num="102" type="stmt" count="3"/>
+      <line num="116" type="method" name="prepareQueryWithValues" visibility="public" complexity="3" crap="3" count="17"/>
+      <line num="118" type="stmt" count="17"/>
+      <line num="119" type="stmt" count="3"/>
+      <line num="122" type="stmt" count="17"/>
+      <line num="123" type="stmt" count="17"/>
+      <line num="124" type="stmt" count="17"/>
+      <line num="125" type="stmt" count="17"/>
+      <line num="127" type="stmt" count="17"/>
+      <line num="139" type="method" name="query" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="141" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="1"/>
+      <line num="156" type="method" name="quote" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="158" type="stmt" count="1"/>
+      <line num="160" type="stmt" count="1"/>
+      <line num="163" type="stmt" count="1"/>
+      <line num="164" type="stmt" count="1"/>
+      <line num="168" type="stmt" count="1"/>
+      <line num="169" type="stmt" count="1"/>
+      <line num="171" type="stmt" count="1"/>
+      <line num="182" type="method" name="fetchAffectedRows" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="184" type="stmt" count="1"/>
+      <line num="185" type="stmt" count="1"/>
+      <line num="196" type="method" name="fetchOne" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="198" type="stmt" count="1"/>
+      <line num="199" type="stmt" count="1"/>
+      <line num="210" type="method" name="fetchAll" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="212" type="stmt" count="1"/>
-      <line num="224" type="method" name="bindValue" visibility="protected" complexity="5" crap="9.06" count="7"/>
-      <line num="227" type="stmt" count="7"/>
-      <line num="228" type="stmt" count="0"/>
-      <line num="229" type="stmt" count="0"/>
-      <line num="231" type="stmt" count="7"/>
-      <line num="232" type="stmt" count="0"/>
-      <line num="233" type="stmt" count="0"/>
-      <line num="235" type="stmt" count="7"/>
-      <line num="236" type="stmt" count="0"/>
+      <line num="213" type="stmt" count="1"/>
+      <line num="225" type="method" name="bindValue" visibility="protected" complexity="6" crap="6.09" count="17"/>
+      <line num="228" type="stmt" count="17"/>
+      <line num="229" type="stmt" count="1"/>
+      <line num="230" type="stmt" count="1"/>
+      <line num="232" type="stmt" count="17"/>
+      <line num="233" type="stmt" count="1"/>
+      <line num="234" type="stmt" count="1"/>
+      <line num="236" type="stmt" count="17"/>
       <line num="237" type="stmt" count="0"/>
-      <line num="240" type="stmt" count="7"/>
-      <line num="243" type="stmt" count="7"/>
-      <line num="253" type="method" name="lastInsertId" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="255" type="stmt" count="0"/>
-      <line num="257" type="stmt" count="0"/>
-      <line num="258" type="stmt" count="0"/>
-      <line num="261" type="stmt" count="0"/>
-      <line num="269" type="method" name="beginTransaction" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="271" type="stmt" count="1"/>
-      <line num="272" type="stmt" count="1"/>
-      <line num="280" type="method" name="commit" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="282" type="stmt" count="1"/>
-      <line num="283" type="stmt" count="1"/>
-      <line num="291" type="method" name="rollBack" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="293" type="stmt" count="1"/>
-      <line num="294" type="stmt" count="1"/>
-      <line num="302" type="method" name="inTransaction" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="304" type="stmt" count="1"/>
-      <line num="305" type="stmt" count="1"/>
-      <line num="313" type="method" name="errorCode" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="315" type="stmt" count="0"/>
-      <line num="316" type="stmt" count="0"/>
-      <line num="324" type="method" name="errorInfo" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="326" type="stmt" count="0"/>
-      <line num="327" type="stmt" count="0"/>
-      <line num="337" type="method" name="exec" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="339" type="stmt" count="7"/>
-      <line num="340" type="stmt" count="7"/>
-      <line num="351" type="method" name="setAttribute" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="353" type="stmt" count="0"/>
-      <line num="354" type="stmt" count="0"/>
-      <line num="364" type="method" name="getAttribute" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="366" type="stmt" count="0"/>
-      <line num="367" type="stmt" count="0"/>
-      <line num="375" type="method" name="getAvailableDrivers" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="377" type="stmt" count="0"/>
-      <metrics loc="380" ncloc="199" classes="1" methods="23" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="36" elements="91" coveredelements="48"/>
+      <line num="238" type="stmt" count="0"/>
+      <line num="241" type="stmt" count="17"/>
+      <line num="242" type="stmt" count="1"/>
+      <line num="243" type="stmt" count="1"/>
+      <line num="244" type="stmt" count="1"/>
+      <line num="248" type="stmt" count="17"/>
+      <line num="251" type="stmt" count="17"/>
+      <line num="261" type="method" name="lastInsertId" visibility="public" complexity="2" crap="2.06" count="1"/>
+      <line num="263" type="stmt" count="1"/>
+      <line num="265" type="stmt" count="1"/>
+      <line num="266" type="stmt" count="1"/>
+      <line num="269" type="stmt" count="0"/>
+      <line num="277" type="method" name="beginTransaction" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="279" type="stmt" count="1"/>
+      <line num="280" type="stmt" count="1"/>
+      <line num="288" type="method" name="commit" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="290" type="stmt" count="1"/>
+      <line num="291" type="stmt" count="1"/>
+      <line num="299" type="method" name="rollBack" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="301" type="stmt" count="1"/>
+      <line num="302" type="stmt" count="1"/>
+      <line num="310" type="method" name="inTransaction" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="312" type="stmt" count="1"/>
+      <line num="313" type="stmt" count="1"/>
+      <line num="321" type="method" name="errorCode" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="323" type="stmt" count="1"/>
+      <line num="324" type="stmt" count="1"/>
+      <line num="332" type="method" name="errorInfo" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="334" type="stmt" count="1"/>
+      <line num="335" type="stmt" count="1"/>
+      <line num="345" type="method" name="exec" visibility="public" complexity="1" crap="1" count="17"/>
+      <line num="347" type="stmt" count="17"/>
+      <line num="348" type="stmt" count="17"/>
+      <line num="359" type="method" name="setAttribute" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="361" type="stmt" count="1"/>
+      <line num="362" type="stmt" count="1"/>
+      <line num="372" type="method" name="getAttribute" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="374" type="stmt" count="1"/>
+      <line num="375" type="stmt" count="1"/>
+      <metrics loc="378" ncloc="202" classes="1" methods="22" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="68" elements="93" coveredelements="88"/>
     </file>
     <file name="/var/www/html/src/Database/Connection.php">
       <class name="Deondazy\Core\Database\Connection" namespace="global">
         <metrics complexity="7" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
       </class>
-      <line num="30" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="7"/>
-      <line num="37" type="stmt" count="7"/>
-      <line num="38" type="stmt" count="7"/>
-      <line num="42" type="stmt" count="7"/>
-      <line num="63" type="method" name="connect" visibility="public" complexity="3" crap="3" count="7"/>
-      <line num="65" type="stmt" count="7"/>
-      <line num="66" type="stmt" count="7"/>
-      <line num="69" type="stmt" count="7"/>
-      <line num="72" type="stmt" count="7"/>
+      <line num="30" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="17"/>
+      <line num="37" type="stmt" count="17"/>
+      <line num="38" type="stmt" count="17"/>
+      <line num="42" type="stmt" count="17"/>
+      <line num="63" type="method" name="connect" visibility="public" complexity="3" crap="3" count="17"/>
+      <line num="65" type="stmt" count="17"/>
+      <line num="66" type="stmt" count="17"/>
+      <line num="69" type="stmt" count="17"/>
+      <line num="72" type="stmt" count="17"/>
       <line num="73" type="stmt" count="1"/>
       <line num="74" type="stmt" count="1"/>
       <line num="83" type="method" name="disconnect" visibility="public" complexity="1" crap="1" count="1"/>
@@ -212,6 +215,12 @@
     </file>
     <file name="/var/www/html/src/Database/ConnectionInterface.php">
       <metrics loc="92" ncloc="29" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Database/Exceptions/BadValueException.php">
+      <class name="Deondazy\Core\Database\Exceptions\BadValueException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Database/Exceptions/DatabaseException.php">
       <class name="Deondazy\Core\Database\Exceptions\DatabaseException" namespace="global">
@@ -460,6 +469,6 @@
     <file name="/var/www/html/src/Routing/RouterInterface.php">
       <metrics loc="23" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="19" loc="1922" ncloc="1031" classes="12" methods="68" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="286" coveredstatements="50" elements="354" coveredelements="67"/>
+    <metrics files="20" loc="1932" ncloc="1046" classes="12" methods="67" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="290" coveredstatements="82" elements="357" coveredelements="107"/>
   </project>
 </coverage>
