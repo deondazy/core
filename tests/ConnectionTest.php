@@ -403,4 +403,16 @@ class ConnectionTest extends TestCase
     {
         $this->assertEquals('sqlite', $this->connection->getAttribute(PDO::ATTR_DRIVER_NAME));
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testGetAvailableDrivers()
+    {
+        $drivers = $this->connection::getAvailableDrivers();
+        $this->assertTrue((bool)count($drivers));
+    }
 }
