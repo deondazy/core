@@ -2,6 +2,7 @@
 
 namespace Deondazy\Tests;
 
+use PDOException;
 use Deondazy\Core\Database\Connection;
 use Deondazy\Core\Database\AbstractConnection;
 use PHPUnit\Framework\TestCase;
@@ -133,5 +134,12 @@ class ConnectionTest extends TestCase
     public function testGetConnection(): void
     {
         $this->assertInstanceOf('PDO', $this->connection->getConnection());
+    }
+
+    public function testGetConnectionException(): void
+    {
+        $this->expectException(PDOException::class);
+
+        $this->connection->getConnection();
     }
 }
