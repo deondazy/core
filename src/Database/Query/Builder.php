@@ -10,15 +10,6 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
-     * The supported query operators.
-     *
-     * @var array
-     */
-    protected $operators = [
-        '=', '!=', '<', '>', '<=', '>=', '<>', '!=',
-    ];
-
-    /**
      * Set the database connection
      *
      * @param Deondazy\Core\Database\Connection $connection
