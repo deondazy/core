@@ -10,19 +10,6 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
-     * Set the database connection
-     *
-     * @param Deondazy\Core\Database\Connection $connection
-     *
-     * @return $this
-     */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-        return $this;
-    }
-
-    /**
      * Set the database table to be used.
      *
      * @param string $table
