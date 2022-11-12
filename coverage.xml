@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668281133">
-  <project timestamp="1668281133">
+<coverage generated="1668281479">
+  <project timestamp="1668281479">
     <file name="/var/www/html/app/Controllers/HomeController.php">
       <class name="Deondazy\App\Controllers\HomeController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
@@ -94,7 +94,7 @@
     </file>
     <file name="/var/www/html/src/Database/AbstractConnection.php">
       <class name="Deondazy\Core\Database\AbstractConnection" namespace="global">
-        <metrics complexity="33" methods="22" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="68" elements="93" coveredelements="88"/>
+        <metrics complexity="33" methods="22" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="69" elements="93" coveredelements="90"/>
       </class>
       <line num="30" type="method" name="__call" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="32" type="stmt" count="1"/>
@@ -157,11 +157,11 @@
       <line num="244" type="stmt" count="1"/>
       <line num="248" type="stmt" count="17"/>
       <line num="251" type="stmt" count="17"/>
-      <line num="261" type="method" name="lastInsertId" visibility="public" complexity="2" crap="2.06" count="1"/>
+      <line num="261" type="method" name="lastInsertId" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="263" type="stmt" count="1"/>
       <line num="265" type="stmt" count="1"/>
       <line num="266" type="stmt" count="1"/>
-      <line num="269" type="stmt" count="0"/>
+      <line num="269" type="stmt" count="1"/>
       <line num="277" type="method" name="beginTransaction" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="279" type="stmt" count="1"/>
       <line num="280" type="stmt" count="1"/>
@@ -189,7 +189,7 @@
       <line num="372" type="method" name="getAttribute" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="374" type="stmt" count="1"/>
       <line num="375" type="stmt" count="1"/>
-      <metrics loc="378" ncloc="202" classes="1" methods="22" coveredmethods="20" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="68" elements="93" coveredelements="88"/>
+      <metrics loc="378" ncloc="202" classes="1" methods="22" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="69" elements="93" coveredelements="90"/>
     </file>
     <file name="/var/www/html/src/Database/Connection.php">
       <class name="Deondazy\Core\Database\Connection" namespace="global">
@@ -469,6 +469,6 @@
     <file name="/var/www/html/src/Routing/RouterInterface.php">
       <metrics loc="23" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="20" loc="1932" ncloc="1046" classes="12" methods="67" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="290" coveredstatements="82" elements="357" coveredelements="107"/>
+    <metrics files="20" loc="1932" ncloc="1046" classes="12" methods="67" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="290" coveredstatements="83" elements="357" coveredelements="109"/>
   </project>
 </coverage>
