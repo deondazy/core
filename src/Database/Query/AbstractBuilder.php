@@ -133,4 +133,17 @@ abstract class AbstractBuilder
         $this->connection = $connection;
         return $this;
     }
+
+    /**
+     * Set the database table to be used.
+     *
+     * @param string $table
+     *
+     * @return $this
+     */
+    public function table($table)
+    {
+        $this->table = $table;
+        return $this;
+    }
 }
