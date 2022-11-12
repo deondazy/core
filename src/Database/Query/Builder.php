@@ -10,13 +10,6 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
-     * The where clause.
-     *
-     * @var array
-     */
-    protected $where = [];
-
-    /**
      * The database query bindings.
      *
      * @var array
