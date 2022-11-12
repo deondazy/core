@@ -391,4 +391,16 @@ class ConnectionTest extends TestCase
     {
         $this->assertTrue($this->connection->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL));
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::getAttribute
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testGetAttribute()
+    {
+        $this->assertEquals('sqlite', $this->connection->getAttribute(PDO::ATTR_DRIVER_NAME));
+    }
 }
