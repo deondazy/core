@@ -22,7 +22,7 @@ class Builder extends AbstractBuilder
      * @var bool
      */
     protected $endParentheses = false;
-    
+
     /**
      * Run a select query on the database.
      *
