@@ -119,7 +119,7 @@ abstract class AbstractBuilder
      */
     protected $operators = [
         '=', '!=', '<', '>', '<=', '>=', '<>', 'LIKE', 'NOT LIKE', 'IS NULL',
-        'IS NOT NULL', 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN',
+        'IS NOT NULL', 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN', 'REGEXP',
     ];
 
     /**
