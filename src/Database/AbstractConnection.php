@@ -374,14 +374,4 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
         $this->connect();
         return $this->connection->getAttribute($attribute);
     }
-
-    /**
-     * Return an array of available PDO drivers.
-     *
-     * @return array
-     */
-    public static function getAvailableDrivers(): array
-    {
-        return self::getAvailableDrivers();
-    }
 }
