@@ -16,74 +16,81 @@ class Builder extends AbstractBuilder
      *
      * @return $this
      */
-    public function select($columns = '*')
+    public function select(...$columns)
     {
-        $this->query = "SELECT {$columns} FROM {$this->table}";
+        $this->select = (!empty($columns)) ? implode(', ', $columns) : '*';
         return $this;
     }
 
     /**
-     * Set the where clause.
+     * Set the where clause condition.
      *
-     * @param string $chainOperator
-     * @param string $column
-     * @param string $operator
-     * @param string $value
+     * @param string $clause
+     * @param string|callable $column
+     * @param mixed $operator
+     * @param mixed $value
      *
-     * @return string $whereClause
+     * @return $this
+     *
+     * @throws InvalidArgumentException
      */
-    protected function setWhereClause($chainOperator, $column, $operator, $value)
+    protected function setWhereClause($clause, $column, $operator = null, $value = null)
     {
-        // Check if the operator is supported.
-        if (!in_array($operator, $this->operators)) {
-            throw new InvalidArgumentException("Operator {$operator} is not supported.");
+        if (!is_string($column) && !is_callable($column)) {
+            throw new InvalidArgumentException("First parameter must of type  String or Closure");
         }
 
-        $whereClause = "";
-
-        if (!empty($this->where)) {
-            $whereClause = " {$chainOperator} `{$column}` {$operator} ?";
-            $this->bindings[] =  $value;
+        if (is_callable($column) && !is_string($column)) {
+                $this->startParentheses = true;
+                call_user_func($column, $this);
+                $last = (count($this->where)) - 1;
+                $this->where[$last]['endParentheses'] = true;
         } else {
-            $whereClause = " WHERE `{$column}` {$operator} ?";
-            $this->bindings[] =  $value;
+            $operatorValue = (!is_null($operator) && in_array($operator, $this->operators)) ? $operator : '=';
+            $this->where[] = [
+                'clause'           => $clause,
+                'column'           => trim($column),
+                'operator'         => trim($operatorValue),
+                'value'            => ($value) ? $value : $operator,
+                'startParentheses' => $this->startParentheses,
+                'endParentheses'   => $this->endParentheses
+            ];
         }
 
-        return $this->where .= $whereClause;
+        $this->startParentheses = false;
+        return $this;
     }
 
     /**
      * Set the where clause for the query.
      *
-     * @param string $column
-     * @param string $operator
-     * @param string $value
+     * @param string|callable $column
+     * @param mixed $operator
+     * @param mixed|null $value
      *
      * @return $this
      *
      * @throws InvalidArgumentException
      */
-    public function where(string $column, string $operator, string $value)
+    public function where($column, $operator = null, $value = null)
     {
-        $this->setWhereClause('AND', $column, $operator, $value);
-        return $this;
+        return $this->setWhereClause('AND', $column, $operator, $value);
     }
 
     /**
      * Chain the where clause with an OR operator.
      *
-     * @param string $column
-     * @param string $operator
-     * @param string $value
+     * @param string|callable $column
+     * @param mixed $operator
+     * @param mixed $value
      *
      * @return $this
      *
      * @throws InvalidArgumentException
      */
-    public function orWhere(string $column, string $operator, string $value)
+    public function orWhere($column, $operator = null, $value = null)
     {
-        $this->setWhereClause('OR', $column, $operator, $value);
-        return $this;
+        return $this->setWhereClause('OR', $column, $operator, $value);
     }
 
     /**
@@ -107,9 +114,8 @@ class Builder extends AbstractBuilder
      */
     public function get()
     {
-        if (!empty($this->where)) {
-            $this->query .= $this->where;
-        }
+        $this->composeSelect();
+        $this->composeWhereClauseConditions();
 
         $this->statement = $this->connection->prepare($this->query);
         $this->statement->execute($this->bindings);
