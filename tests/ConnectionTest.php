@@ -255,4 +255,29 @@ class ConnectionTest extends TestCase
         $this->assertInstanceOf('PDOStatement', $statement);
         $this->assertEquals(10, count($statement->fetchAll(\PDO::FETCH_ASSOC)));
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::quote
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+    */
+    public function testQuote()
+    {
+        // quote a string
+        $this->assertEquals("'\"abc\" xyz ''opq'''", $this->connection->quote('"abc" xyz \'opq\''));
+
+        // quote an integer
+        $this->assertEquals("'123'", $this->connection->quote(123));
+
+        // quote a float
+        $this->assertEquals("'123.456'", $this->connection->quote(123.456));
+
+        // quote an array
+        $this->assertEquals("'\"foo\"', 'bar', '''baz'''", $this->connection->quote(['"foo"', 'bar', "'baz'"]));
+
+        // quote a null
+        $this->assertSame("''", $this->connection->quote(null));
+    }
 }
