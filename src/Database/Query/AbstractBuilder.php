@@ -118,7 +118,7 @@ abstract class AbstractBuilder
      * @var array
      */
     protected $operators = [
-        '=', '!=', '<', '>', '<=', '>=', '<>', 'LIKE',
+        '=', '!=', '<', '>', '<=', '>=', '<>', 'LIKE', 'NOT LIKE'
     ];
 
     /**
