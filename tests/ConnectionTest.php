@@ -293,4 +293,23 @@ class ConnectionTest extends TestCase
     {
         $this->assertSame(10, $this->connection->fetchAffectedRows("DELETE FROM users"));
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::fetchOne
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testFetchOne()
+    {
+        $query = "SELECT id, name FROM users WHERE id = 1";
+        $actual = $this->connection->fetchOne($query);
+        $expect = [
+            'id'   => '1',
+            'name' => 'John',
+        ];
+        $this->assertEquals($expect, $actual);
+    }
 }
