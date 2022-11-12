@@ -163,4 +163,15 @@ class BuilderTest extends TestCase
 
         $this->assertEquals(1, count($query));
     }
+
+    /**
+     * Test setWhereClause method Exception.
+     *
+     * @return void
+     */
+    public function testSetWhereClauseException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->queryBuilder->table('users')->select('name')->where(null)->get();
+    }
 }
