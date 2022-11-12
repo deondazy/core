@@ -146,4 +146,14 @@ abstract class AbstractBuilder
         $this->table = $table;
         return $this;
     }
+
+    /**
+     * Compose the SQL select query.
+     *
+     * return void
+     */
+    protected function composeSelect()
+    {
+        $this->query = "SELECT {$this->select} FROM {$this->table}";
+    }
 }
