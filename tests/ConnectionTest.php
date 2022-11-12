@@ -83,11 +83,21 @@ class ConnectionTest extends TestCase
     private function insertData()
     {
         foreach ($this->data as $id => $name) {
-            $this->connection->runQuery('INSERT INTO users (id, name) VALUES (:id, :name)', [
-                'id'   => $id,
-                'name' => $name,
-            ]);
+            $this->insert(['name' =>  $name]);
         }
+    }
+
+    protected function insert(array $data)
+    {
+        $columns = array_keys($data);
+        $values = [];
+        foreach ($columns as $col) {
+            $values[] = ":$col";
+        }
+        $columns = implode(', ', $columns);
+        $values = implode(', ', $values);
+        $query = "INSERT INTO users ({$columns}) VALUES ({$values})";
+        $this->connection->runQuery($query, $data);
     }
 
     /**
@@ -148,7 +158,7 @@ class ConnectionTest extends TestCase
         $this->expectException(DatabaseException::class);
 
         $connection = new Connection('bad:dns');
-        $connection->getConnection();
+        $connection->connect();
     }
 
     /**
@@ -186,5 +196,48 @@ class ConnectionTest extends TestCase
         });
         $this->expectException('BadMethodCallException');
         $this->connection->sqliteNoSuchMethod();
+    }
+
+   /**
+    * @covers \Deondazy\Core\Database\AbstractConnection::exec
+    * @covers \Deondazy\Core\Database\AbstractConnection::commit
+    * @covers \Deondazy\Core\Database\AbstractConnection::prepare
+    * @covers \Deondazy\Core\Database\AbstractConnection::rollBack
+    * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
+    * @covers \Deondazy\Core\Database\AbstractConnection::fetchAll
+    * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
+    * @covers \Deondazy\Core\Database\AbstractConnection::inTransaction
+    * @covers \Deondazy\Core\Database\AbstractConnection::beginTransaction
+    * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+    */
+    public function testTransactions()
+    {
+        // data
+        $cols = ['name' => 'Joe'];
+
+        // begin and rollback
+        $this->assertFalse($this->connection->inTransaction());
+        $this->connection->beginTransaction();
+        $this->assertTrue($this->connection->inTransaction());
+        $this->insert($cols);
+        $actual = $this->connection->fetchAll("SELECT * FROM users");
+        $this->assertSame(11, count($actual));
+        $rollBackResult = $this->connection->rollback();
+        $this->assertFalse($this->connection->inTransaction());
+
+        $actual = $this->connection->fetchAll("SELECT * FROM users");
+        $this->assertSame(10, count($actual));
+
+        // begin and commit
+        $this->assertFalse($this->connection->inTransaction());
+        $this->connection->beginTransaction();
+        $this->assertTrue($this->connection->inTransaction());
+        $this->insert($cols);
+        $this->connection->commit();
+        $this->assertFalse($this->connection->inTransaction());
+
+        $actual = $this->connection->fetchAll("SELECT * FROM users");
+        $this->assertSame(11, count($actual));
+        $this->assertTrue($rollBackResult);
     }
 }
