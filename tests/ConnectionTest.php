@@ -280,4 +280,17 @@ class ConnectionTest extends TestCase
         // quote a null
         $this->assertSame("''", $this->connection->quote(null));
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::fetchAffectedRows
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testFetchAffectedRows()
+    {
+        $this->assertSame(10, $this->connection->fetchAffectedRows("DELETE FROM users"));
+    }
 }
