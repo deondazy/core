@@ -150,4 +150,21 @@ class ConnectionTest extends TestCase
         $connection = new Connection('bad:dns');
         $connection->getConnection();
     }
+
+    /**
+     * @covers \Deondazy\Core\Database\AbstractConnection::exec
+     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testDebugInfo(): void
+    {
+        $this->connection->connect();
+
+        $this->assertIsArray($this->connection->__debugInfo());
+
+        $this->assertArrayHasKey('dsn', $this->connection->__debugInfo());
+
+        $this->assertEquals('sqlite::memory:', $this->connection->__debugInfo()['dsn']);
+    }
 }
