@@ -114,10 +114,9 @@ class Builder extends AbstractBuilder
      *
      * @return $this
      */
-    public function rawWhere(string $whereClause)
+    public function rawWhere(string $where, array $values = []): self
     {
-        $this->where = " WHERE {$whereClause}";
-        return $this;
+        return $this->setWhereClause('', $where, null, $values);
     }
 
 
