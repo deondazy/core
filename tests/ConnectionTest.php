@@ -240,4 +240,19 @@ class ConnectionTest extends TestCase
         $this->assertSame(11, count($actual));
         $this->assertTrue($rollBackResult);
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::query
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testQuery()
+    {
+        $query = "SELECT * FROM users";
+        $statement = $this->connection->query($query);
+        $this->assertInstanceOf('PDOStatement', $statement);
+        $this->assertEquals(10, count($statement->fetchAll(\PDO::FETCH_ASSOC)));
+    }
 }
