@@ -10,13 +10,6 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
-     * The database connection instance.
-     *
-     * @var Deondazy\Core\Database\Connection
-     */
-    protected $connection;
-
-    /**
      * The database table to be used.
      *
      * @var string
