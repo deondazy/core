@@ -364,6 +364,9 @@ class ConnectionTest extends TestCase
     {
         $this->insert(['name' => 'Adam']);
         $this->assertEquals(11, $this->connection->lastInsertId());
+
+        $this->insert(['name' => 'Eve']);
+        $this->assertEquals(12, $this->connection->lastInsertId('name'));
     }
 
     /**
