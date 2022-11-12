@@ -238,6 +238,13 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
                 break;
 
             default:
+                if (! is_scalar($value)) {
+                    $type = gettype($value);
+                    throw new BadValueException(
+                        "Cannot bind value of type '{$type}' to placeholder '{$key}'"
+                    );
+                }
+
                 $type = self::PARAM_STR;
         }
 
