@@ -205,4 +205,31 @@ class BuilderTest extends TestCase
             $this->queryBuilder->getQuery()
         );
     }
+
+    /**
+     * Test rawWhere method.
+     *
+     * @return void
+     */
+    public function testRawWhere()
+    {
+        $data = $this->queryBuilder
+            ->table('users')
+            ->select('name')
+            ->rawWhere(
+                'WHERE name = :name0 OR name = :name1',
+                [
+                    'name0' => 'John',
+                    'name1' => 'Mary'
+                ]
+            );
+
+        $array = [];
+
+        while ($row = $data->get()) {
+            $array[] = $row['name'];
+        }
+
+        $this->assertEquals(1, count($array));
+    }
 }
