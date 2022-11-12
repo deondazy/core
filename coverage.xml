@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668272547">
-  <project timestamp="1668272547">
+<coverage generated="1668274550">
+  <project timestamp="1668274550">
     <file name="/var/www/html/app/Controllers/HomeController.php">
       <class name="Deondazy\App\Controllers\HomeController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
@@ -93,33 +93,33 @@
     </file>
     <file name="/var/www/html/src/Database/AbstractConnection.php">
       <class name="Deondazy\Core\Database\AbstractConnection" namespace="global">
-        <metrics complexity="33" methods="23" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="20" elements="91" coveredelements="23"/>
+        <metrics complexity="33" methods="23" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="24" elements="91" coveredelements="28"/>
       </class>
-      <line num="29" type="method" name="__call" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
+      <line num="29" type="method" name="__call" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
       <line num="59" type="method" name="getConnection" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="61" type="stmt" count="0"/>
       <line num="69" type="method" name="isConnected" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="71" type="stmt" count="2"/>
-      <line num="82" type="method" name="runQuery" visibility="public" complexity="1" crap="1" count="5"/>
-      <line num="84" type="stmt" count="5"/>
-      <line num="85" type="stmt" count="5"/>
-      <line num="86" type="stmt" count="5"/>
-      <line num="87" type="stmt" count="5"/>
+      <line num="82" type="method" name="runQuery" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="84" type="stmt" count="6"/>
+      <line num="85" type="stmt" count="6"/>
+      <line num="86" type="stmt" count="6"/>
+      <line num="87" type="stmt" count="6"/>
       <line num="98" type="method" name="prepare" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="100" type="stmt" count="0"/>
       <line num="101" type="stmt" count="0"/>
-      <line num="115" type="method" name="prepareQueryWithValues" visibility="public" complexity="3" crap="3.03" count="5"/>
-      <line num="117" type="stmt" count="5"/>
+      <line num="115" type="method" name="prepareQueryWithValues" visibility="public" complexity="3" crap="3.03" count="6"/>
+      <line num="117" type="stmt" count="6"/>
       <line num="118" type="stmt" count="0"/>
-      <line num="121" type="stmt" count="5"/>
-      <line num="122" type="stmt" count="5"/>
-      <line num="123" type="stmt" count="5"/>
-      <line num="124" type="stmt" count="5"/>
-      <line num="126" type="stmt" count="5"/>
+      <line num="121" type="stmt" count="6"/>
+      <line num="122" type="stmt" count="6"/>
+      <line num="123" type="stmt" count="6"/>
+      <line num="124" type="stmt" count="6"/>
+      <line num="126" type="stmt" count="6"/>
       <line num="138" type="method" name="query" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="140" type="stmt" count="0"/>
       <line num="141" type="stmt" count="0"/>
@@ -140,18 +140,18 @@
       <line num="209" type="method" name="fetchAll" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="211" type="stmt" count="0"/>
       <line num="212" type="stmt" count="0"/>
-      <line num="224" type="method" name="bindValue" visibility="protected" complexity="5" crap="6.20" count="5"/>
-      <line num="227" type="stmt" count="5"/>
-      <line num="228" type="stmt" count="5"/>
-      <line num="229" type="stmt" count="5"/>
-      <line num="231" type="stmt" count="5"/>
+      <line num="224" type="method" name="bindValue" visibility="protected" complexity="5" crap="6.20" count="6"/>
+      <line num="227" type="stmt" count="6"/>
+      <line num="228" type="stmt" count="6"/>
+      <line num="229" type="stmt" count="6"/>
+      <line num="231" type="stmt" count="6"/>
       <line num="232" type="stmt" count="0"/>
       <line num="233" type="stmt" count="0"/>
-      <line num="235" type="stmt" count="5"/>
+      <line num="235" type="stmt" count="6"/>
       <line num="236" type="stmt" count="0"/>
       <line num="237" type="stmt" count="0"/>
-      <line num="240" type="stmt" count="5"/>
-      <line num="243" type="stmt" count="5"/>
+      <line num="240" type="stmt" count="6"/>
+      <line num="243" type="stmt" count="6"/>
       <line num="253" type="method" name="lastInsertId" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="255" type="stmt" count="0"/>
       <line num="257" type="stmt" count="0"/>
@@ -175,9 +175,9 @@
       <line num="324" type="method" name="errorInfo" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="326" type="stmt" count="0"/>
       <line num="327" type="stmt" count="0"/>
-      <line num="337" type="method" name="exec" visibility="public" complexity="1" crap="1" count="5"/>
-      <line num="339" type="stmt" count="5"/>
-      <line num="340" type="stmt" count="5"/>
+      <line num="337" type="method" name="exec" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="339" type="stmt" count="6"/>
+      <line num="340" type="stmt" count="6"/>
       <line num="351" type="method" name="setAttribute" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="353" type="stmt" count="0"/>
       <line num="354" type="stmt" count="0"/>
@@ -186,21 +186,21 @@
       <line num="367" type="stmt" count="0"/>
       <line num="375" type="method" name="getAvailableDrivers" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="377" type="stmt" count="0"/>
-      <metrics loc="380" ncloc="199" classes="1" methods="23" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="20" elements="91" coveredelements="23"/>
+      <metrics loc="380" ncloc="199" classes="1" methods="23" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="68" coveredstatements="24" elements="91" coveredelements="28"/>
     </file>
     <file name="/var/www/html/src/Database/Connection.php">
       <class name="Deondazy\Core\Database\Connection" namespace="global">
         <metrics complexity="8" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="19" coveredelements="19"/>
       </class>
-      <line num="30" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="5"/>
-      <line num="37" type="stmt" count="5"/>
-      <line num="38" type="stmt" count="5"/>
-      <line num="42" type="stmt" count="5"/>
-      <line num="63" type="method" name="connect" visibility="public" complexity="3" crap="3" count="5"/>
-      <line num="65" type="stmt" count="5"/>
-      <line num="66" type="stmt" count="5"/>
-      <line num="69" type="stmt" count="5"/>
-      <line num="72" type="stmt" count="5"/>
+      <line num="30" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="6"/>
+      <line num="37" type="stmt" count="6"/>
+      <line num="38" type="stmt" count="6"/>
+      <line num="42" type="stmt" count="6"/>
+      <line num="63" type="method" name="connect" visibility="public" complexity="3" crap="3" count="6"/>
+      <line num="65" type="stmt" count="6"/>
+      <line num="66" type="stmt" count="6"/>
+      <line num="69" type="stmt" count="6"/>
+      <line num="72" type="stmt" count="6"/>
       <line num="73" type="stmt" count="1"/>
       <line num="74" type="stmt" count="1"/>
       <line num="83" type="method" name="disconnect" visibility="public" complexity="1" crap="1" count="1"/>
@@ -463,6 +463,6 @@
     <file name="/var/www/html/src/Routing/RouterInterface.php">
       <metrics loc="23" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="19" loc="1933" ncloc="1037" classes="12" methods="69" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="288" coveredstatements="36" elements="357" coveredelements="45"/>
+    <metrics files="19" loc="1933" ncloc="1037" classes="12" methods="69" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="288" coveredstatements="40" elements="357" coveredelements="50"/>
   </project>
 </coverage>
