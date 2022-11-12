@@ -216,20 +216,9 @@ class BuilderTest extends TestCase
         $data = $this->queryBuilder
             ->table('users')
             ->select('name')
-            ->rawWhere(
-                'WHERE name = :name0 OR name = :name1',
-                [
-                    'name0' => 'John',
-                    'name1' => 'Mary'
-                ]
-            );
+            ->rawWhere('WHERE id = :id', ['id' => 1])
+            ->get();
 
-        $array = [];
-
-        while ($row = $data->get()) {
-            $array[] = $row['name'];
-        }
-
-        $this->assertEquals(1, count($array));
+        $this->assertEquals(1, count($data));
     }
 }
