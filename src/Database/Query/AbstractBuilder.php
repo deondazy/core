@@ -26,7 +26,7 @@ abstract class AbstractBuilder
      *
      * @var string
      */
-    protected string $query;
+    protected string $query = '';
 
     /**
      * The prepared PDOStatement.
@@ -208,5 +208,15 @@ abstract class AbstractBuilder
                 }
             }
         }
+    }
+
+    /**
+     * Get the raw SQL query string.
+     *
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->query;
     }
 }
