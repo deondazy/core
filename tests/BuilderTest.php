@@ -174,4 +174,21 @@ class BuilderTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->queryBuilder->table('users')->select('name')->where(null)->get();
     }
+
+    /**
+     * Test setWhereClause method callable.
+     *
+     * @return void
+     */
+    public function testSetWhereClauseCallable()
+    {
+        $this->queryBuilder->table('users')->select('name')->where(function ($query) {
+            $query->where('id', 1);
+        })->get();
+
+        $this->assertEquals(
+            'SELECT name FROM users WHERE id = :id0',
+            $this->queryBuilder->getQuery()
+        );
+    }
 }
