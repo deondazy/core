@@ -10,13 +10,6 @@ use Deondazy\Core\Database\Query\AbstractBuilder;
 class Builder extends AbstractBuilder
 {
     /**
-     * The database query bindings.
-     *
-     * @var array
-     */
-    protected $bindings = [];
-
-    /**
      * The supported query operators.
      *
      * @var array
