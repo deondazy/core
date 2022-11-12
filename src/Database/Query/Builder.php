@@ -5,7 +5,7 @@ namespace Deondazy\Core\Database\Query;
 use PDOStatement;
 use InvalidArgumentException;
 use Deondazy\Core\Database\Connection;
-use Deondazy\Core\Database\Query\AbstractConnection;
+use Deondazy\Core\Database\Query\AbstractBuilder;
 
 class Builder
 {
