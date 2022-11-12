@@ -6,6 +6,7 @@ use PDO;
 use PDOStatement;
 use BadMethodCallException;
 use Deondazy\Core\Database\ConnectionInterface;
+use Deondazy\Core\Database\Exceptions\BadValueException;
 
 abstract class AbstractConnection extends PDO implements ConnectionInterface
 {
