@@ -191,4 +191,18 @@ class BuilderTest extends TestCase
             $this->queryBuilder->getQuery()
         );
     }
+
+    /**
+     * Test orwhere method.
+     *
+     * @return void
+     */
+    public function testOrWhere()
+    {
+        $this->queryBuilder->table('users')->select('name')->where('id', 1)->orWhere('id', 2)->get();
+        $this->assertEquals(
+            'SELECT name FROM users WHERE id = :id0 OR id = :id1',
+            $this->queryBuilder->getQuery()
+        );
+    }
 }
