@@ -135,10 +135,10 @@ class Builder extends AbstractBuilder
         $this->statement->execute($this->bindings);
 
         if ($this->statement->rowCount() > 1) {
-            return $this->statement->fetchAll(\PDO::FETCH_OBJ);
+            return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
         }
 
-        return $this->statement->fetch(\PDO::FETCH_OBJ);
+        return $this->statement->fetch(\PDO::FETCH_ASSOC);
     }
 
     /**
