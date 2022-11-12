@@ -351,4 +351,31 @@ class ConnectionTest extends TestCase
         );
         $statement = $this->connection->prepareQueryWithValues($query, ['id' => new stdClass()]);
     }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::lastInsertId
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testLastInsertId()
+    {
+        $this->insert(['name' => 'Adam']);
+        $this->assertEquals(11, $this->connection->lastInsertId());
+    }
+
+    /**
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::errorCode
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::errorInfo
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     */
+    public function testErrorCodeAndErrorInfo()
+    {
+        $this->assertSame('00000', $this->connection->errorCode());
+        $this->assertSame(['00000', null, null], $this->connection->errorInfo());
+    }
 }
