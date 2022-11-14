@@ -149,6 +149,16 @@ abstract class AbstractBuilder
     }
 
     /**
+     * Get the database table.
+     *
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    /**
      * Compose the SQL select query.
      *
      * return void
