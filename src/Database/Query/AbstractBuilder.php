@@ -184,7 +184,7 @@ abstract class AbstractBuilder
                     $column = str_replace('.', '', $where['column']);
 
                     foreach ($where['value'] as $x => $item) {
-                        $key = "{$column} in {$x}";
+                        $key = "{$column}_in_{$x}";
                         $in .= ":{$key}, ";
                         $this->bindings[$key] = $item;
                     }
