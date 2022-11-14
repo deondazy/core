@@ -105,7 +105,63 @@ class BuilderTest extends TestCase
     }
 
     /**
+     * Test the constructor.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     *
+     * @return void
+     */
+    public function testConstructor()
+    {
+        $this->assertInstanceOf(Builder::class, $this->queryBuilder);
+
+        // Abstract Builder class instance
+        $this->assertInstanceOf(\Deondazy\Core\Database\Query\AbstractBuilder::class, $this->queryBuilder);
+    }
+
+    /**
+     * Test the table method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getTable
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     *
+     * @return void
+     */
+    public function testTable()
+    {
+        $this->queryBuilder->table('users');
+
+        $this->assertEquals('users', $this->queryBuilder->getTable());
+    }
+
+    /**
      * Test the select method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -127,6 +183,18 @@ class BuilderTest extends TestCase
     /**
      * Test the where method.
      *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     *
      * @return void
      */
     public function testWhere()
@@ -137,6 +205,18 @@ class BuilderTest extends TestCase
 
     /**
      * Test the get method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -151,6 +231,18 @@ class BuilderTest extends TestCase
 
     /**
      * Test the get method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -167,6 +259,15 @@ class BuilderTest extends TestCase
     /**
      * Test setWhereClause method Exception.
      *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     *
      * @return void
      */
     public function testSetWhereClauseException()
@@ -177,6 +278,19 @@ class BuilderTest extends TestCase
 
     /**
      * Test setWhereClause method callable.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -195,6 +309,19 @@ class BuilderTest extends TestCase
     /**
      * Test orwhere method.
      *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     *
      * @return void
      */
     public function testOrWhere()
@@ -208,6 +335,18 @@ class BuilderTest extends TestCase
 
     /**
      * Test rawWhere method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
