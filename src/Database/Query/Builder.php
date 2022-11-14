@@ -108,6 +108,18 @@ class Builder extends AbstractBuilder
     }
 
     /**
+     * Set the WHERE IS NULL and AND IS NULL conditions.
+     *
+     * @param string $column
+     *
+     * @return $this
+     */
+    public function whereNull($column)
+    {
+        return $this->setWhereClause('AND', $column, 'IS NULL');
+    }
+
+    /**
      * Set a raw where clause.
      *
      * @param string $whereClause
