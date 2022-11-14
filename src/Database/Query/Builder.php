@@ -120,6 +120,18 @@ class Builder extends AbstractBuilder
     }
 
     /**
+     * Set the WHERE IS NOT NULL and AND IS NOT NULL conditions.
+     *
+     * @param string $column
+     *
+     * @return $this
+     */
+    public function whereNotNull($column)
+    {
+        return $this->setWhereClause('AND', $column, 'IS NOT NULL');
+    }
+
+    /**
      * Set a raw where clause.
      *
      * @param string $whereClause
