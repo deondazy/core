@@ -522,4 +522,38 @@ class BuilderTest extends TestCase
 
         $this->assertEquals($expectedQuery, $this->queryBuilder->getQuery());
     }
+
+    /**
+     * Test or where not null method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     *
+     * @return void
+     */
+    public function testOrWhereNotNull()
+    {
+        $this->queryBuilder
+            ->table('users')
+            ->select('name')
+            ->whereNotNull('name')
+            ->orWhereNotNull('id')
+            ->get();
+
+        $expectedQuery = 'SELECT name FROM users WHERE name IS NOT NULL OR id IS NOT NULL';
+        $expectedData = 'John';
+
+        $this->assertEquals($expectedQuery, $this->queryBuilder->getQuery());
+        $this->assertEquals($expectedData, $this->queryBuilder->get()['name']);
+    }
 }
