@@ -72,7 +72,7 @@ class BuilderTest extends TestCase
     {
         $sql = 'CREATE TABLE users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name VARCHAR(5) NOT NULL
+            name VARCHAR(5) DEFAULT NULL
         )';
 
         $this->connection->connect();
@@ -359,5 +359,102 @@ class BuilderTest extends TestCase
             ->get();
 
         $this->assertEquals(1, count($data));
+    }
+
+    /**
+     * Test where between method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     *
+     * @return void
+     */
+    public function testWhereBetween()
+    {
+        $this->queryBuilder
+            ->table('users')
+            ->select('name')
+            ->where('id', 'BETWEEN', [1, 2])
+            ->get();
+
+        $expectedQuery = 'SELECT name FROM users WHERE id BETWEEN :id_btw0 AND :id_btw1';
+
+        $this->assertEquals($expectedQuery, $this->queryBuilder->getQuery());
+    }
+
+    /**
+     * Test where not between method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     *
+     * @return void
+     */
+    public function testWhereNotBetween()
+    {
+        $this->queryBuilder
+            ->table('users')
+            ->select('name')
+            ->where('id', 'NOT BETWEEN', [1, 2])
+            ->get();
+
+        $expectedQuery = 'SELECT name FROM users WHERE id NOT BETWEEN :id_btw0 AND :id_btw1';
+
+        $this->assertEquals($expectedQuery, $this->queryBuilder->getQuery());
+    }
+
+    /**
+     * Test where is null method.
+     *
+     * @covers Deondazy\Core\Database\Connection::connect
+     * @covers Deondazy\Core\Database\Connection::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::exec
+     * @covers Deondazy\Core\Database\AbstractConnection::prepare
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
+     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     *
+     * @return void
+     */
+    public function testWhereNull()
+    {
+        $this->insert(['name' => null]);
+
+        $this->queryBuilder
+            ->table('users')
+            ->select('id')
+            ->whereNull('name')
+            ->get();
+
+        $expectedQuery = 'SELECT id FROM users WHERE name IS NULL';
+        $expectedData = 11;
+
+        $this->assertEquals($expectedQuery, $this->queryBuilder->getQuery());
+        $this->assertEquals($expectedData, $this->queryBuilder->get()['id']);
     }
 }
