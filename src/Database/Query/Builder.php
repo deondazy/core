@@ -144,6 +144,18 @@ class Builder extends AbstractBuilder
     }
 
     /**
+     * Set the OR WHERE IS NOT NULL condition.
+     *
+     * @param string $column
+     *
+     * @return $this
+     */
+    public function orWhereNotNull($column)
+    {
+        return $this->setWhereClause('OR', $column, 'IS NOT NULL');
+    }
+
+    /**
      * Set a raw where clause.
      *
      * @param string $whereClause
