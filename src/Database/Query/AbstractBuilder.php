@@ -19,7 +19,7 @@ abstract class AbstractBuilder
      *
      * @var string
      */
-    protected string $table;
+    private string $table;
 
     /**
      * The SQL query string.
