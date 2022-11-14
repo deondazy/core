@@ -156,6 +156,19 @@ class Builder extends AbstractBuilder
     }
 
     /**
+     * Set the WHERE IN and AND IN conditions.
+     *
+     * @param string $column
+     * @param array $values
+     *
+     * @return $this
+     */
+    public function whereIn($column, array $values)
+    {
+        return $this->setWhereClause('AND', $column, 'IN', $values);
+    }
+
+    /**
      * Set a raw where clause.
      *
      * @param string $whereClause
