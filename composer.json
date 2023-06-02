@@ -21,7 +21,8 @@
         "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^5.12"
     },
     "autoload": {
         "psr-4": {
