@@ -12,6 +12,7 @@
 use Dotenv\Dotenv;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
+use Symfony\Component\Yaml\Yaml;
 
 // Require Autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -22,10 +23,15 @@ Dotenv::createImmutable(dirname(dirname(__FILE__)))->safeLoad();
 // Require the constants file
 require_once __DIR__ . '/constants.php';
 
-// Use Whoops for error handling
-$whoops = new Run();
-$whoops->pushHandler(new PrettyPageHandler());
-$whoops->register();
+// Require the config file
+$config = Yaml::parseFile(CORE_CONFIG . '/app.yaml');
+
+// Use Whoops for error handling if debug is enabled
+if ($config['debug']) {
+    $whoops = new Run();
+    $whoops->pushHandler(new PrettyPageHandler());
+    $whoops->register();
+}
 
 // Check if the current PHP version is compatible with the app
 if (version_compare(PHP_VERSION, CORE_PHP, '<')) {

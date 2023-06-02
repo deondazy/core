@@ -99,15 +99,4 @@ class Connection extends AbstractConnection
             'options'  => $this->credentials['options'],
         ];
     }
-
-    /**
-     * Get the database connection.
-     *
-     * @return PDO
-     */
-    public function getConnection()
-    {
-        $this->connect();
-        return $this->connection;
-    }
 }

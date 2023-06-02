@@ -1,9 +1,9 @@
 <?php
 
+use Deondazy\App\Controllers\AuthController;
 use Deondazy\App\Controllers\HomeController;
 
-$router->get('/', [HomeController::class, 'index']);
+$app->get('/', [HomeController::class, 'index']);
 
-$router->notFoundHandler(function() {
-    require_once CORE_ROOT . '/app/Views/404.html';
-});
+$app->get('/sign-in', [AuthController::class, 'login']);
+$app->get('/sign-up', [AuthController::class, 'register']);

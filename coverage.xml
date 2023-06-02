@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1667954792">
-  <project timestamp="1667954792">
+<coverage generated="1668390072">
+  <project timestamp="1668390072">
     <file name="/var/www/html/app/Controllers/HomeController.php">
       <class name="Deondazy\App\Controllers\HomeController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
@@ -9,6 +9,479 @@
       <line num="11" type="stmt" count="0"/>
       <metrics loc="14" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
-    <metrics files="1" loc="14" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    <file name="/var/www/html/app/Controllers/UserController.php">
+      <class name="Deondazy\App\Controllers\UserController" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
+      </class>
+      <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="11" type="stmt" count="0"/>
+      <line num="12" type="stmt" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <line num="14" type="stmt" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="32" type="method" name="show" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <metrics loc="42" ncloc="42" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Base/Controller.php">
+      <class name="Deondazy\Core\Base\Controller" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+      </class>
+      <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="38" type="method" name="render" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <metrics loc="43" ncloc="25" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Base/View.php">
+      <class name="Deondazy\Core\Base\View" namespace="global">
+        <metrics complexity="6" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
+      </class>
+      <line num="29" type="method" name="get" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="32" type="stmt" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="51" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <line num="66" type="method" name="findTemplateFile" visibility="private" complexity="3" crap="12" count="0"/>
+      <line num="68" type="stmt" count="0"/>
+      <line num="69" type="stmt" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <line num="74" type="stmt" count="0"/>
+      <line num="90" type="method" name="render" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="92" type="stmt" count="0"/>
+      <metrics loc="95" ncloc="54" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Config/Exceptions/FileNotFoundException.php">
+      <class name="Deondazy\Core\Config\Exceptions\FileNotFoundException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Config/YamlConfig.php">
+      <class name="Deondazy\Core\Config\YamlConfig" namespace="global">
+        <metrics complexity="6" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
+      </class>
+      <line num="20" type="method" name="checkFile" visibility="private" complexity="2" crap="6" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="39" type="method" name="get" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="51" type="stmt" count="0"/>
+      <line num="62" type="method" name="load" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="64" type="stmt" count="0"/>
+      <metrics loc="67" ncloc="40" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Database/AbstractConnection.php">
+      <class name="Deondazy\Core\Database\AbstractConnection" namespace="global">
+        <metrics complexity="33" methods="22" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="69" elements="93" coveredelements="90"/>
+      </class>
+      <line num="30" type="method" name="__call" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="60" type="method" name="getConnection" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="70" type="method" name="isConnected" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="72" type="stmt" count="2"/>
+      <line num="83" type="method" name="runQuery" visibility="public" complexity="1" crap="1" count="34"/>
+      <line num="85" type="stmt" count="34"/>
+      <line num="86" type="stmt" count="34"/>
+      <line num="87" type="stmt" count="34"/>
+      <line num="88" type="stmt" count="34"/>
+      <line num="99" type="method" name="prepare" visibility="public" complexity="1" crap="1" count="17"/>
+      <line num="101" type="stmt" count="17"/>
+      <line num="102" type="stmt" count="17"/>
+      <line num="116" type="method" name="prepareQueryWithValues" visibility="public" complexity="3" crap="3" count="34"/>
+      <line num="118" type="stmt" count="34"/>
+      <line num="119" type="stmt" count="3"/>
+      <line num="122" type="stmt" count="34"/>
+      <line num="123" type="stmt" count="34"/>
+      <line num="124" type="stmt" count="34"/>
+      <line num="125" type="stmt" count="34"/>
+      <line num="127" type="stmt" count="34"/>
+      <line num="139" type="method" name="query" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="141" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="1"/>
+      <line num="156" type="method" name="quote" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="158" type="stmt" count="1"/>
+      <line num="160" type="stmt" count="1"/>
+      <line num="163" type="stmt" count="1"/>
+      <line num="164" type="stmt" count="1"/>
+      <line num="168" type="stmt" count="1"/>
+      <line num="169" type="stmt" count="1"/>
+      <line num="171" type="stmt" count="1"/>
+      <line num="182" type="method" name="fetchAffectedRows" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="184" type="stmt" count="1"/>
+      <line num="185" type="stmt" count="1"/>
+      <line num="196" type="method" name="fetchOne" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="198" type="stmt" count="1"/>
+      <line num="199" type="stmt" count="1"/>
+      <line num="210" type="method" name="fetchAll" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="212" type="stmt" count="1"/>
+      <line num="213" type="stmt" count="1"/>
+      <line num="225" type="method" name="bindValue" visibility="protected" complexity="6" crap="6.09" count="34"/>
+      <line num="228" type="stmt" count="34"/>
+      <line num="229" type="stmt" count="2"/>
+      <line num="230" type="stmt" count="2"/>
+      <line num="232" type="stmt" count="34"/>
+      <line num="233" type="stmt" count="1"/>
+      <line num="234" type="stmt" count="1"/>
+      <line num="236" type="stmt" count="34"/>
+      <line num="237" type="stmt" count="0"/>
+      <line num="238" type="stmt" count="0"/>
+      <line num="241" type="stmt" count="34"/>
+      <line num="242" type="stmt" count="1"/>
+      <line num="243" type="stmt" count="1"/>
+      <line num="244" type="stmt" count="1"/>
+      <line num="248" type="stmt" count="34"/>
+      <line num="251" type="stmt" count="34"/>
+      <line num="261" type="method" name="lastInsertId" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="263" type="stmt" count="1"/>
+      <line num="265" type="stmt" count="1"/>
+      <line num="266" type="stmt" count="1"/>
+      <line num="269" type="stmt" count="1"/>
+      <line num="277" type="method" name="beginTransaction" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="279" type="stmt" count="1"/>
+      <line num="280" type="stmt" count="1"/>
+      <line num="288" type="method" name="commit" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="290" type="stmt" count="1"/>
+      <line num="291" type="stmt" count="1"/>
+      <line num="299" type="method" name="rollBack" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="301" type="stmt" count="1"/>
+      <line num="302" type="stmt" count="1"/>
+      <line num="310" type="method" name="inTransaction" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="312" type="stmt" count="1"/>
+      <line num="313" type="stmt" count="1"/>
+      <line num="321" type="method" name="errorCode" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="323" type="stmt" count="1"/>
+      <line num="324" type="stmt" count="1"/>
+      <line num="332" type="method" name="errorInfo" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="334" type="stmt" count="1"/>
+      <line num="335" type="stmt" count="1"/>
+      <line num="345" type="method" name="exec" visibility="public" complexity="1" crap="1" count="34"/>
+      <line num="347" type="stmt" count="34"/>
+      <line num="348" type="stmt" count="34"/>
+      <line num="359" type="method" name="setAttribute" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="361" type="stmt" count="1"/>
+      <line num="362" type="stmt" count="1"/>
+      <line num="372" type="method" name="getAttribute" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="374" type="stmt" count="1"/>
+      <line num="375" type="stmt" count="1"/>
+      <metrics loc="378" ncloc="202" classes="1" methods="22" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="69" elements="93" coveredelements="90"/>
+    </file>
+    <file name="/var/www/html/src/Database/Connection.php">
+      <class name="Deondazy\Core\Database\Connection" namespace="global">
+        <metrics complexity="7" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
+      </class>
+      <line num="30" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="34"/>
+      <line num="37" type="stmt" count="34"/>
+      <line num="38" type="stmt" count="34"/>
+      <line num="42" type="stmt" count="34"/>
+      <line num="63" type="method" name="connect" visibility="public" complexity="3" crap="3" count="34"/>
+      <line num="65" type="stmt" count="34"/>
+      <line num="66" type="stmt" count="34"/>
+      <line num="69" type="stmt" count="34"/>
+      <line num="72" type="stmt" count="34"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="83" type="method" name="disconnect" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="93" type="method" name="__debugInfo" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="96" type="stmt" count="1"/>
+      <line num="99" type="stmt" count="1"/>
+      <metrics loc="103" ncloc="63" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
+    </file>
+    <file name="/var/www/html/src/Database/ConnectionInterface.php">
+      <metrics loc="92" ncloc="29" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Database/Exceptions/BadValueException.php">
+      <class name="Deondazy\Core\Database\Exceptions\BadValueException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Database/Exceptions/DatabaseException.php">
+      <class name="Deondazy\Core\Database\Exceptions\DatabaseException" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <line num="12" type="stmt" count="1"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+    </file>
+    <file name="/var/www/html/src/Database/PdoInterface.php">
+      <metrics loc="127" ncloc="38" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Database/Query/AbstractBuilder.php">
+      <class name="Deondazy\Core\Database\Query\AbstractBuilder" namespace="global">
+        <metrics complexity="17" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="39" coveredstatements="39" elements="45" coveredelements="45"/>
+      </class>
+      <line num="132" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="17"/>
+      <line num="134" type="stmt" count="17"/>
+      <line num="135" type="stmt" count="17"/>
+      <line num="145" type="method" name="table" visibility="public" complexity="1" crap="1" count="16"/>
+      <line num="147" type="stmt" count="16"/>
+      <line num="148" type="stmt" count="16"/>
+      <line num="156" type="method" name="getTable" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="158" type="stmt" count="1"/>
+      <line num="166" type="method" name="composeSelect" visibility="protected" complexity="1" crap="1" count="14"/>
+      <line num="168" type="stmt" count="14"/>
+      <line num="176" type="method" name="composeWhereClauseConditions" visibility="protected" complexity="12" crap="12" count="14"/>
+      <line num="178" type="stmt" count="14"/>
+      <line num="179" type="stmt" count="12"/>
+      <line num="180" type="stmt" count="12"/>
+      <line num="181" type="stmt" count="4"/>
+      <line num="182" type="stmt" count="8"/>
+      <line num="183" type="stmt" count="1"/>
+      <line num="184" type="stmt" count="1"/>
+      <line num="186" type="stmt" count="1"/>
+      <line num="187" type="stmt" count="1"/>
+      <line num="188" type="stmt" count="1"/>
+      <line num="189" type="stmt" count="1"/>
+      <line num="191" type="stmt" count="1"/>
+      <line num="192" type="stmt" count="1"/>
+      <line num="193" type="stmt" count="7"/>
+      <line num="194" type="stmt" count="2"/>
+      <line num="195" type="stmt" count="2"/>
+      <line num="196" type="stmt" count="2"/>
+      <line num="197" type="stmt" count="2"/>
+      <line num="198" type="stmt" count="5"/>
+      <line num="199" type="stmt" count="1"/>
+      <line num="200" type="stmt" count="1"/>
+      <line num="202" type="stmt" count="4"/>
+      <line num="203" type="stmt" count="4"/>
+      <line num="204" type="stmt" count="4"/>
+      <line num="207" type="stmt" count="12"/>
+      <line num="208" type="stmt" count="11"/>
+      <line num="209" type="stmt" count="11"/>
+      <line num="211" type="stmt" count="3"/>
+      <line num="212" type="stmt" count="3"/>
+      <line num="213" type="stmt" count="3"/>
+      <line num="214" type="stmt" count="11"/>
+      <line num="217" type="stmt" count="1"/>
+      <line num="228" type="method" name="getQuery" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="230" type="stmt" count="10"/>
+      <metrics loc="233" ncloc="119" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="39" coveredstatements="39" elements="45" coveredelements="45"/>
+    </file>
+    <file name="/var/www/html/src/Database/Query/Builder.php">
+      <class name="Deondazy\Core\Database\Query\Builder" namespace="global">
+        <metrics complexity="22" methods="12" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="32" elements="50" coveredelements="42"/>
+      </class>
+      <line num="33" type="method" name="select" visibility="public" complexity="2" crap="2" count="15"/>
+      <line num="35" type="stmt" count="15"/>
+      <line num="36" type="stmt" count="15"/>
+      <line num="51" type="method" name="setWhereClause" visibility="protected" complexity="8" crap="8" count="13"/>
+      <line num="53" type="stmt" count="13"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="12"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="63" type="stmt" count="12"/>
+      <line num="64" type="stmt" count="12"/>
+      <line num="66" type="stmt" count="12"/>
+      <line num="67" type="stmt" count="12"/>
+      <line num="68" type="stmt" count="12"/>
+      <line num="69" type="stmt" count="12"/>
+      <line num="70" type="stmt" count="12"/>
+      <line num="74" type="stmt" count="12"/>
+      <line num="75" type="stmt" count="12"/>
+      <line num="89" type="method" name="where" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="91" type="stmt" count="7"/>
+      <line num="105" type="method" name="orWhere" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="107" type="stmt" count="1"/>
+      <line num="117" type="method" name="whereNull" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="119" type="stmt" count="2"/>
+      <line num="129" type="method" name="whereNotNull" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="131" type="stmt" count="2"/>
+      <line num="141" type="method" name="orWhereNull" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="143" type="stmt" count="1"/>
+      <line num="153" type="method" name="orWhereNotNull" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="155" type="stmt" count="1"/>
+      <line num="166" type="method" name="whereIn" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="168" type="stmt" count="1"/>
+      <line num="178" type="method" name="rawWhere" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="180" type="stmt" count="1"/>
+      <line num="189" type="method" name="get" visibility="public" complexity="2" crap="2.01" count="14"/>
+      <line num="191" type="stmt" count="14"/>
+      <line num="192" type="stmt" count="14"/>
+      <line num="194" type="stmt" count="14"/>
+      <line num="195" type="stmt" count="14"/>
+      <line num="197" type="stmt" count="14"/>
+      <line num="198" type="stmt" count="0"/>
+      <line num="201" type="stmt" count="14"/>
+      <line num="209" type="method" name="dump" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="211" type="stmt" count="0"/>
+      <line num="212" type="stmt" count="0"/>
+      <line num="213" type="stmt" count="0"/>
+      <line num="214" type="stmt" count="0"/>
+      <line num="215" type="stmt" count="0"/>
+      <metrics loc="218" ncloc="114" classes="1" methods="12" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="32" elements="50" coveredelements="42"/>
+    </file>
+    <file name="/var/www/html/src/Exceptions/DeondazyCoreException.php">
+      <class name="Deondazy\Core\Exceptions\DeondazyCoreException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Exceptions/InvalidArgumentException.php">
+      <class name="Deondazy\Core\Exceptions\InvalidArgumentException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Exceptions/InvalidRequirementException.php">
+      <class name="Deondazy\Core\Exceptions\InvalidRequirementException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Router.php">
+      <class name="Deondazy\Core\Router" namespace="global">
+        <metrics complexity="23" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
+      </class>
+      <line num="68" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <line num="83" type="method" name="post" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="85" type="stmt" count="0"/>
+      <line num="98" type="method" name="put" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="100" type="stmt" count="0"/>
+      <line num="113" type="method" name="patch" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="115" type="stmt" count="0"/>
+      <line num="128" type="method" name="delete" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="130" type="stmt" count="0"/>
+      <line num="140" type="method" name="notFoundHandler" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="142" type="stmt" count="0"/>
+      <line num="154" type="method" name="addRoute" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="156" type="stmt" count="0"/>
+      <line num="173" type="method" name="getParameters" visibility="private" complexity="4" crap="20" count="0"/>
+      <line num="175" type="stmt" count="0"/>
+      <line num="177" type="stmt" count="0"/>
+      <line num="178" type="stmt" count="0"/>
+      <line num="179" type="stmt" count="0"/>
+      <line num="183" type="stmt" count="0"/>
+      <line num="193" type="method" name="run" visibility="public" complexity="12" crap="156" count="0"/>
+      <line num="195" type="stmt" count="0"/>
+      <line num="196" type="stmt" count="0"/>
+      <line num="197" type="stmt" count="0"/>
+      <line num="198" type="stmt" count="0"/>
+      <line num="200" type="stmt" count="0"/>
+      <line num="201" type="stmt" count="0"/>
+      <line num="203" type="stmt" count="0"/>
+      <line num="204" type="stmt" count="0"/>
+      <line num="205" type="stmt" count="0"/>
+      <line num="207" type="stmt" count="0"/>
+      <line num="208" type="stmt" count="0"/>
+      <line num="211" type="stmt" count="0"/>
+      <line num="213" type="stmt" count="0"/>
+      <line num="214" type="stmt" count="0"/>
+      <line num="215" type="stmt" count="0"/>
+      <line num="216" type="stmt" count="0"/>
+      <line num="222" type="stmt" count="0"/>
+      <line num="223" type="stmt" count="0"/>
+      <line num="225" type="stmt" count="0"/>
+      <line num="226" type="stmt" count="0"/>
+      <line num="229" type="stmt" count="0"/>
+      <line num="230" type="stmt" count="0"/>
+      <line num="232" type="stmt" count="0"/>
+      <line num="233" type="stmt" count="0"/>
+      <line num="238" type="stmt" count="0"/>
+      <line num="239" type="stmt" count="0"/>
+      <line num="240" type="stmt" count="0"/>
+      <line num="242" type="stmt" count="0"/>
+      <line num="243" type="stmt" count="0"/>
+      <line num="248" type="stmt" count="0"/>
+      <line num="249" type="stmt" count="0"/>
+      <line num="251" type="stmt" count="0"/>
+      <line num="254" type="stmt" count="0"/>
+      <metrics loc="257" ncloc="134" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Routing/Router.php">
+      <class name="Deondazy\Core\Routing\Router" namespace="global">
+        <metrics complexity="23" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
+      </class>
+      <line num="69" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="71" type="stmt" count="0"/>
+      <line num="84" type="method" name="post" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="86" type="stmt" count="0"/>
+      <line num="99" type="method" name="put" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="101" type="stmt" count="0"/>
+      <line num="114" type="method" name="patch" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="116" type="stmt" count="0"/>
+      <line num="129" type="method" name="delete" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="131" type="stmt" count="0"/>
+      <line num="141" type="method" name="notFoundHandler" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="143" type="stmt" count="0"/>
+      <line num="156" type="method" name="addRoute" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="158" type="stmt" count="0"/>
+      <line num="175" type="method" name="getParameters" visibility="private" complexity="4" crap="20" count="0"/>
+      <line num="177" type="stmt" count="0"/>
+      <line num="179" type="stmt" count="0"/>
+      <line num="180" type="stmt" count="0"/>
+      <line num="181" type="stmt" count="0"/>
+      <line num="185" type="stmt" count="0"/>
+      <line num="195" type="method" name="run" visibility="public" complexity="12" crap="156" count="0"/>
+      <line num="197" type="stmt" count="0"/>
+      <line num="198" type="stmt" count="0"/>
+      <line num="199" type="stmt" count="0"/>
+      <line num="200" type="stmt" count="0"/>
+      <line num="202" type="stmt" count="0"/>
+      <line num="203" type="stmt" count="0"/>
+      <line num="205" type="stmt" count="0"/>
+      <line num="206" type="stmt" count="0"/>
+      <line num="207" type="stmt" count="0"/>
+      <line num="209" type="stmt" count="0"/>
+      <line num="210" type="stmt" count="0"/>
+      <line num="213" type="stmt" count="0"/>
+      <line num="215" type="stmt" count="0"/>
+      <line num="216" type="stmt" count="0"/>
+      <line num="217" type="stmt" count="0"/>
+      <line num="218" type="stmt" count="0"/>
+      <line num="224" type="stmt" count="0"/>
+      <line num="225" type="stmt" count="0"/>
+      <line num="227" type="stmt" count="0"/>
+      <line num="228" type="stmt" count="0"/>
+      <line num="231" type="stmt" count="0"/>
+      <line num="232" type="stmt" count="0"/>
+      <line num="234" type="stmt" count="0"/>
+      <line num="235" type="stmt" count="0"/>
+      <line num="240" type="stmt" count="0"/>
+      <line num="241" type="stmt" count="0"/>
+      <line num="242" type="stmt" count="0"/>
+      <line num="244" type="stmt" count="0"/>
+      <line num="245" type="stmt" count="0"/>
+      <line num="250" type="stmt" count="0"/>
+      <line num="251" type="stmt" count="0"/>
+      <line num="253" type="stmt" count="0"/>
+      <line num="256" type="stmt" count="0"/>
+      <metrics loc="259" ncloc="135" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/src/Routing/RouterInterface.php">
+      <metrics loc="23" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <metrics files="20" loc="2011" ncloc="1080" classes="12" methods="74" coveredmethods="42" conditionals="0" coveredconditionals="0" statements="296" coveredstatements="154" elements="370" coveredelements="196"/>
   </project>
 </coverage>

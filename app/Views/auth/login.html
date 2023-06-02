@@ -1,0 +1,39 @@
+{% extends "layout/app.html" %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+    <div class="relative flex flex-col items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0">
+        <h1 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-4">Sign In</h1>
+        <div class="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 w-96 rounded-lg text-center shadow-lg px-6 py-8">
+            <form action="" class="w-full">
+                <div class="mb-6 text-left w-full">
+                    <label for="email" class="block text-slate-900 dark:text-white mb-2">Email</label>
+                    <input type="email" id="email" class="bg-slate-200 dark:bg-slate-700 outline-none border dark:border-slate-500 text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-400" placeholder="email@example.com" autofocus>
+                </div>
+
+                <div class="mb-4 text-left w-full">
+                    <label for="password" class="block text-slate-900 dark:text-white mb-2">Password</label>
+                    <input type="password" id="password" class="bg-slate-200 dark:bg-slate-700 outline-none border dark:border-slate-500 text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-4" placeholder="**********">
+                </div>
+
+                <div class="flex justify-between mb-6">
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-blue-300 dark:bg-slate-900 dark:border-slate-600 dark:focus:ring-blue-600 dark:ring-offset-slate-800 dark:focus:ring-offset-slate-800" required>
+                        </div>
+                        <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Remember me</label>
+                    </div>
+
+                    <a href="/forgot-password" class="text-sm font-medium text-gray-900 dark:text-white hover:text-blue-400">Forgot Password?</a>
+                </div>
+
+                <button class="block w-full bg-blue-600 hover:bg-blue-500 text-white h-10 rounded-lg">Sign In</button>
+            </form>
+
+            <div class="mt-4">
+                <a href="/sign-up" class="text-slate-900 dark:text-white hover:text-blue-400">Create Account</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

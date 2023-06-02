@@ -6,6 +6,7 @@ use PDO;
 use PDOStatement;
 use BadMethodCallException;
 use Deondazy\Core\Database\ConnectionInterface;
+use Deondazy\Core\Database\Exceptions\BadValueException;
 
 abstract class AbstractConnection extends PDO implements ConnectionInterface
 {
@@ -237,6 +238,13 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
                 break;
 
             default:
+                if (! is_scalar($value)) {
+                    $type = gettype($value);
+                    throw new BadValueException(
+                        "Cannot bind value of type '{$type}' to placeholder '{$key}'"
+                    );
+                }
+
                 $type = self::PARAM_STR;
         }
 
@@ -365,15 +373,5 @@ abstract class AbstractConnection extends PDO implements ConnectionInterface
     {
         $this->connect();
         return $this->connection->getAttribute($attribute);
-    }
-
-    /**
-     * Return an array of available PDO drivers.
-     *
-     * @return array
-     */
-    public static function getAvailableDrivers(): array
-    {
-        return self::getAvailableDrivers();
     }
 }

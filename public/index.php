@@ -1,11 +1,11 @@
 <?php
 
-use Deondazy\Core\Routing\Router;
+use Slim\Factory\AppFactory;
 
 require_once __DIR__ . '/../bootstrap/app.php';
 
-$router = new Router();
+$app = AppFactory::create();
 
 require_once CORE_ROOT . '/routes/web.php';
 
-$router->run();
+$app->run();

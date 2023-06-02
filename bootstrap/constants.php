@@ -12,7 +12,7 @@
 define('CORE_VERSION', '1.0.0');
 
 // Define required PHP version
-define('CORE_PHP', '7.4');
+define('CORE_PHP', '8.1');
 
 // Define installation root path
 define('CORE_ROOT', dirname(dirname(__FILE__)));

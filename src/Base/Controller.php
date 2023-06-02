@@ -15,7 +15,7 @@ class Controller
      *
      * @var View
      */
-    private $view;
+    protected $view;
 
     public function __construct()
     {

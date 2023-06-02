@@ -2,79 +2,26 @@
 
 namespace Deondazy\Core\Database\Query;
 
+use PDOStatement;
+use InvalidArgumentException;
 use Deondazy\Core\Database\Connection;
+use Deondazy\Core\Database\Query\AbstractBuilder;
 
-class Builder
+class Builder extends AbstractBuilder
 {
     /**
-     * The database connection instance.
+     * Prefix parentheses in the query.
      *
-     * @var \Deondazy\Core\Database\Connection
+     * @var bool
      */
-    protected $connection;
+    protected $startParentheses = false;
 
     /**
-     * The database table to be used.
+     * Suffix parentheses in the query.
      *
-     * @var string
+     * @var bool
      */
-    protected $table;
-
-    /**
-     * The query statement.
-     *
-     * @var string
-     */
-    protected $statement;
-
-    /**
-     * The where clause.
-     *
-     * @var string
-     */
-    protected $where;
-
-    /**
-     * The database query bindings.
-     *
-     * @var array
-     */
-    protected $bindings = [];
-
-    /**
-     * The supported query operators.
-     *
-     * @var array
-     */
-    protected $operators = [
-        '=', '!=', '<', '>', '<=', '>=', '<>', '!=',
-    ];
-
-    /**
-     * Set the database connection
-     *
-     * @param Deondazy\Core\Database\Connection $connection
-     *
-     * @return $this
-     */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-        return $this;
-    }
-
-    /**
-     * Set the database table to be used.
-     *
-     * @param string $table
-     *
-     * @return $this
-     */
-    public function table($table)
-    {
-        $this->table = $table;
-        return $this;
-    }
+    protected $endParentheses = false;
 
     /**
      * Run a select query on the database.
@@ -83,43 +30,156 @@ class Builder
      *
      * @return $this
      */
-    public function select($columns = '*')
+    public function select(...$columns)
     {
-        $this->statement = "SELECT {$columns} FROM {$this->table}";
+        $this->select = (!empty($columns)) ? implode(', ', $columns) : '*';
+        return $this;
+    }
 
+    /**
+     * Set the where clause condition.
+     *
+     * @param string $clause
+     * @param string|callable $column
+     * @param mixed $operator
+     * @param mixed $value
+     *
+     * @return $this
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function setWhereClause($clause, $column, $operator = null, $value = null)
+    {
+        if (!is_string($column) && !is_callable($column)) {
+            throw new InvalidArgumentException("First parameter must of type  String or Closure");
+        }
+
+        if (is_callable($column) && !is_string($column)) {
+                $this->startParentheses = true;
+                call_user_func($column, $this);
+                $last = (count($this->where)) - 1;
+                $this->where[$last]['endParentheses'] = true;
+        } else {
+            $operatorValue = (!is_null($operator) && in_array($operator, $this->operators)) ? $operator : '=';
+            $this->where[] = [
+                'clause'           => $clause,
+                'column'           => trim($column),
+                'operator'         => trim($operatorValue),
+                'value'            => ($value) ? $value : $operator,
+                'startParentheses' => $this->startParentheses,
+                'endParentheses'   => $this->endParentheses
+            ];
+        }
+
+        $this->startParentheses = false;
         return $this;
     }
 
     /**
      * Set the where clause for the query.
      *
+     * @param string|callable $column
+     * @param mixed $operator
+     * @param mixed|null $value
+     *
+     * @return $this
+     *
+     * @throws InvalidArgumentException
+     */
+    public function where($column, $operator = null, $value = null)
+    {
+        return $this->setWhereClause('AND', $column, $operator, $value);
+    }
+
+    /**
+     * Chain the where clause with an OR operator.
+     *
+     * @param string|callable $column
+     * @param mixed $operator
+     * @param mixed $value
+     *
+     * @return $this
+     *
+     * @throws InvalidArgumentException
+     */
+    public function orWhere($column, $operator = null, $value = null)
+    {
+        return $this->setWhereClause('OR', $column, $operator, $value);
+    }
+
+    /**
+     * Set the WHERE IS NULL and AND IS NULL conditions.
+     *
      * @param string $column
-     * @param string $operator
-     * @param string $value
      *
      * @return $this
      */
-    public function where(string $column, string $operator, string $value)
+    public function whereNull($column)
     {
-        // Check if the operator is supported.
-        if (!in_array($operator, $this->operators)) {
-            throw new \InvalidArgumentException("Operator {$operator} is not supported.");
-        }
-
-        $whereClause = "";
-
-        if (!empty($this->where)) {
-            $whereClause = " AND `{$column}` {$operator} :{$column}";
-            $this->bindings[$column] = $value;
-        } else {
-            $whereClause = " WHERE `{$column}` {$operator} :{$column}";
-            $this->bindings = [$column =>  $value];
-        }
-
-        $this->where .= $whereClause;
-
-        return $this;
+        return $this->setWhereClause('AND', $column, 'IS NULL');
     }
+
+    /**
+     * Set the WHERE IS NOT NULL and AND IS NOT NULL conditions.
+     *
+     * @param string $column
+     *
+     * @return $this
+     */
+    public function whereNotNull($column)
+    {
+        return $this->setWhereClause('AND', $column, 'IS NOT NULL');
+    }
+
+    /**
+     * Set the OR WHERE IS NULL condition.
+     *
+     * @param string $column
+     *
+     * @return $this
+     */
+    public function orWhereNull($column)
+    {
+        return $this->setWhereClause('OR', $column, 'IS NULL');
+    }
+
+    /**
+     * Set the OR WHERE IS NOT NULL condition.
+     *
+     * @param string $column
+     *
+     * @return $this
+     */
+    public function orWhereNotNull($column)
+    {
+        return $this->setWhereClause('OR', $column, 'IS NOT NULL');
+    }
+
+    /**
+     * Set the WHERE IN and AND IN conditions.
+     *
+     * @param string $column
+     * @param array $values
+     *
+     * @return $this
+     */
+    public function whereIn($column, array $values)
+    {
+        return $this->setWhereClause('AND', $column, 'IN', $values);
+    }
+
+    /**
+     * Set a raw where clause.
+     *
+     * @param string $whereClause
+     *
+     * @return $this
+     */
+    public function rawWhere(string $where, array $values = []): self
+    {
+        return $this->setWhereClause('', $where, null, $values);
+    }
+
 
     /**
      * Fetch all the results from the database.
@@ -128,10 +188,30 @@ class Builder
      */
     public function get()
     {
-        if (!empty($this->where)) {
-            $this->statement .= $this->where;
+        $this->composeSelect();
+        $this->composeWhereClauseConditions();
+
+        $this->statement = $this->connection->prepare($this->query);
+        $this->statement->execute($this->bindings);
+
+        if ($this->statement->rowCount() > 1) {
+            return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
         }
 
-        return $this->connection->fetchAll($this->statement, $this->bindings);
+        return $this->statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Dump the SQl prepared command.
+     *
+     * @return string
+     */
+    public function dump()
+    {
+        ob_start();
+        $this->statement->debugDumpParams();
+        $output = ob_get_contents() ?: '';
+        ob_end_clean();
+        return '<pre>' . htmlspecialchars($output) . '</pre>';
     }
 }
