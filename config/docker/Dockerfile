@@ -2,13 +2,9 @@ FROM php:8.1-fpm
 
 LABEL maintainer="Deon Okonkwo"
 
-ARG NVM_DIR=/root/.nvm
 ARG NODE_VERSION=16
 
-COPY composer.lock composer.json /var/www/html/
-
-WORKDIR /var/www/html
-
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
@@ -26,24 +22,30 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install Xdebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
+# Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
+RUN apt-get install -y nodejs
 
-RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin:${PATH}"
-
+# Copy application files
 COPY . /var/www/html
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install Node.js dependencies
+RUN npm install
 
 EXPOSE 9000
 CMD ["php-fpm"]
