@@ -9,10 +9,10 @@
  * @version 1.0.0
  */
 
-use Dotenv\Dotenv;
 use Whoops\Run;
-use Whoops\Handler\PrettyPageHandler;
+use Dotenv\Dotenv;
 use Symfony\Component\Yaml\Yaml;
+use Whoops\Handler\PrettyPageHandler;
 
 // Require Autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
