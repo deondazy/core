@@ -16,6 +16,7 @@
         "doctrine/dbal": "^3.6",
         "doctrine/migrations": "^3.6",
         "doctrine/orm": "^2.15",
+        "doctrine/sql-formatter": "^1.1",
         "filp/whoops": "^2.14",
         "slim/psr7": "^1.6",
         "slim/slim": "^4.11",
