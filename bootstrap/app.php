@@ -34,10 +34,3 @@ if ($config['debug']) {
     $whoops->pushHandler(new PrettyPageHandler());
     $whoops->register();
 }
-
-// Check if the current PHP version is compatible with the app
-if (version_compare(PHP_VERSION, CORE_PHP, '<')) {
-    throw new Deondazy\Core\Exceptions\InvalidRequirementException(
-        'PHP version ' . CORE_PHP . ' or higher is required. You are using PHP version ' . PHP_VERSION
-    );
-}
