@@ -11,14 +11,16 @@
 
 use Whoops\Run;
 use Dotenv\Dotenv;
+use DI\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
 use Whoops\Handler\PrettyPageHandler;
 
-// Require Autoloader
-require_once __DIR__ . '/../vendor/autoload.php';
-
 // Load environment variables
 Dotenv::createImmutable(dirname(dirname(__FILE__)))->safeLoad();
+
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions(__DIR__ . '/../config/container.php');
+$container = $containerBuilder->build();
 
 // Require the constants file
 require_once __DIR__ . '/constants.php';
