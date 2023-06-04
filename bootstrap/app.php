@@ -12,6 +12,7 @@
 use Whoops\Run;
 use Dotenv\Dotenv;
 use DI\ContainerBuilder;
+use DI\Bridge\Slim\Bridge;
 use Symfony\Component\Yaml\Yaml;
 use Whoops\Handler\PrettyPageHandler;
 
@@ -34,3 +35,5 @@ if ($config['debug']) {
     $whoops->pushHandler(new PrettyPageHandler());
     $whoops->register();
 }
+
+return Bridge::create($container);
