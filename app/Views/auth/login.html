@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="relative flex flex-col items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0">
-        <h1 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-4">Sign In</h1>
+        <h1 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-4">Sign In, {{ username }}</h1>
         <div class="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 w-96 rounded-lg text-center shadow-lg px-6 py-8">
             <form action="" class="w-full">
                 <div class="mb-6 text-left w-full">
@@ -32,7 +32,7 @@
             </form>
 
             <div class="mt-4">
-                <a href="/sign-up" class="text-slate-900 dark:text-white hover:text-blue-400">Create Account</a>
+                <a href="{{ url_for('register') }}" class="text-slate-900 dark:text-white hover:text-blue-400">Create Account</a>
             </div>
         </div>
     </div>
