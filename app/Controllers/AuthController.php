@@ -3,22 +3,16 @@
 namespace Deondazy\App\Controllers;
 
 use Deondazy\Core\Base\Controller;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthController extends Controller
 {
-    public function login(Request $request, Response $response)
+    public function login($username)
     {
-        $this->render('auth/login');
-        
-        return $response;
+        return $this->render('auth/login.html', ['username' => $username]);
     }
 
-    public function register(Request $request, Response $response)
+    public function register()
     {
-        $this->render('auth/register');
-        
-        return $response;
+        return $this->render('auth/register.html');
     }
 }
