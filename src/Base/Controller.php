@@ -2,25 +2,23 @@
 
 namespace Deondazy\Core\Base;
 
-use Deondazy\Core\Base\View;
+use Slim\Views\Twig;
 use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Deondazy\Core\Base\View;
+use Twig\Error\RuntimeError;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Deondazy\Core\Config\Exceptions\FileNotFoundException;
 
 class Controller
 {
-    /**
-     * The view instance
-     *
-     * @var View
-     */
-    protected $view;
-
-    public function __construct()
-    {
-        $this->view = new View();
-    }
+    public function __construct(
+        protected Twig $twig,
+        protected ServerRequestInterface $request,
+        protected ResponseInterface $response
+    ){}
 
     /**
      * Render a view file template
@@ -28,15 +26,15 @@ class Controller
      * @param string $template
      * @param array $data
      *
-     * @return void
+     * @return 
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws FileNotFoundException
      */
-    public function render(string $template, array $data = []): void
+    protected function render(string $template, array $data = []): ResponseInterface
     {
-        $this->view->render($template, $data);
+        return $this->twig->render($this->response, $template, $data);
     }
 }
