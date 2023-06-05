@@ -3,7 +3,7 @@
 use Deondazy\App\Controllers\AuthController;
 use Deondazy\App\Controllers\HomeController;
 
-$app->get('/', [HomeController::class, 'index']);
+$app->get('/', [HomeController::class, 'index'])->setName('home');
 
-$app->get('/sign-in', [AuthController::class, 'login']);
-$app->get('/sign-up', [AuthController::class, 'register']);
+$app->get('/sign-in/{username}', [AuthController::class, 'login'])->setName('login');
+$app->get('/register', [AuthController::class, 'register'])->setName('register');
