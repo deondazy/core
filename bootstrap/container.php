@@ -28,4 +28,8 @@ return [
     
         return $twig;
     },
+
+    'view' => function (ContainerInterface $container) {
+        return $container->get(Twig::class);
+    },
 ];
