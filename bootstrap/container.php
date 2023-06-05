@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
+use Deondazy\Core\Config;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
