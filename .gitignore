@@ -10,3 +10,4 @@ test.php
 /.vscode
 /public/assets
 .idea
+/storage/cache/twig/*
