@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Deondazy\Core\Base;
 
 use Deondazy\Core\Config;
