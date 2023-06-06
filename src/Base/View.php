@@ -2,17 +2,21 @@
 
 namespace Deondazy\Core\Base;
 
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
-use Twig\Loader\FilesystemLoader;
-use Twig\Extension\DebugExtension;
-use Deondazy\Core\Config\YamlConfig;
+use Deondazy\Core\Config;
+use Slim\Views\Twig;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Deondazy\Core\Config\Exceptions\FileNotFoundException;
 
 class View
 {
+    public function __construct(
+        protected Twig $twig,
+        protected Request $request,
+        protected Response $response,
+        private Config $config
+    ) {}
+
     /**
      * Get the view file template using twig
      *
@@ -20,13 +24,8 @@ class View
      * @param array $data
      *
      * @return string
-     *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws FileNotFoundException
      */
-    public function get(string $template, array $data = []): string
+    public function get(string $template): string
     {
         // If template has an extension, remove it
         if (strpos($template, '.') !== false) {
@@ -37,20 +36,13 @@ class View
             $templateName = $template;
         }
 
-        // Get the twig config file
-        $config = YamlConfig::load('twig');
+        $config = $this->config->get('views.twig');
 
         // Get supported template extensions
         $extensions = $config['extensions'];
 
         // Find the file that matches the template name
-        $templateFile = $this->findTemplateFile($templateName, $extensions);
-
-        $loader = new FilesystemLoader(CORE_VIEWS);
-        $twig = new Environment($loader, $config);
-        $twig->addExtension(new DebugExtension());
-
-        return $twig->render($templateFile, $data);
+        return $this->findTemplateFile($templateName, $extensions);
     }
 
     /**
@@ -66,7 +58,7 @@ class View
     private function findTemplateFile(string $templateName, array $extensions): string
     {
         foreach ($extensions as $extension) {
-            if (file_exists(CORE_VIEWS . DS . $templateName . $extension)) {
+            if (file_exists(__DIR__ . '/../../app/Views/' . $templateName . $extension)) {
                 return $templateName . $extension;
             }
         }
@@ -80,15 +72,15 @@ class View
      * @param string $template
      * @param array $data
      *
-     * @return void
+     * @return Response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws FileNotFoundException
      */
-    public function render(string $template, array $data = []): void
+    public function render(string $template, array $data = []): Response
     {
-        echo $this->get($template, $data);
+        return $this->twig->render($this->response, $this->get($template), $data);
     }
 }
