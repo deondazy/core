@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Deondazy\App\Controllers;
 
 use Deondazy\Core\Base\Controller;
