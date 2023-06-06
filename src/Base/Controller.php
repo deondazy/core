@@ -2,13 +2,11 @@
 
 namespace Deondazy\Core\Base;
 
-use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
 use Deondazy\Core\Base\View;
 use Twig\Error\RuntimeError;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface;
 use Deondazy\Core\Config\Exceptions\FileNotFoundException;
 
 class Controller
