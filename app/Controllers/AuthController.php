@@ -9,11 +9,11 @@ class AuthController extends Controller
 {
     public function login($username): ResponseInterface
     {
-        return $this->render('auth/login.html', ['username' => $username]);
+        return $this->view('auth/login', ['username' => $username]);
     }
 
     public function register(): ResponseInterface
     {
-        return $this->render('auth/register.html');
+        return $this->view('auth/register');
     }
 }
