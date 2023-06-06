@@ -9,9 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class AuthController extends Controller
 {
-    public function login($username): ResponseInterface
+    public function login(): ResponseInterface
     {
-        return $this->view('auth/login', ['username' => $username]);
+        return $this->view('auth/login');
     }
 
     public function register(): ResponseInterface
