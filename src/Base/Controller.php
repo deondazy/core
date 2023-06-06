@@ -7,18 +7,14 @@ use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
 use Deondazy\Core\Base\View;
 use Twig\Error\RuntimeError;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Deondazy\Core\Config\Exceptions\FileNotFoundException;
 
 class Controller
 {
-    public function __construct(
-        protected Twig $twig,
-        protected ServerRequestInterface $request,
-        protected ResponseInterface $response
-    ){}
+    public function __construct(protected View $view)
+    {}
 
     /**
      * Render a view file template
@@ -26,15 +22,15 @@ class Controller
      * @param string $template
      * @param array $data
      *
-     * @return 
+     * @return Response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws FileNotFoundException
      */
-    protected function render(string $template, array $data = []): ResponseInterface
+    protected function view(string $template, array $data = []): Response
     {
-        return $this->twig->render($this->response, $template, $data);
+        return $this->view->render($template, $data);
     }
 }
