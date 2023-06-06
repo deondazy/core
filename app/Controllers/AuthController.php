@@ -12,7 +12,7 @@ class AuthController extends Controller
         return $this->render('auth/login.html', ['username' => $username]);
     }
 
-    public function register()
+    public function register(): ResponseInterface
     {
         return $this->render('auth/register.html');
     }
