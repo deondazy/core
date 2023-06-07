@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function register(): ResponseInterface
     {
-        return $this->view('auth/register');
+        return $this->view('auth.register');
     }
 
     public function forgotPassword(): ResponseInterface
