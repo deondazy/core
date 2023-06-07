@@ -29,12 +29,9 @@ class View
      */
     public function get(string $template): string
     {
-        // If template has an extension, remove it
         if (strpos($template, '.') !== false) {
-            $extension = explode('.', $template)[1];
-            $templateName = trim(str_replace($extension, '', $template), '.');
+            $templateName = str_replace('.', '/', $template);
         } else {
-            // If template has no extension, use it
             $templateName = $template;
         }
 
