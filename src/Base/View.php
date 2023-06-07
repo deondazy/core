@@ -73,9 +73,6 @@ class View
      *
      * @return Response
      *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      * @throws FileNotFoundException
      */
     public function render(string $template, array $data = []): Response
