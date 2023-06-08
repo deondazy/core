@@ -32,7 +32,6 @@ return [
         return $twig;
     },
 
-    
     Config::class => function () {
         $directory = __DIR__ . '/../config/';
         
