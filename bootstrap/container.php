@@ -32,21 +32,19 @@ return [
         return $twig;
     },
 
-    'view' => function (ContainerInterface $container) {
-        return $container->get(Twig::class);
-    },
-
+    
     Config::class => function () {
         $directory = __DIR__ . '/../config/';
-    
+        
         $configs = [];
         foreach (glob($directory . '*.php') as $filename) {
             $key = pathinfo($filename, PATHINFO_FILENAME);
             $configs[$key] = require $filename;
         }
-    
+        
         return new Config($configs);
     },
-
+    
+    'view' => get(Twig::class),
     'config' => get(Config::class)
 ];
