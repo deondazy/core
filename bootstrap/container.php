@@ -10,6 +10,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
 
+use function Di\get;
+
 return [
     ServerRequestInterface::class => function () {
         $serverRequestCreator = ServerRequestCreatorFactory::create();
@@ -45,4 +47,6 @@ return [
     
         return new Config($configs);
     },
+
+    'config' => get(Config::class)
 ];
