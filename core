@@ -9,11 +9,13 @@ use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\Migrations\Configuration\Migration\PhpFile;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
-require __DIR__ . '/bootstrap/database.php';
+$app = require_once __DIR__ . '/bootstrap/app.php';
 
 $config = $app->get(Config::class);
+$entityManager = $app->get(EntityManager::class);
 
 $dependencyFactory = DependencyFactory::fromEntityManager(
     new PhpFile(__DIR__ . '/config/migrations.php'),
