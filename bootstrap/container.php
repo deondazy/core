@@ -6,6 +6,8 @@ use function Di\get;
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
 use Deondazy\Core\Config;
+use DI\Bridge\Slim\Bridge;
+use DI\Container;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
@@ -14,6 +16,8 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Views\TwigMiddleware;
+use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
 return [
     ServerRequestInterface::class => function () {
@@ -23,6 +27,18 @@ return [
 
     ResponseInterface::class => function () {
         return new Response();
+    },
+
+    'AppFactory' => function(ContainerInterface $container) {
+        $factory = Bridge::create($container);
+
+        $factory->addRoutingMiddleware();
+
+        $factory->add(TwigMiddleware::createFromContainer($factory));
+
+        $factory->add(new WhoopsMiddleware());
+
+        return $factory;
     },
 
     EntityManager::class => function (Config $config) {
