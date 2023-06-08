@@ -38,7 +38,10 @@
         "psr-4": {
             "Deondazy\\Core\\": "src/",
             "Deondazy\\App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Functions/Functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
