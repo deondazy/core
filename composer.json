@@ -23,6 +23,7 @@
         "slim/slim": "^4.11",
         "slim/twig-view": "^3.3",
         "symfony/cache": "^6.3",
+        "symfony/security-bundle": "^6.3",
         "symfony/yaml": "^6.1",
         "vlucas/phpdotenv": "^5.5",
         "zeuxisoo/slim-whoops": "^0.7.3"
