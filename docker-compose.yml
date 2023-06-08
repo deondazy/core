@@ -10,7 +10,7 @@ services:
       XDEBUG_CONFIG: '${CORE_XDEBUG_CONFIG:-client_host=host.docker.internal}'
     volumes:
       - .:/var/www/html
-      - ./config/docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
     networks:
       - core
   nginx:
