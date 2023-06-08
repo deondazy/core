@@ -2,15 +2,18 @@
 
 declare(strict_types = 1);
 
+use function Di\get;
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
 use Deondazy\Core\Config;
+use Doctrine\ORM\ORMSetup;
+use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\DriverManager;
+
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
-
-use function Di\get;
 
 return [
     ServerRequestInterface::class => function () {
@@ -20,6 +23,16 @@ return [
 
     ResponseInterface::class => function () {
         return new Response();
+    },
+
+    EntityManager::class => function (Config $config) {
+        return new EntityManager(
+            DriverManager::getConnection($config->get('database.mysql')),
+            ORMSetup::createAttributeMetadataConfiguration(
+                $config->get('paths.entity_dir'),
+                $config->get('app.debug')
+            )
+        );
     },
 
     Twig::class => function (ContainerInterface $container) {
