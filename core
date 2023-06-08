@@ -1,11 +1,33 @@
 #!/usr/bin/env php
 <?php
 
+declare(strict_types = 1);
+
+use Deondazy\Core\Config;
+use Doctrine\Migrations\DependencyFactory;
+use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 require __DIR__ . '/bootstrap/database.php';
 
-ConsoleRunner::run(
-    new SingleManagerProvider($entityManager)
+$config = $app->get(Config::class);
+
+$dependencyFactory = DependencyFactory::fromEntityManager(
+    new PhpFile(__DIR__ . '/config/migrations.php'),
+    new ExistingEntityManager($entityManager)
 );
+
+$migrationCommands = require __DIR__ . '/commands/migrations.php';
+$customCommands    = require __DIR__ . '/commands/custom.php';
+
+$cliApp = new Application($config->get('app.name'), $config->get('app.version'));
+
+ConsoleRunner::addCommands($cliApp, new SingleManagerProvider($entityManager));
+
+$cliApp->addCommands($migrationCommands($dependencyFactory));
+$cliApp->addCommands(array_map(fn($command) => $container->get($command), $customCommands));
+
+$cliApp->run();
