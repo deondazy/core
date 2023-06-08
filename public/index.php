@@ -6,8 +6,7 @@ use DI\Bridge\Slim\Bridge;
 use Slim\Views\TwigMiddleware;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 
-// Require Autoloader
-require __DIR__ . '/../vendor/autoload.php';
+ini_set('display_errors', true);
 
 $container = require_once __DIR__ . '/../bootstrap/app.php';
 
