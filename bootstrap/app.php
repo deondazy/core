@@ -12,6 +12,8 @@
 use Dotenv\Dotenv;
 use DI\ContainerBuilder;
 
+require __DIR__ . '/../vendor/autoload.php';
+
 // Load environment variables
 Dotenv::createImmutable(dirname(dirname(__FILE__)))->safeLoad();
 
