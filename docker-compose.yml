@@ -3,7 +3,7 @@ services:
   core.php:
     build:
       context: ./
-      dockerfile: ./config/docker/Dockerfile
+      dockerfile: ./docker/Dockerfile
     image: core-8.1/php
     environment:
       XDEBUG_MODE: '${CORE_XDEBUG_MODE:-off}'
@@ -20,7 +20,7 @@ services:
       - '${CORE_SSL_PORT:-443}:443'
     volumes:
       - .:/var/www/html
-      - ./config/docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - core
   mysql:
@@ -38,7 +38,7 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - core-mysql:/var/lib/mysql/
-      - ./config/docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - core
 networks:
