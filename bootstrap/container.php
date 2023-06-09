@@ -2,22 +2,22 @@
 
 declare(strict_types = 1);
 
-use function Di\get;
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
 use Deondazy\Core\Config;
 use DI\Bridge\Slim\Bridge;
-use DI\Container;
 use Doctrine\ORM\ORMSetup;
+use Slim\Views\TwigMiddleware;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
-
 use Psr\Container\ContainerInterface;
+use Deondazy\Core\View\ViteExtension;
 use Psr\Http\Message\ResponseInterface;
+use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
-use Slim\Views\TwigMiddleware;
-use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
+
+use function Di\get;
 
 return [
     ServerRequestInterface::class => function () {
@@ -52,9 +52,16 @@ return [
     },
 
     Twig::class => function (ContainerInterface $container) {
+        dd($container->get(Config::class)->get('app.debug'));
         $config = $container->get(Config::class)->get('views.twig');
     
         $twig = Twig::create(__DIR__ . '/../app/Views', $config);
+
+        $twig->addExtension(new ViteExtension(
+            $container->get(Config::class)->get('app.debug'),
+            [],
+            $container->get(Config::class)
+        ));
     
         // $twig->addExtension(new \Twig\Extension\DebugExtension());
     
