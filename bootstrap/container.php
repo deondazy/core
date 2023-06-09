@@ -52,7 +52,6 @@ return [
     },
 
     Twig::class => function (ContainerInterface $container) {
-        dd($container->get(Config::class)->get('app.debug'));
         $config = $container->get(Config::class)->get('views.twig');
     
         $twig = Twig::create(__DIR__ . '/../app/Views', $config);
