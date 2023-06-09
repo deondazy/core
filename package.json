@@ -6,9 +6,8 @@
     "vite": "^4.3.9"
   },
   "scripts": {
-    "vite": "vite",
-    "vite build": "vite build",
-    "vite preview": "vite preview"
+    "dev": "vite",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
