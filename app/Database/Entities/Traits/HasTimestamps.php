@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Entity\Traits;
+namespace Deondazy\App\Database\Entities\Traits;
 
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
