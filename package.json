@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/deondazy/core/issues"
   },
-  "homepage": "https://github.com/deondazy/core#readme"
+  "homepage": "https://github.com/deondazy/core#readme",
+  "dependencies": {
+    "alpinejs": "^3.12.2"
+  }
 }
