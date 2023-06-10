@@ -62,8 +62,7 @@ return [
             $config,
             $config->get('app.debug'),
             $config->get('paths.public_dir') . '/build/manifest.json',
-            '127.0.0.1',
-            5173
+            'http://127.0.0.1:5173'
         ));
     
         // $twig->addExtension(new \Twig\Extension\DebugExtension());
