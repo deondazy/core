@@ -5,16 +5,14 @@ declare(strict_types = 1);
 namespace Deondazy\Core\View;
 
 use Twig\TwigFunction;
-use Deondazy\Core\Config;
 use Twig\Extension\AbstractExtension;
 
 class ViteExtension extends AbstractExtension
 {
     public function __construct(
-        private Config $config,
-        private bool $isDev,
+        private string $appUrl,
         private string $manifest,
-        private string $devServer
+        private string $viteServer
     ) {}
 
     public function getFunctions()
@@ -22,27 +20,33 @@ class ViteExtension extends AbstractExtension
         return [
             new TwigFunction(
                 'vite',
-                [$this, 'getViteAsset'],
+                [$this, 'getViteAssets'],
                 ['is_safe' => ['html']]
-        ),
+            ),
         ];
     }
 
-    public function getViteAsset(array $assets): string
+    public function getViteAssets(array $assets): string
     {
-        if ($this->isDev) {
-            return $this->renderDevAssets($assets);
-        } else {
-            return $this->renderProductionAssets($assets);
+        $html = $this->getViteClientModule();
+
+        foreach ($assets as $asset) {
+            if ($this->isOnViteServer($asset)) {
+                $html .= $this->renderAssetFromViteServer($asset);
+            } else {
+                $html .= $this->renderAssetFromManifest($asset);
+            }
         }
+
+        return $html;
     }
 
-    private function isOnDevServer(string $asset): bool 
+    private function isOnViteServer(string $asset): bool 
     {
-        static $devEntries = [];
+        static $assetEntries = [];
     
-        if (!isset($devEntries[$asset])) {
-            $url = $this->devServer . '/' . $asset;
+        if (!isset($assetEntries[$asset])) {
+            $url = $this->getUrlFromViteServer($asset);
             $handle = curl_init($url);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($handle, CURLOPT_NOBODY, true);
@@ -51,10 +55,10 @@ class ViteExtension extends AbstractExtension
             $error = curl_errno($handle);
             curl_close($handle);
     
-            $devEntries[$asset] = !$error;
+            $assetEntries[$asset] = !$error;
         }
     
-        return $devEntries[$asset];
+        return $assetEntries[$asset];
     }
 
     private function getManifest(): array
@@ -77,52 +81,61 @@ class ViteExtension extends AbstractExtension
 
         if (isset($manifest[$asset])) {
             $file = $manifest[$asset]['file'];
-            return $this->config->get('app.url') . "/build/{$file}";
+            return $this->appUrl . "/build/{$file}";
         }
 
         return '';
     }
 
-    private function renderDevAssets(array $assets): string
+    private function getUrlFromViteServer(string $asset): string
     {
-        $html = $this->getViteModule();
-
-        foreach ($assets as $asset) {
-            $url = $this->isOnDevServer($asset)
-                ? "{$this->devServer}/{$asset}"
-                : $this->getUrlFromManifest($asset);
-
-            $html .= match ($this->getFileExtension($asset)) {
-                'js' => $this->renderScriptTag($url),
-                'css' => $this->renderLinkTag($url),
-                default => '',
-            };
-        }
-
-        return $html;
-    }
-
-    private function renderProductionAssets(array $assets): string
-    {
-        $html = '';
-
-        foreach ($assets as $asset) {
-            $url = $this->getUrlFromManifest($asset);
-
-            $html .= match ($this->getFileExtension($asset)) {
-                'js' => $this->renderScriptTag($url),
-                'css' => $this->renderLinkTag($url),
-                default => '',
-            };
-        }
-
-        return $html;
+        return "{$this->viteServer}/{$asset}";
     }
 
     private function getFileExtension(string $filename): string
     {
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
         return strtolower($extension);
+    }
+
+    public function getViteClientModule(): string
+    {
+        if ($this->isOnViteServer('@vite/client')) {
+            return "<script 
+                type=\"module\"
+                src=\"{$this->getUrlFromViteServer('/@vite/client')}\">
+                </script>";
+        } else {
+            return '';
+        }
+    }
+
+    private function renderAssetFromViteServer(string $asset): string
+    {
+        $url = $this->isOnViteServer($asset)
+            ? $this->getUrlFromViteServer($asset)
+            : $this->getUrlFromManifest($asset);
+
+        $html = match ($this->getFileExtension($asset)) {
+            'js' => $this->renderScriptTag($url),
+            'css' => $this->renderLinkTag($url),
+            default => '',
+        };
+
+        return $html;
+    }
+
+    private function renderAssetFromManifest(string $asset): string
+    {   
+        $url = $this->getUrlFromManifest($asset);
+
+        $html = match ($this->getFileExtension($asset)) {
+            'js' => $this->renderScriptTag($url),
+            'css' => $this->renderLinkTag($url),
+            default => '',
+        };
+
+        return $html;
     }
 
     private function renderScriptTag(string $src): string
@@ -133,17 +146,5 @@ class ViteExtension extends AbstractExtension
     private function renderLinkTag(string $href): string
     {
         return "<link rel=\"stylesheet\" href=\"$href\">";
-    }
-
-    public function getViteModule(): string
-    {
-        if ($this->isDev && $this->isOnDevServer('@vite/client')) {
-            return "<script 
-                type=\"module\"
-                src=\"{$this->devServer}/@vite/client\">
-                </script>";
-        } else {
-            return '';
-        }
     }
 }
