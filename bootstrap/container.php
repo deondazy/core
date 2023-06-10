@@ -59,10 +59,9 @@ return [
         );
 
         $twig->addExtension(new ViteExtension(
-            $config,
-            $config->get('app.debug'),
+            $config->get('app.url'),
             $config->get('paths.public_dir') . '/build/manifest.json',
-            'http://127.0.0.1:5173'
+            $config->get('app.vite_server')
         ));
     
         // $twig->addExtension(new \Twig\Extension\DebugExtension());
