@@ -33,4 +33,17 @@ class Controller
     {
         return $this->view->render($template, $data);
     }
+
+    /**
+     * Redirect to a given url
+     *
+     * @param string $url
+     * @param array $data
+     *
+     * @return Response
+     */
+    protected function redirect(string $url, array $data = []): Response
+    {
+        return $this->view->redirect($url, $data);
+    }
 }
