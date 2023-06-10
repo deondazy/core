@@ -2,6 +2,9 @@
 
 declare(strict_types = 1);
 
+use function Di\get;
+use function DI\create;
+
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
 use Deondazy\Core\Config;
@@ -10,14 +13,19 @@ use Doctrine\ORM\ORMSetup;
 use Slim\Views\TwigMiddleware;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
-use Psr\Container\ContainerInterface;
 use Deondazy\Core\View\ViteExtension;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
+use Deondazy\App\Database\Entities\User;
+
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
-
-use function Di\get;
+use Deondazy\App\Services\UserRegistrationService;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 return [
     ServerRequestInterface::class => function () {
@@ -79,6 +87,23 @@ return [
         }
         
         return new Config($configs);
+    },
+
+    UserPasswordHasherInterface::class => function (ContainerInterface $container) {
+        return $container->get(UserPasswordHasher::class);
+    },
+
+    UserPasswordHasher::class => function () {
+        return new UserPasswordHasher(new PasswordHasherFactory([
+            User::class => new NativePasswordHasher()
+        ]));
+    },
+
+    UserRegistrationService::class => function (ContainerInterface $container) {
+        return new UserRegistrationService(
+            $container->get(EntityManager::class),
+            $container->get(UserPasswordHasherInterface::class)
+        );
     },
     
     'view' => get(Twig::class),
