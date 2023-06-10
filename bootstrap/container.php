@@ -21,7 +21,7 @@ use Deondazy\App\Database\Entities\User;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
-use Deondazy\App\Services\UserRegistrationService;
+use Deondazy\App\Services\UserAuthenticationService;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
@@ -99,8 +99,8 @@ return [
         ]));
     },
 
-    UserRegistrationService::class => function (ContainerInterface $container) {
-        return new UserRegistrationService(
+    UserAuthenticationService::class => function (ContainerInterface $container) {
+        return new UserAuthenticationService(
             $container->get(EntityManager::class),
             $container->get(UserPasswordHasherInterface::class)
         );
