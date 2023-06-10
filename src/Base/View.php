@@ -79,4 +79,17 @@ class View
     {
         return $this->twig->render($this->response, $this->get($template), $data);
     }
+
+    /**
+     * Redirect to a given route
+     * 
+     * @param string $route
+     * @param array $data
+     * 
+     * @return Response
+     */
+    public function redirect(string $route, array $data = []): Response
+    {
+        return $this->response->withHeader('Location', $route)->withStatus(302);
+    }
 }
