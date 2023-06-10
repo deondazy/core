@@ -6,5 +6,6 @@ return [
 
     'name' => $_ENV['APP_NAME'] ?? 'Core Web',
     'version' => $_ENV['APP_VERSION'],
-    'debug' => (bool) $_ENV['APP_DEBUG'] ?? false,
+    'url' => $_ENV['APP_URL'] ?? 'http://localhost',
+    'debug' => false,
 ];
