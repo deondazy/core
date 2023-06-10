@@ -5,6 +5,7 @@
 test.php
 **/.DS_Store
 /node_modules
+/public/build
 composer.lock
 .phpunit.cache
 /public/assets
