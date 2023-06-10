@@ -51,15 +51,19 @@ return [
         );
     },
 
-    Twig::class => function (ContainerInterface $container) {
-        $config = $container->get(Config::class)->get('views.twig');
+    Twig::class => function (Config $config) {
     
-        $twig = Twig::create(__DIR__ . '/../app/Views', $config);
+        $twig = Twig::create(
+            $config->get('paths.views_dir'),
+            $config->get('views.twig')
+        );
 
         $twig->addExtension(new ViteExtension(
-            $container->get(Config::class)->get('app.debug'),
-            [],
-            $container->get(Config::class)
+            $config,
+            $config->get('app.debug'),
+            $config->get('paths.public_dir') . '/build/manifest.json',
+            '127.0.0.1',
+            5173
         ));
     
         // $twig->addExtension(new \Twig\Extension\DebugExtension());
