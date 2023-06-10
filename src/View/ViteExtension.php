@@ -14,8 +14,7 @@ class ViteExtension extends AbstractExtension
         private Config $config,
         private bool $isDev,
         private string $manifest,
-        private string $devServerHost,
-        private int $devServerPort
+        private string $devServer
     ) {}
 
     public function getFunctions()
@@ -34,18 +33,54 @@ class ViteExtension extends AbstractExtension
         if ($this->isDev) {
             return $this->renderDevAssets($assets);
         } else {
+            return $this->renderProductionAssets($assets);
+        }
+    }
+
+    private function isOnDevServer(string $asset): bool 
+    {
+        static $devEntries = [];
+    
+        if (!isset($devEntries[$asset])) {
+            $url = $this->devServer . '/' . $asset;
+            $handle = curl_init($url);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($handle, CURLOPT_NOBODY, true);
+    
+            curl_exec($handle);
+            $error = curl_errno($handle);
+            curl_close($handle);
+    
+            $devEntries[$asset] = !$error;
+        }
+    
+        return $devEntries[$asset];
+    }
+
+    private function getManifest(): array
+    {
+        static $manifest = null;
+
+        if ($manifest === null) {
             $manifest = json_decode(
                 file_get_contents($this->manifest),
                 true
             );
-
-            $html = '';
-            foreach ($assets as $asset) {
-                $html .= $this->renderProductionAsset($asset, $manifest);
-            }
-
-            return $html;
         }
+
+        return $manifest;
+    }
+
+    private function getUrlFromManifest(string $asset): string
+    {
+        $manifest = $this->getManifest();
+
+        if (isset($manifest[$asset])) {
+            $file = $manifest[$asset]['file'];
+            return $this->config->get('app.url') . "/build/{$file}";
+        }
+
+        return '';
     }
 
     private function renderDevAssets(array $assets): string
@@ -53,9 +88,13 @@ class ViteExtension extends AbstractExtension
         $html = $this->getViteModule();
 
         foreach ($assets as $asset) {
+            $url = $this->isOnDevServer($asset)
+                ? "{$this->devServer}/{$asset}"
+                : $this->getUrlFromManifest($asset);
+
             $html .= match ($this->getFileExtension($asset)) {
-                'js' => $this->renderScriptTag("http://{$this->devServerHost}:{$this->devServerPort}/$asset"),
-                'css' => $this->renderLinkTag("http://{$this->devServerHost}:{$this->devServerPort}/$asset"),
+                'js' => $this->renderScriptTag($url),
+                'css' => $this->renderLinkTag($url),
                 default => '',
             };
         }
@@ -63,20 +102,21 @@ class ViteExtension extends AbstractExtension
         return $html;
     }
 
-    private function renderProductionAsset(string $asset, array $manifest): string
+    private function renderProductionAssets(array $assets): string
     {
-        if (isset($manifest[$asset])) {
-            $file = $manifest[$asset]['file'];
-            $url = $this->config->get('app.url') . "/build/$file";
+        $html = '';
 
-            return match ($this->getFileExtension($asset)) {
+        foreach ($assets as $asset) {
+            $url = $this->getUrlFromManifest($asset);
+
+            $html .= match ($this->getFileExtension($asset)) {
                 'js' => $this->renderScriptTag($url),
                 'css' => $this->renderLinkTag($url),
                 default => '',
             };
         }
 
-        return '';
+        return $html;
     }
 
     private function getFileExtension(string $filename): string
@@ -97,10 +137,10 @@ class ViteExtension extends AbstractExtension
 
     public function getViteModule(): string
     {
-        if ($this->isDev) {
+        if ($this->isDev && $this->isOnDevServer('@vite/client')) {
             return "<script 
                 type=\"module\"
-                src=\"http://{$this->devServerHost}:{$this->devServerPort}/@vite/client\">
+                src=\"{$this->devServer}/@vite/client\">
                 </script>";
         } else {
             return '';
