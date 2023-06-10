@@ -11,6 +11,6 @@ class HomeController extends Controller
 {
     public function index(): ResponseInterface
     {   
-        return $this->view('index', ['home' => 'My Home Page']);
+        return $this->view('index');
     }
 }
