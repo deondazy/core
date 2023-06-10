@@ -87,7 +87,7 @@ class ViteExtension extends AbstractExtension
 
     private function renderScriptTag(string $src): string
     {
-        return "<script src=\"$src\"></script>";
+        return "<script type=\"module\" crossorigin src=\"$src\"></script>";
     }
 
     private function renderLinkTag(string $href): string
