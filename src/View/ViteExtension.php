@@ -103,7 +103,7 @@ class ViteExtension extends AbstractExtension
         if ($this->isOnViteServer('@vite/client')) {
             return "<script 
                 type=\"module\"
-                src=\"{$this->getUrlFromViteServer('/@vite/client')}\">
+                src=\"{$this->getUrlFromViteServer('@vite/client')}\">
                 </script>";
         } else {
             return '';
