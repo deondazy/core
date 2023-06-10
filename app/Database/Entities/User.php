@@ -1,18 +1,19 @@
 <?php
 
-namespace Deondazy\Core\Database\Entities;
+namespace Deondazy\App\Database\Entities;
 
-use Deondazy\Core\Entity\Traits\HasTimestamps;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use Deondazy\App\Database\Entities\Traits\HasTimestamps;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[Entity, Table(name: 'users')]
 #[HasLifecycleCallbacks]
-class User
+class User implements PasswordAuthenticatedUserInterface
 {
     use HasTimestamps;
     
@@ -72,7 +73,7 @@ class User
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
