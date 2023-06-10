@@ -119,6 +119,7 @@ class ViteExtension extends AbstractExtension
         $html = match ($this->getFileExtension($asset)) {
             'js' => $this->renderScriptTag($url),
             'css' => $this->renderLinkTag($url),
+            'scss' => $this->renderLinkTag($url),
             default => '',
         };
 
@@ -132,6 +133,7 @@ class ViteExtension extends AbstractExtension
         $html = match ($this->getFileExtension($asset)) {
             'js' => $this->renderScriptTag($url),
             'css' => $this->renderLinkTag($url),
+            'scss' => $this->renderLinkTag($url),
             default => '',
         };
 
