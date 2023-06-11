@@ -35,6 +35,19 @@ class Controller
     }
 
     /**
+     * Set a flash message
+     * 
+     * @param string $key
+     * @param string $message
+     * 
+     * @return array|null
+     */
+    protected function flash(string $key, string $message = ''): array|null
+    {
+        return $this->view->flash($key, $message);
+    }
+
+    /**
      * Redirect to a given url
      *
      * @param string $url
