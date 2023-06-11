@@ -42,8 +42,8 @@ class Controller
      *
      * @return Response
      */
-    protected function redirect(string $url, array $data = []): Response
+    protected function redirect(string $route): Response
     {
-        return $this->view->redirect($url, $data);
+        return $this->view->redirect($route);
     }
 }
