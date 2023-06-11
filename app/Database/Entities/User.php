@@ -2,44 +2,43 @@
 
 namespace Deondazy\App\Database\Entities;
 
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\Table;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Deondazy\App\Database\Entities\Traits\HasTimestamps;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Deondazy\App\Database\Entities\Traits\HasTimestamps;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-#[Entity, Table(name: 'users')]
+#[ORM\Entity]
+#[ORM\Table(name: 'users')]
 #[HasLifecycleCallbacks]
-class User implements PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use HasTimestamps;
     
-    #[Id, Column(options: ['unsigned' => true]), GeneratedValue]
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    #[Column(name: 'first_name')]
-    private string $firstName;
+    #[ORM\Column(name: 'first_name', type: Types::STRING)]
+    private ?string $firstName = null;
 
-    #[Column(name: 'last_name')]
-    private string $lastName;
+    #[ORM\Column(name: 'last_name', type: Types::STRING)]
+    private ?string $lastName = null;
 
-    #[Column(unique: true)]
-    private string $email;
+    #[ORM\Column(type: Types::STRING, unique: true)]
+    private ?string $email = null;
 
-    #[Column(type: 'string')]
-    private string $password;
+    #[ORM\Column(type: Types::STRING)]
+    private ?string $password = null;
 
-    public function getId(): int
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private array $roles = [];
+
+    public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
     }
 
     public function setFirstName(string $firstName): User
@@ -49,9 +48,9 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastName(): string
+    public function getFirstName(): ?string
     {
-        return $this->lastName;
+        return $this->firstName;
     }
 
     public function setLastName(string $lastName): User
@@ -61,14 +60,31 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEmail(): string
+    public function getLastName(): ?string
     {
-        return strtolower($this->email);
+        return $this->lastName;
     }
 
     public function setEmail(string $email): User
     {
-        $this->email = strtolower($email);
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+    
+    public function getEmail(): string
+    {
+        return $this->getUserIdentifier();
+    }
+
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
 
         return $this;
     }
@@ -78,10 +94,36 @@ class User implements PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): User
+    public function setRoles(array $roles): User
     {
-        $this->password = $password;
+        $this->roles = $roles;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
+    }
+
+    public function eraseCredentials(): void
+    {
+        // ...
+    }
+
+    public function __serialize(): array
+    {
+        return [$this->id, $this->email, $this->password];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        [$this->id, $this->email, $this->password] = $data;
     }
 }
