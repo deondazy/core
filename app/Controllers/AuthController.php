@@ -8,17 +8,40 @@ use Deondazy\Core\Base\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Deondazy\App\Services\UserAuthenticationService;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AuthController extends Controller
 {
-    public function login(): ResponseInterface
+    public function showLoginForm(): ResponseInterface
     {
-        return $this->view('auth/login');
+        $message = $this->flash('error');
+
+        return $this->view('auth.login', compact('message'));
+    }
+
+    public function login(
+        ServerRequestInterface $request, 
+        UserAuthenticationService $authService
+    ): ResponseInterface
+    {
+        $formData = $request->getParsedBody();
+
+        try {
+            $authService->login($formData);
+
+            return $this->redirect('/dashboard');
+
+        } catch (AuthenticationException $e) {
+            $this->flash('error', $e->getMessage());
+            return $this->redirect('/login');
+        }
     }
 
     public function showRegistrationForm(): ResponseInterface
     {
-        return $this->view('auth.register');
+        $message = $this->flash('error');
+
+        return $this->view('auth.register', compact('message'));
     }
 
     public function register(
