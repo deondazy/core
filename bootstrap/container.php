@@ -6,6 +6,7 @@ use Slim\App;
 use function Di\get;
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
+use Valitron\Validator;
 use Deondazy\Core\Config;
 use DI\Bridge\Slim\Bridge;
 use Doctrine\ORM\ORMSetup;
@@ -23,6 +24,7 @@ use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 use Deondazy\App\Middleware\RequireAuthentication;
 use Odan\Session\Middleware\SessionStartMiddleware;
 use Deondazy\App\Services\UserAuthenticationService;
+use Deondazy\App\Middleware\ValidationExceptionMiddleware;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
@@ -40,6 +42,7 @@ return [
         
         $app->add(SessionStartMiddleware::class);
         $app->add(TwigMiddleware::createFromContainer($app));
+        $app->add(ValidationExceptionMiddleware::class);
         $app->add(new WhoopsMiddleware());
 
         return $app;
@@ -109,7 +112,10 @@ return [
             $container->get(UserPasswordHasherInterface::class),
             $container->get(TokenStorageInterface::class),
             $container->get(AuthenticationTrustResolverInterface::class),
+            $container->get(Validator::class)
         ),
+
+    Validator::class => fn () => new Validator(),
 
     TokenStorageInterface::class => fn () => new TokenStorage(),
 
@@ -121,6 +127,12 @@ return [
             $container->get(TokenStorageInterface::class),
             $container->get(App::class)->getResponseFactory()
         ),
+
+    ValidationExceptionMiddleware::class => function (ContainerInterface $container) {
+        return new ValidationExceptionMiddleware(
+            $container->get(App::class)->getResponseFactory()
+        );
+    },
 
     'view' => get(Twig::class),
     'config' => get(Config::class),
