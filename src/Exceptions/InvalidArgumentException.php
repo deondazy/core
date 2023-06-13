@@ -2,6 +2,8 @@
 
 namespace Deondazy\Core\Exceptions;
 
-class InvalidArgumentException extends DeondazyCoreException
+use LogicException;
+
+class InvalidArgumentException extends LogicException
 {
 }
