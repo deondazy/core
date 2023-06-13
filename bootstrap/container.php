@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Slim\App;
 use function Di\get;
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
@@ -19,46 +20,32 @@ use Psr\Http\Message\ResponseInterface;
 use Deondazy\App\Database\Entities\User;
 use Odan\Session\SessionManagerInterface;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
-use Psr\Http\Message\ServerRequestInterface;
-use Slim\Factory\ServerRequestCreatorFactory;
 use Deondazy\App\Middleware\RequireAuthentication;
 use Odan\Session\Middleware\SessionStartMiddleware;
 use Deondazy\App\Services\UserAuthenticationService;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\AccessDecisionManager;
-use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver;
-use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
 
 return [
-    ServerRequestInterface::class => function () {
-        $serverRequestCreator = ServerRequestCreatorFactory::create();
-        return $serverRequestCreator->createServerRequestFromGlobals();
-    },
-
-    ResponseInterface::class => function () {
-        return new Response();
-    },
-
-    'AppFactory' => function (ContainerInterface $container) {
-        $factory = Bridge::create($container);
+    App::class => function (ContainerInterface $container) {
+        $app = Bridge::create($container);
         
-        $factory->addRoutingMiddleware();
+        $app->addRoutingMiddleware();
         
-        $factory->add(SessionStartMiddleware::class);
-        $factory->add(TwigMiddleware::createFromContainer($factory));
-        $factory->add(new WhoopsMiddleware());
+        $app->add(SessionStartMiddleware::class);
+        $app->add(TwigMiddleware::createFromContainer($app));
+        $app->add(new WhoopsMiddleware());
 
-        return $factory;
+        return $app;
     },
+
+    ResponseInterface::class => fn () => new Response(),
 
     EntityManager::class => function (Config $config) {
         return new EntityManager(
@@ -70,18 +57,13 @@ return [
         );
     },
 
-    SessionManagerInterface::class => function (ContainerInterface $container) {
-        return $container->get(SessionInterface::class);
-    },
+    SessionManagerInterface::class => fn (ContainerInterface $container) 
+        => $container->get(SessionInterface::class),
 
-    SessionInterface::class => function (Config $config) {
-        $options = $config->get('session');
-
-        return new PhpSession($options);
-    },
+    SessionInterface::class => fn (Config $config) 
+        => new PhpSession($config->get('session')),
 
     Twig::class => function (ContainerInterface $container) {
-
         $twig = Twig::create(
             $container->get(Config::class)->get('paths.views_dir'),
             $container->get(Config::class)->get('views.twig')
@@ -89,12 +71,10 @@ return [
 
         $twig->addExtension(new ViteExtension(
             $container->get(Config::class)->get('app.url'),
-            $container->get(Config::class)->get('paths.public_dir') . '/build/manifest.json',
+            $container->get(Config::class)
+                ->get('paths.public_dir') . '/build/manifest.json',
             $container->get(Config::class)->get('app.vite_server')
         ));
-
-        $flash = $container->get(SessionInterface::class)->getFlash();
-        $twig->getEnvironment()->addGlobal('flash', $flash);
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
@@ -113,56 +93,34 @@ return [
         return new Config($configs);
     },
 
-    UserPasswordHasherInterface::class => function (ContainerInterface $container) {
-        return $container->get(UserPasswordHasher::class);
-    },
+    UserPasswordHasherInterface::class => fn (ContainerInterface $container)
+        => $container->get(UserPasswordHasher::class),
 
-    UserPasswordHasher::class => function () {
-        return new UserPasswordHasher(new PasswordHasherFactory([
-            User::class => new NativePasswordHasher(),
-        ]));
-    },
+    UserPasswordHasher::class => fn ()
+        => new UserPasswordHasher(new PasswordHasherFactory(
+            [
+                User::class => new NativePasswordHasher(),
+            ]
+        )),
 
-    UserAuthenticationService::class => function (ContainerInterface $container) {
-        return new UserAuthenticationService(
+    UserAuthenticationService::class => fn (ContainerInterface $container)
+        => new UserAuthenticationService(
             $container->get(EntityManager::class),
             $container->get(UserPasswordHasherInterface::class),
             $container->get(TokenStorageInterface::class),
             $container->get(AuthenticationTrustResolverInterface::class),
-        );
-    },
+        ),
 
-    AuthenticationTrustResolverInterface::class => function () {
-        return new AuthenticationTrustResolver();
-    },
+    TokenStorageInterface::class => fn () => new TokenStorage(),
 
-    AuthorizationCheckerInterface::class => function (ContainerInterface $container) {
-        return $container->get(AuthorizationChecker::class);
-    },
+    AuthenticationTrustResolverInterface::class => fn ()
+        => new AuthenticationTrustResolver(),
 
-    TokenStorageInterface::class => DI\create(TokenStorage::class),
-    TokenInterface::class => DI\get(TokenStorageInterface::class),
-
-    AccessDecisionManagerInterface::class => function (ContainerInterface $container) {
-        return new AccessDecisionManager([
-            new AuthenticatedVoter($container->get(AuthenticationTrustResolverInterface::class)),
-        ]);
-    },
-
-    AuthenticationTrustResolverInterface::class => function () {
-        return new AuthenticationTrustResolver();
-    },
-
-    RequireAuthentication::class => function (TokenStorageInterface $tokenStorage) {
-        return new RequireAuthentication($tokenStorage);
-    },
-
-    AuthorizationChecker::class => function (
-        TokenStorageInterface $tokenStorage,
-        AccessDecisionManagerInterface $accessDecisionManager
-    ) {
-        return new AuthorizationChecker($tokenStorage, $accessDecisionManager);
-    },
+    RequireAuthentication::class => fn (ContainerInterface $container)
+        => new RequireAuthentication(
+            $container->get(TokenStorageInterface::class),
+            $container->get(App::class)->getResponseFactory()
+        ),
 
     'view' => get(Twig::class),
     'config' => get(Config::class),
