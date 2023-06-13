@@ -6,12 +6,10 @@ namespace Deondazy\App\Services;
 
 use Deondazy\App\Database\Entities\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
 
@@ -56,8 +54,6 @@ class UserAuthenticationService
         }
 
         $token = new UsernamePasswordToken($user,'main', $user->getRoles());
-        
-        dd($token->getUserIdentifier());
         
         if (!$this->authenticationChecker->isAuthenticated($token)) {
             throw new AuthenticationException('Access Denied.');
