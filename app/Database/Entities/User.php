@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Deondazy\App\Database\Entities\Traits\HasTimestamps;
+use Deondazy\App\Database\Entities\Traits\WithTimestamps;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use HasTimestamps;
+    use WithTimestamps;
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
