@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
-trait HasTimestamps
+trait WithTimestamps
 {
     #[Column(name: 'created_at')]
     private DateTime $createdAt;
