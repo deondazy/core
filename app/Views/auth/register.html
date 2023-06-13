@@ -9,31 +9,36 @@
             <form action="{{ url_for('register.post') }}" method="POST" class="w-full">
                 <div class="mb-6 text-left w-full">
                     <label for="first-name" class="block text-slate-900 dark:text-white mb-2">First Name</label>
-                    <input name="first_name" type="text" id="first-name" class="bg-slate-200 dark:bg-slate-700 outline-none border dark:border-slate-500 text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-400" placeholder="John" autofocus>
+                    <input name="first_name" type="text" id="first-name" class="bg-slate-200 dark:bg-slate-700 outline-none border text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-400 {{ errors.first_name ? 'border-red-500' : 'dark:border-slate-500' }}" placeholder="John" autofocus>
+                    <div class="text-red-500">{{ errors.first_name | first }}</div>
                 </div>
 
                 <div class="mb-6 text-left w-full">
                     <label for="last-name" class="block text-slate-900 dark:text-white mb-2">Last Name</label>
                     <input name="last_name" type="text" id="last-name" class="bg-slate-200 dark:bg-slate-700 outline-none border dark:border-slate-500 text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-400" placeholder="Doe">
+                    <div class="text-red-500">{{ errors.last_name | first }}</div>
                 </div>
 
                 <div class="mb-6 text-left w-full">
                     <label for="email" class="block text-slate-900 dark:text-white mb-2">Email</label>
                     <input name="email" type="email" id="email" class="bg-slate-200 dark:bg-slate-700 outline-none border dark:border-slate-500 text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-400" placeholder="email@example.com">
+                    <div class="text-red-500">{{ errors.email | first }}</div>
                 </div>
 
                 <div class="mb-4 text-left w-full">
                     <label for="password" class="block text-slate-900 dark:text-white mb-2">Password</label>
                     <input name="password" type="password" id="password" class="bg-slate-200 dark:bg-slate-700 outline-none border dark:border-slate-500 text-slate-900 dark:text-white text-sm rounded-lg focus:border-blue-500 block w-full p-2.5 placeholder:text-slate-500 dark:placeholder:text-slate-4" placeholder="**********">
+                    <div class="text-red-500">{{ errors.password | first }}</div>
                 </div>
 
-                <div class="flex justify-between mb-6">
+                <div class="flex flex-col items-start mb-6">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            <input name="terms" id="terms" type="checkbox" value="" class="w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-blue-300 dark:bg-slate-900 dark:border-slate-600 dark:focus:ring-blue-600 dark:ring-offset-slate-800 dark:focus:ring-offset-slate-800" required>
+                            <input name="terms" id="terms" type="checkbox" class="w-4 h-4 border border-slate-300 rounded bg-slate-50 focus:ring-3 focus:ring-blue-300 dark:bg-slate-900 dark:border-slate-600 dark:focus:ring-blue-600 dark:ring-offset-slate-800 dark:focus:ring-offset-slate-800">
                         </div>
-                        <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">I accept the <a href="/terms" class="text-slate-900 dark:text-white hover:text-blue-400">Terms & Conditions</a>.</label>
+                        <label for="terms" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">I accept the <a href="/terms" class="text-slate-900 dark:text-white hover:text-blue-400">Terms & Conditions</a>.</label>
                     </div>
+                    <div class="text-red-500">{{ errors.terms | first }}</div>
                 </div>
 
                 <button class="block w-full bg-blue-600 hover:bg-blue-500 text-white h-10 rounded-lg">Create Account</button>
