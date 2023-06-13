@@ -25,6 +25,7 @@ use Deondazy\App\Middleware\RequireAuthentication;
 use Odan\Session\Middleware\SessionStartMiddleware;
 use Deondazy\App\Services\UserAuthenticationService;
 use Deondazy\App\Middleware\ValidationExceptionMiddleware;
+use Deondazy\App\Middleware\FlashValidationErrorMiddleware;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
@@ -40,9 +41,10 @@ return [
         
         $app->addRoutingMiddleware();
         
-        $app->add(SessionStartMiddleware::class);
         $app->add(TwigMiddleware::createFromContainer($app));
         $app->add(ValidationExceptionMiddleware::class);
+        $app->add(FlashValidationErrorMiddleware::class);
+        $app->add(SessionStartMiddleware::class);
         $app->add(new WhoopsMiddleware());
 
         return $app;
@@ -130,7 +132,8 @@ return [
 
     ValidationExceptionMiddleware::class => function (ContainerInterface $container) {
         return new ValidationExceptionMiddleware(
-            $container->get(App::class)->getResponseFactory()
+            $container->get(App::class)->getResponseFactory(),
+            $container->get(SessionInterface::class)
         );
     },
 
