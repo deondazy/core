@@ -27,6 +27,7 @@
         "symfony/security-core": "^6.3",
         "symfony/yaml": "^6.1",
         "vlucas/phpdotenv": "^5.5",
+        "vlucas/valitron": "^1.4",
         "zeuxisoo/slim-whoops": "^0.7.3"
     },
     "require-dev": {
