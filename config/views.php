@@ -61,7 +61,7 @@ return [
         | When set to true, Twig throws an exception instead (default to false).
         |
         */
-        'strict_variables' => true,
+        'strict_variables' => false,
 
         /*
         |--------------------------------------------------------------------------
