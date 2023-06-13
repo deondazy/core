@@ -39,9 +39,7 @@ class AuthController extends Controller
 
     public function showRegistrationForm(): ResponseInterface
     {
-        $message = $this->flash('error');
-
-        return $this->view('auth.register', compact('message'));
+        return $this->view('auth.register');
     }
 
     public function register(
@@ -50,9 +48,9 @@ class AuthController extends Controller
     ): ResponseInterface
     {
         $formData = $request->getParsedBody();
-
+    
         $registrationService->register($formData);
-
+    
         return $this->redirect('/login');
     }
 
