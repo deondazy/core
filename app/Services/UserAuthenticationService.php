@@ -6,6 +6,7 @@ namespace Deondazy\App\Services;
 
 use Deondazy\App\Database\Entities\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Deondazy\Core\Validation\FormDataValidation;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
 
 class UserAuthenticationService
-{
+{   
     public function __construct(
         protected EntityManagerInterface $entityManager,
         protected UserPasswordHasherInterface $passwordHasher,
@@ -22,18 +23,29 @@ class UserAuthenticationService
         protected AuthenticationTrustResolverInterface $authenticationChecker
     ) {}
     
-    public function register(array $formData): void
+    public function register(array $formData)
     {
+        $rules = [
+            'first_name' => ['required', 'min:3', 'max:50'],
+            'last_name'  => ['required', 'min:3', 'max:50'],
+            'email'      => ['required', 'email', 'unique:users'],
+            'password'   => ['required', 'min:8'],
+            'terms'      => ['accepted'],
+        ];
+
+        (new FormDataValidation())
+            ->setValidationEntityManager($this->entityManager)
+            ->validate($formData, $rules);
+        
         $user = new User();
         $user->setFirstName($formData['first_name'])
-        ->setLastName($formData['last_name'])
-        ->setEmail($formData['email']);
+            ->setLastName($formData['last_name'])
+            ->setEmail($formData['email']);
         
         $hashedPassword = $this->passwordHasher
             ->hashPassword($user, $formData['password']);
         $user->setPassword($hashedPassword)
             ->setRoles(['ROLE_USER']);
-        
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
