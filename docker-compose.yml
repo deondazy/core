@@ -2,8 +2,7 @@ version: '3'
 services:
   core.php:
     build:
-      context: ./
-      dockerfile: ./docker/Dockerfile
+      context: ./docker
     image: core-8.1/php
     environment:
       XDEBUG_MODE: '${CORE_XDEBUG_MODE:-off}'
@@ -23,8 +22,8 @@ services:
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - core
-  mysql:
-    image: mysql:5.7.32
+  db:
+    image: mariadb:10.10
     ports:
       - '${DB_PORT:-3306}:3306'
     environment:
