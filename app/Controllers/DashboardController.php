@@ -13,4 +13,9 @@ class DashboardController extends Controller
     {
         return $this->view('dashboard.index');
     }
+
+    public function profile(): ResponseInterface
+    {
+        return $this->view('dashboard.profile');
+    }
 }
