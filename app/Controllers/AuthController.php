@@ -7,6 +7,7 @@ namespace Deondazy\App\Controllers;
 use Deondazy\Core\Base\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Deondazy\App\Services\TokenStorageService;
 use Deondazy\App\Services\UserAuthenticationService;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
@@ -20,7 +21,7 @@ class AuthController extends Controller
     }
 
     public function login(
-        ServerRequestInterface $request, 
+        ServerRequestInterface $request,
         UserAuthenticationService $authService
     ): ResponseInterface
     {
@@ -57,5 +58,12 @@ class AuthController extends Controller
     public function forgotPassword(): ResponseInterface
     {
         return $this->view('auth/forgot-password');
+    }
+
+    public function logout(TokenStorageService $tokenStorageService): ResponseInterface
+    {
+        $tokenStorageService->logout();
+
+        return $this->redirect('/');
     }
 }
