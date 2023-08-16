@@ -8,6 +8,6 @@ if (!function_exists('config')) {
     
     function config($key)
     {
-        // return $container->get(Config::class)->get($key);
+        // return $container->get('config')->get($key);
     }
 }
