@@ -7,7 +7,6 @@ use function Di\get;
 use Slim\Views\Twig;
 use Slim\Psr7\Response;
 use Valitron\Validator;
-use Deondazy\Core\Config;
 use DI\Bridge\Slim\Bridge;
 use Doctrine\ORM\ORMSetup;
 use Odan\Session\PhpSession;
@@ -17,13 +16,23 @@ use Doctrine\DBAL\DriverManager;
 use Odan\Session\SessionInterface;
 use Deondazy\Core\View\ViteExtension;
 use Psr\Container\ContainerInterface;
+use Deondazy\Core\Encryption\Encrypter;
 use Psr\Http\Message\ResponseInterface;
 use Deondazy\App\Database\Entities\User;
+use Dotenv\Repository\RepositoryBuilder;
 use Odan\Session\SessionManagerInterface;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
+use Dotenv\Repository\Adapter\PutenvAdapter;
+use Deondazy\App\Services\TokenStorageService;
+use Deondazy\Core\Config\ConfigurationManager;
+use Deondazy\Core\Config\ArrayFileConfiguration;
+use Deondazy\Core\Config\ConfigurationInterface;
+use Deondazy\Core\Environment\EnvironmentLoader;
 use Deondazy\App\Middleware\RequireAuthentication;
-use Odan\Session\Middleware\SessionStartMiddleware;
+use Deondazy\App\Middleware\SessionStartMiddleware;
 use Deondazy\App\Services\UserAuthenticationService;
+use Deondazy\App\Middleware\SessionEncryptMiddleware;
+use Deondazy\Core\Environment\EnvironmentLoaderInterface;
 use Deondazy\App\Middleware\ValidationExceptionMiddleware;
 use Deondazy\App\Middleware\FlashValidationErrorMiddleware;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
@@ -42,17 +51,26 @@ return [
         $app->addRoutingMiddleware();
         
         $app->add(TwigMiddleware::createFromContainer($app));
+        $app->add(SessionStartMiddleware::class);
+        $app->add(SessionEncryptMiddleware::class);
         $app->add(ValidationExceptionMiddleware::class);
         $app->add(FlashValidationErrorMiddleware::class);
-        $app->add(SessionStartMiddleware::class);
         $app->add(new WhoopsMiddleware());
 
         return $app;
     },
 
+    EnvironmentLoaderInterface::class => function () {
+        $builder = RepositoryBuilder::createWithDefaultAdapters();
+        $builder = $builder->addAdapter(PutenvAdapter::class);
+        $repository = $builder->immutable()->make();
+
+        return new EnvironmentLoader($repository);
+    },
+
     ResponseInterface::class => fn () => new Response(),
 
-    EntityManager::class => function (Config $config) {
+    EntityManager::class => function (ConfigurationInterface $config) {
         return new EntityManager(
             DriverManager::getConnection($config->get('database.mysql')),
             ORMSetup::createAttributeMetadataConfiguration(
@@ -65,20 +83,20 @@ return [
     SessionManagerInterface::class => fn (ContainerInterface $container) 
         => $container->get(SessionInterface::class),
 
-    SessionInterface::class => fn (Config $config) 
+    SessionInterface::class => fn (ConfigurationInterface $config) 
         => new PhpSession($config->get('session')),
 
-    Twig::class => function (ContainerInterface $container) {
+    Twig::class => function (ConfigurationInterface $config) {
         $twig = Twig::create(
-            $container->get(Config::class)->get('paths.views_dir'),
-            $container->get(Config::class)->get('views.twig')
+            $config->get('paths.views_dir'),
+            $config->get('views.twig')
         );
 
         $twig->addExtension(new ViteExtension(
-            $container->get(Config::class)->get('app.url'),
-            $container->get(Config::class)
-                ->get('paths.public_dir') . '/build/manifest.json',
-            $container->get(Config::class)->get('app.vite_server')
+            $config->get('app.url') . '/build',
+            $config
+                ->get('paths.build_dir') . '/manifest.json',
+            $config->get('app.vite_server')
         ));
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
@@ -86,16 +104,19 @@ return [
         return $twig;
     },
 
-    Config::class => function () {
+    ConfigurationInterface::class => function (ContainerInterface $container) {
         $directory = __DIR__ . '/../config/';
 
-        $configs = [];
-        foreach (glob($directory . '*.php') as $filename) {
-            $key = pathinfo($filename, PATHINFO_FILENAME);
-            $configs[$key] = require $filename;
-        }
+        $configurationManager = new ConfigurationManager(
+            $container->get(EnvironmentLoaderInterface::class)
+        );
 
-        return new Config($configs);
+        $config = $configurationManager->loadConfigurationFiles($directory);
+
+        return new ArrayFileConfiguration(
+            $container->get(EnvironmentLoaderInterface::class),
+            $config
+        );
     },
 
     UserPasswordHasherInterface::class => fn (ContainerInterface $container)
@@ -112,21 +133,32 @@ return [
         => new UserAuthenticationService(
             $container->get(EntityManager::class),
             $container->get(UserPasswordHasherInterface::class),
-            $container->get(TokenStorageInterface::class),
-            $container->get(AuthenticationTrustResolverInterface::class),
-            $container->get(Validator::class)
+            $container->get(TokenStorageService::class),
+            $container->get(AuthenticationTrustResolverInterface::class)
+        ),
+    
+    TokenStorageService::class => fn (ContainerInterface $container)
+        => new TokenStorageService(
+            $container->get(Encrypter::class),
+            $container->get(SessionInterface::class),
+            new TokenStorage(),
+            $container->get(EntityManager::class),
+            $container->get('config')->get('session.name')
         ),
 
     Validator::class => fn () => new Validator(),
 
-    TokenStorageInterface::class => fn () => new TokenStorage(),
+    TokenStorageInterface::class => fn() => new TokenStorage(),
+
+    Encrypter::class => fn(ConfigurationInterface $config) 
+        => new Encrypter($config->get('app.key')),
 
     AuthenticationTrustResolverInterface::class => fn ()
         => new AuthenticationTrustResolver(),
 
     RequireAuthentication::class => fn (ContainerInterface $container)
         => new RequireAuthentication(
-            $container->get(TokenStorageInterface::class),
+            $container->get(TokenStorageService::class),
             $container->get(App::class)->getResponseFactory()
         ),
 
@@ -138,5 +170,5 @@ return [
     },
 
     'view' => get(Twig::class),
-    'config' => get(Config::class),
+    'config' => get(ConfigurationInterface::class),
 ];
