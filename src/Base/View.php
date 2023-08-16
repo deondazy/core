@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Deondazy\Core\Base;
 
 use Slim\Views\Twig;
-use Deondazy\Core\Config;
 use Odan\Session\SessionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -34,7 +33,7 @@ class View
             $templateName = $template;
         }
 
-        $config = $this->container->get(Config::class)->get('views.twig');
+        $config = $this->container->get('config')->get('views.twig');
 
         $extensions = $config['extensions'];
 
@@ -95,19 +94,5 @@ class View
         }
 
         return $session->getFlash()->get($key);
-    }
-
-    /**
-     * Redirect to a given route
-     * 
-     * @param string $route
-     * @param array $data
-     * 
-     * @return Response
-     */
-    public function redirect(string $route): Response
-    {
-        return $this->container->get(Response::class)->withStatus(302)
-            ->withHeader('Location', $route);
     }
 }
