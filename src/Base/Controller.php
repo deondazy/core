@@ -8,13 +8,18 @@ use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
 use Deondazy\Core\Base\View;
 use Twig\Error\RuntimeError;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Deondazy\Core\Config\Exceptions\FileNotFoundException;
 
 class Controller
 {
-    public function __construct(protected View $view)
-    {}
+    public function __construct(
+        protected View $view,
+        private ContainerInterface $container
+    ){
+
+    }
 
     /**
      * Render a view file template
@@ -48,15 +53,24 @@ class Controller
     }
 
     /**
-     * Redirect to a given url
+     * Redirect to a given route
      *
-     * @param string $url
-     * @param array $data
+     * @param string $route
+     * @param array $headers
      *
      * @return Response
      */
-    protected function redirect(string $route): Response
+    public function redirect(string $route, array $headers = []): Response
     {
-        return $this->view->redirect($route);
+        $response = $this->container->get(Response::class)->withStatus(302)
+        ->withHeader('Location', $route);
+
+        foreach ($headers as $name => $values) {
+            foreach ((array) $values as $value) {
+                $response = $response->withAddedHeader($name, $value);
+            }
+        }
+
+        return $response;
     }
 }
