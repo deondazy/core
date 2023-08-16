@@ -3,12 +3,12 @@
 declare(strict_types = 1);
 
 return [
-
-    'name' => 'core',
+    'name' => 'core_web_session',
     'lifetime' => 7200,
-    'path' => null,
+    'path' => '/',
     'domain' => null,
-    'secure' => false,
+    'secure' => true,
     'httponly' => true,
     'cache_limiter' => 'nocache',
+    'same_site' => 'lax',
 ];
