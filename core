@@ -3,7 +3,6 @@
 
 declare(strict_types = 1);
 
-use Deondazy\Core\Config;
 use Doctrine\Migrations\DependencyFactory;
 use Symfony\Component\Console\Application;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
@@ -14,7 +13,7 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 $app = require_once __DIR__ . '/bootstrap/app.php';
 
-$config = $app->get(Config::class);
+$config = $app->get('config');
 $entityManager = $app->get(EntityManager::class);
 
 $dependencyFactory = DependencyFactory::fromEntityManager(
@@ -30,6 +29,6 @@ $cliApp = new Application($config->get('app.name'), $config->get('app.version'))
 ConsoleRunner::addCommands($cliApp, new SingleManagerProvider($entityManager));
 
 $cliApp->addCommands($migrationCommands($dependencyFactory));
-$cliApp->addCommands(array_map(fn($command) => $container->get($command), $customCommands));
+$cliApp->addCommands($customCommands($config));
 
 $cliApp->run();
