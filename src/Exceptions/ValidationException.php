@@ -1,6 +1,6 @@
 <?php
 
-namespace Deondazy\Core\Exceptions;
+namespace Denosys\Core\Exceptions;
 
 use Throwable;
 

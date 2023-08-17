@@ -1,7 +1,7 @@
 <?php
 
-namespace Deondazy\Core\Exceptions;
+namespace Denosys\Core\Exceptions;
 
-class DeondazyCoreException extends \Exception
+class DenosysCoreException extends \Exception
 {
 }

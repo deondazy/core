@@ -1,7 +1,7 @@
 <?php
 
-namespace Deondazy\Core\Exceptions;
+namespace Denosys\Core\Exceptions;
 
-class InvalidRequirementException extends DeondazyCoreException
+class InvalidRequirementException extends DenosysCoreException
 {
 }

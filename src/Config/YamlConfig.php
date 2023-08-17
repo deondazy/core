@@ -1,8 +1,8 @@
 <?php
 
-namespace Deondazy\Core\Config;
+namespace Denosys\Core\Config;
 
-use Deondazy\Core\Config\Exceptions\FileNotFoundException;
+use Denosys\Core\Config\Exceptions\FileNotFoundException;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 

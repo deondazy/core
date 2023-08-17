@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Environment;
+namespace Denosys\Core\Environment;
 
 interface EnvironmentLoaderInterface
 {

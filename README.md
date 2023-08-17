@@ -1,4 +1,4 @@
-# **Deondazy Core PHP MVC Framework**
+# **Denosys Core PHP MVC Framework**
 
 Core is a simple light weight PHP MVC Framework, built to use for my PHP projects where Laravel and other PHP frameworks have way too much for my needs. Core has a simple Router, User Authentication, Template engine with Twig, MySQL and MariaDB Database support.
 
@@ -39,7 +39,7 @@ Core is a simple light weight PHP MVC Framework, built to use for my PHP project
 
 ## Contributing
 
-Thank you for considering contributing to Deondazy Core framework! Any contributions you make are **greatly appreciated.**
+Thank you for considering contributing to Denosys Core framework! Any contributions you make are **greatly appreciated.**
 
 If you have any suggestion that would improve this framework, please fork this repo and create a pull request. You can also open an issue with the tag "improvement". Please don't forget to give this project a star! Thanks again!
 
@@ -51,7 +51,7 @@ If you have any suggestion that would improve this framework, please fork this r
 
 ## License
 
-Deondazy Core framework is open-sourced software licensed under the MIT License. See `LICENSE.txt` for more information.
+Denosys Core framework is open-sourced software licensed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 

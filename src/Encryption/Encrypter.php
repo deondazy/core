@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Encryption;
+namespace Denosys\Core\Encryption;
 
 class Encrypter
 {

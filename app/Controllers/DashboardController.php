@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\App\Controllers;
+namespace Denosys\App\Controllers;
 
-use Deondazy\Core\Base\Controller;
+use Denosys\Core\Base\Controller;
 use Psr\Http\Message\ResponseInterface;
 
 class DashboardController extends Controller

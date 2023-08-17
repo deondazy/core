@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Config;
+namespace Denosys\Core\Config;
 
 interface ConfigurationInterface
 {

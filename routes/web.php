@@ -1,9 +1,9 @@
 <?php
 
-use Deondazy\App\Controllers\AuthController;
-use Deondazy\App\Controllers\HomeController;
-use Deondazy\App\Controllers\DashboardController;
-use Deondazy\App\Middleware\RequireAuthentication;
+use Denosys\App\Controllers\AuthController;
+use Denosys\App\Controllers\HomeController;
+use Denosys\App\Controllers\DashboardController;
+use Denosys\App\Middleware\RequireAuthentication;
 
 $app->get('/', [HomeController::class, 'index'])->setName('home');
 

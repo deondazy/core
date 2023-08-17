@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Deondazy\App\Middleware;
+namespace Denosys\App\Middleware;
 
-use Deondazy\App\Services\TokenStorageService;
+use Denosys\App\Services\TokenStorageService;
 use InvalidArgumentException;
 use Slim\Psr7\Response;
 use Psr\Http\Server\MiddlewareInterface;

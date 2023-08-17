@@ -2,7 +2,7 @@
 <coverage generated="1668390072">
   <project timestamp="1668390072">
     <file name="/var/www/html/app/Controllers/HomeController.php">
-      <class name="Deondazy\App\Controllers\HomeController" namespace="global">
+      <class name="Denosys\App\Controllers\HomeController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </class>
       <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
@@ -10,7 +10,7 @@
       <metrics loc="14" ncloc="14" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
     <file name="/var/www/html/app/Controllers/UserController.php">
-      <class name="Deondazy\App\Controllers\UserController" namespace="global">
+      <class name="Denosys\App\Controllers\UserController" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
       </class>
       <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
@@ -32,7 +32,7 @@
       <metrics loc="42" ncloc="42" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Base/Controller.php">
-      <class name="Deondazy\Core\Base\Controller" namespace="global">
+      <class name="Denosys\Core\Base\Controller" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </class>
       <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
@@ -42,7 +42,7 @@
       <metrics loc="43" ncloc="25" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Base/View.php">
-      <class name="Deondazy\Core\Base\View" namespace="global">
+      <class name="Denosys\Core\Base\View" namespace="global">
         <metrics complexity="6" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
       </class>
       <line num="29" type="method" name="get" visibility="public" complexity="2" crap="6" count="0"/>
@@ -67,13 +67,13 @@
       <metrics loc="95" ncloc="54" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Config/Exceptions/FileNotFoundException.php">
-      <class name="Deondazy\Core\Config\Exceptions\FileNotFoundException" namespace="global">
+      <class name="Denosys\Core\Config\Exceptions\FileNotFoundException" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
       <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Config/YamlConfig.php">
-      <class name="Deondazy\Core\Config\YamlConfig" namespace="global">
+      <class name="Denosys\Core\Config\YamlConfig" namespace="global">
         <metrics complexity="6" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
       </class>
       <line num="20" type="method" name="checkFile" visibility="private" complexity="2" crap="6" count="0"/>
@@ -93,7 +93,7 @@
       <metrics loc="67" ncloc="40" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Database/AbstractConnection.php">
-      <class name="Deondazy\Core\Database\AbstractConnection" namespace="global">
+      <class name="Denosys\Core\Database\AbstractConnection" namespace="global">
         <metrics complexity="33" methods="22" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="69" elements="93" coveredelements="90"/>
       </class>
       <line num="30" type="method" name="__call" visibility="public" complexity="2" crap="2" count="1"/>
@@ -192,7 +192,7 @@
       <metrics loc="378" ncloc="202" classes="1" methods="22" coveredmethods="21" conditionals="0" coveredconditionals="0" statements="71" coveredstatements="69" elements="93" coveredelements="90"/>
     </file>
     <file name="/var/www/html/src/Database/Connection.php">
-      <class name="Deondazy\Core\Database\Connection" namespace="global">
+      <class name="Denosys\Core\Database\Connection" namespace="global">
         <metrics complexity="7" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
       </class>
       <line num="30" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="34"/>
@@ -217,13 +217,13 @@
       <metrics loc="92" ncloc="29" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Database/Exceptions/BadValueException.php">
-      <class name="Deondazy\Core\Database\Exceptions\BadValueException" namespace="global">
+      <class name="Denosys\Core\Database\Exceptions\BadValueException" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
       <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Database/Exceptions/DatabaseException.php">
-      <class name="Deondazy\Core\Database\Exceptions\DatabaseException" namespace="global">
+      <class name="Denosys\Core\Database\Exceptions\DatabaseException" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </class>
       <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
@@ -235,7 +235,7 @@
       <metrics loc="127" ncloc="38" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Database/Query/AbstractBuilder.php">
-      <class name="Deondazy\Core\Database\Query\AbstractBuilder" namespace="global">
+      <class name="Denosys\Core\Database\Query\AbstractBuilder" namespace="global">
         <metrics complexity="17" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="39" coveredstatements="39" elements="45" coveredelements="45"/>
       </class>
       <line num="132" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="17"/>
@@ -286,7 +286,7 @@
       <metrics loc="233" ncloc="119" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="39" coveredstatements="39" elements="45" coveredelements="45"/>
     </file>
     <file name="/var/www/html/src/Database/Query/Builder.php">
-      <class name="Deondazy\Core\Database\Query\Builder" namespace="global">
+      <class name="Denosys\Core\Database\Query\Builder" namespace="global">
         <metrics complexity="22" methods="12" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="32" elements="50" coveredelements="42"/>
       </class>
       <line num="33" type="method" name="select" visibility="public" complexity="2" crap="2" count="15"/>
@@ -341,26 +341,26 @@
       <line num="215" type="stmt" count="0"/>
       <metrics loc="218" ncloc="114" classes="1" methods="12" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="32" elements="50" coveredelements="42"/>
     </file>
-    <file name="/var/www/html/src/Exceptions/DeondazyCoreException.php">
-      <class name="Deondazy\Core\Exceptions\DeondazyCoreException" namespace="global">
+    <file name="/var/www/html/src/Exceptions/DenosysCoreException.php">
+      <class name="Denosys\Core\Exceptions\DenosysCoreException" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Exceptions/InvalidArgumentException.php">
-      <class name="Deondazy\Core\Exceptions\InvalidArgumentException" namespace="global">
+      <class name="Denosys\Core\Exceptions\InvalidArgumentException" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Exceptions/InvalidRequirementException.php">
-      <class name="Deondazy\Core\Exceptions\InvalidRequirementException" namespace="global">
+      <class name="Denosys\Core\Exceptions\InvalidRequirementException" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Router.php">
-      <class name="Deondazy\Core\Router" namespace="global">
+      <class name="Denosys\Core\Router" namespace="global">
         <metrics complexity="23" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
       </class>
       <line num="68" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
@@ -420,7 +420,7 @@
       <metrics loc="257" ncloc="134" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
     </file>
     <file name="/var/www/html/src/Routing/Router.php">
-      <class name="Deondazy\Core\Routing\Router" namespace="global">
+      <class name="Denosys\Core\Routing\Router" namespace="global">
         <metrics complexity="23" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="54" coveredelements="0"/>
       </class>
       <line num="69" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>

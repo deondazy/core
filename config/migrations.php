@@ -12,7 +12,7 @@ return [
     ],
 
     'migrations_paths' => [
-        'Deondazy\App\Database\Migrations' => __DIR__ . '/../app/Database/Migrations',
+        'Denosys\App\Database\Migrations' => __DIR__ . '/../app/Database/Migrations',
     ],
 
     'all_or_nothing' => true,

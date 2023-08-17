@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\App\Controllers;
+namespace Denosys\App\Controllers;
 
-use Deondazy\Core\Base\Controller;
+use Denosys\Core\Base\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Deondazy\App\Services\TokenStorageService;
-use Deondazy\App\Services\UserAuthenticationService;
+use Denosys\App\Services\TokenStorageService;
+use Denosys\App\Services\UserAuthenticationService;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AuthController extends Controller

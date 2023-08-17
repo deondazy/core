@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Base;
+namespace Denosys\Core\Base;
 
 use Slim\Views\Twig;
 use Odan\Session\SessionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
-use Deondazy\Core\Config\Exceptions\FileNotFoundException;
+use Denosys\Core\Config\Exceptions\FileNotFoundException;
 
 class View
 {

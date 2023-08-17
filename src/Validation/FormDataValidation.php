@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Deondazy\Core\Validation;
+namespace Denosys\Core\Validation;
 
 use Valitron\Validator;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Deondazy\Core\Exceptions\ValidationException;
+use Denosys\Core\Exceptions\ValidationException;
 
 class FormDataValidation
 {
@@ -94,7 +94,7 @@ class FormDataValidation
         $classCaseName = $inflector
             ->classify($singularSnakeCaseTableName);
 
-        $className = "Deondazy\\App\\Database\\Entities\\" . $classCaseName;
+        $className = "Denosys\\App\\Database\\Entities\\" . $classCaseName;
 
         $validator->rule(function (
             string $field,

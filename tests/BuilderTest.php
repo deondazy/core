@@ -1,15 +1,15 @@
 <?php
 
-namespace Deondazy\Tests;
+namespace Denosys\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Deondazy\Core\Database\Connection;
-use Deondazy\Core\Database\Query\Builder;
+use Denosys\Core\Database\Connection;
+use Denosys\Core\Database\Query\Builder;
 
 /**
  * Class ConnectionTest.
  *
- * @covers \Deondazy\Core\Database\Query\Builder
+ * @covers \Denosys\Core\Database\Query\Builder
  */
 class BuilderTest extends TestCase
 {
@@ -107,13 +107,13 @@ class BuilderTest extends TestCase
     /**
      * Test the constructor.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      *
      * @return void
      */
@@ -122,21 +122,21 @@ class BuilderTest extends TestCase
         $this->assertInstanceOf(Builder::class, $this->queryBuilder);
 
         // Abstract Builder class instance
-        $this->assertInstanceOf(\Deondazy\Core\Database\Query\AbstractBuilder::class, $this->queryBuilder);
+        $this->assertInstanceOf(\Denosys\Core\Database\Query\AbstractBuilder::class, $this->queryBuilder);
     }
 
     /**
      * Test the table method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getTable
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getTable
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      *
      * @return void
      */
@@ -150,18 +150,18 @@ class BuilderTest extends TestCase
     /**
      * Test the select method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -183,17 +183,17 @@ class BuilderTest extends TestCase
     /**
      * Test the where method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -206,17 +206,17 @@ class BuilderTest extends TestCase
     /**
      * Test the get method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -232,17 +232,17 @@ class BuilderTest extends TestCase
     /**
      * Test the get method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -259,14 +259,14 @@ class BuilderTest extends TestCase
     /**
      * Test setWhereClause method Exception.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
      *
      * @return void
      */
@@ -279,18 +279,18 @@ class BuilderTest extends TestCase
     /**
      * Test setWhereClause method callable.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -309,18 +309,18 @@ class BuilderTest extends TestCase
     /**
      * Test orwhere method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -336,17 +336,17 @@ class BuilderTest extends TestCase
     /**
      * Test rawWhere method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -364,18 +364,18 @@ class BuilderTest extends TestCase
     /**
      * Test where between method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -395,18 +395,18 @@ class BuilderTest extends TestCase
     /**
      * Test where not between method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -426,18 +426,18 @@ class BuilderTest extends TestCase
     /**
      * Test where is null method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -461,18 +461,18 @@ class BuilderTest extends TestCase
     /**
      * Test where is not null method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -494,18 +494,18 @@ class BuilderTest extends TestCase
     /**
      * Test or where null method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -526,18 +526,18 @@ class BuilderTest extends TestCase
     /**
      * Test or where not null method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */
@@ -560,18 +560,18 @@ class BuilderTest extends TestCase
     /**
      * Test where in method.
      *
-     * @covers Deondazy\Core\Database\Connection::connect
-     * @covers Deondazy\Core\Database\Connection::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::table
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::getQuery
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::__construct
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeSelect
-     * @covers Deondazy\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
+     * @covers Denosys\Core\Database\Connection::connect
+     * @covers Denosys\Core\Database\Connection::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::table
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::getQuery
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::__construct
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeSelect
+     * @covers Denosys\Core\Database\Query\AbstractBuilder::composeWhereClauseConditions
      *
      * @return void
      */

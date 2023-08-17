@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\App\Database\Entities\Traits;
+namespace Denosys\Core\Database\Entities\Traits;
 
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
-trait WithTimestamps
+trait HasTimestamps
 {
     #[Column(name: 'created_at')]
     private DateTime $createdAt;
@@ -33,7 +33,7 @@ trait WithTimestamps
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt)
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -43,7 +43,7 @@ trait WithTimestamps
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DateTime $updatedAt)
+    public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }

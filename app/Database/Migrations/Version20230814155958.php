@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Deondazy\App\Database\Migrations;
+namespace Denosys\App\Database\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;

@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\View;
+namespace Denosys\Core\View;
 
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
-use Deondazy\Core\Exceptions\ViteManifestNotFoundException;
+use Denosys\Core\Exceptions\ViteManifestNotFoundException;
 
 class ViteExtension extends AbstractExtension
 {

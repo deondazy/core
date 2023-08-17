@@ -1,6 +1,6 @@
 <?php
 
-namespace Deondazy\App\Database\Entities;
+namespace Denosys\App\Database\Entities;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

@@ -1,18 +1,18 @@
 <?php
 
-namespace Deondazy\Tests;
+namespace Denosys\Tests;
 
 use PDO;
 use stdClass;
 use PHPUnit\Framework\TestCase;
-use Deondazy\Core\Database\Connection;
-use Deondazy\Core\Database\Exceptions\BadValueException;
-use Deondazy\Core\Database\Exceptions\DatabaseException;
+use Denosys\Core\Database\Connection;
+use Denosys\Core\Database\Exceptions\BadValueException;
+use Denosys\Core\Database\Exceptions\DatabaseException;
 
 /**
  * Class ConnectionTest.
  *
- * @covers \Deondazy\Core\Database\Connection
+ * @covers \Denosys\Core\Database\Connection
  */
 class ConnectionTest extends TestCase
 {
@@ -103,12 +103,12 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database\Connection::connect
-     * @covers \Deondazy\Core\Database\AbstractConnection::exec
-     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers \Deondazy\Core\Database\AbstractConnection::isConnected
-     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Denosys\Core\Database\Connection::connect
+     * @covers \Denosys\Core\Database\AbstractConnection::exec
+     * @covers \Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers \Denosys\Core\Database\AbstractConnection::isConnected
+     * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testConnect(): void
     {
@@ -118,12 +118,12 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database\Connection::disconnect
-     * @covers \Deondazy\Core\Database\AbstractConnection::exec
-     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers \Deondazy\Core\Database\AbstractConnection::isConnected
-     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Denosys\Core\Database\Connection::disconnect
+     * @covers \Denosys\Core\Database\AbstractConnection::exec
+     * @covers \Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers \Denosys\Core\Database\AbstractConnection::isConnected
+     * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testDisconnect(): void
     {
@@ -137,11 +137,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database\Connection::getConnection
-     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers \Deondazy\Core\Database\AbstractConnection::exec
-     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
-     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
+     * @covers \Denosys\Core\Database\Connection::getConnection
+     * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers \Denosys\Core\Database\AbstractConnection::exec
+     * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Denosys\Core\Database\AbstractConnection::runQuery
      */
     public function testGetConnection(): void
     {
@@ -149,11 +149,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database\AbstractConnection::exec
-     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers \Deondazy\Core\Database\Exceptions\DatabaseException::__construct
-     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Denosys\Core\Database\AbstractConnection::exec
+     * @covers \Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers \Denosys\Core\Database\Exceptions\DatabaseException::__construct
+     * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testGetConnectionException(): void
     {
@@ -164,10 +164,10 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database\AbstractConnection::exec
-     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Denosys\Core\Database\AbstractConnection::exec
+     * @covers \Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testDebugInfo(): void
     {
@@ -181,11 +181,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers \Deondazy\Core\Database\AbstractConnection::exec
-     * @covers \Deondazy\Core\Database\AbstractConnection::__call
-     * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers \Denosys\Core\Database\AbstractConnection::exec
+     * @covers \Denosys\Core\Database\AbstractConnection::__call
+     * @covers \Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testCall(): void
     {
@@ -201,16 +201,16 @@ class ConnectionTest extends TestCase
     }
 
    /**
-    * @covers \Deondazy\Core\Database\AbstractConnection::exec
-    * @covers \Deondazy\Core\Database\AbstractConnection::commit
-    * @covers \Deondazy\Core\Database\AbstractConnection::prepare
-    * @covers \Deondazy\Core\Database\AbstractConnection::rollBack
-    * @covers \Deondazy\Core\Database\AbstractConnection::runQuery
-    * @covers \Deondazy\Core\Database\AbstractConnection::fetchAll
-    * @covers \Deondazy\Core\Database\AbstractConnection::bindValue
-    * @covers \Deondazy\Core\Database\AbstractConnection::inTransaction
-    * @covers \Deondazy\Core\Database\AbstractConnection::beginTransaction
-    * @covers \Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+    * @covers \Denosys\Core\Database\AbstractConnection::exec
+    * @covers \Denosys\Core\Database\AbstractConnection::commit
+    * @covers \Denosys\Core\Database\AbstractConnection::prepare
+    * @covers \Denosys\Core\Database\AbstractConnection::rollBack
+    * @covers \Denosys\Core\Database\AbstractConnection::runQuery
+    * @covers \Denosys\Core\Database\AbstractConnection::fetchAll
+    * @covers \Denosys\Core\Database\AbstractConnection::bindValue
+    * @covers \Denosys\Core\Database\AbstractConnection::inTransaction
+    * @covers \Denosys\Core\Database\AbstractConnection::beginTransaction
+    * @covers \Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
     */
     public function testTransactions()
     {
@@ -244,11 +244,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::query
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::query
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testQuery()
     {
@@ -259,11 +259,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::quote
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::quote
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
     */
     public function testQuote()
     {
@@ -284,12 +284,12 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::fetchAffectedRows
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::fetchAffectedRows
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testFetchAffectedRows()
     {
@@ -297,12 +297,12 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::prepare
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::fetchOne
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::prepare
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::fetchOne
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testFetchOne()
     {
@@ -316,10 +316,10 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testBindValues()
     {
@@ -354,11 +354,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::lastInsertId
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::lastInsertId
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testLastInsertId()
     {
@@ -370,12 +370,12 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::errorCode
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::errorInfo
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::errorCode
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::errorInfo
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testErrorCodeAndErrorInfo()
     {
@@ -384,11 +384,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::setAttribute
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::setAttribute
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testSetAttribute()
     {
@@ -396,11 +396,11 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::getAttribute
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::getAttribute
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testGetAttribute()
     {
@@ -408,10 +408,10 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @covers Deondazy\Core\Database\AbstractConnection::exec
-     * @covers Deondazy\Core\Database\AbstractConnection::runQuery
-     * @covers Deondazy\Core\Database\AbstractConnection::bindValue
-     * @covers Deondazy\Core\Database\AbstractConnection::prepareQueryWithValues
+     * @covers Denosys\Core\Database\AbstractConnection::exec
+     * @covers Denosys\Core\Database\AbstractConnection::runQuery
+     * @covers Denosys\Core\Database\AbstractConnection::bindValue
+     * @covers Denosys\Core\Database\AbstractConnection::prepareQueryWithValues
      */
     public function testGetAvailableDrivers()
     {

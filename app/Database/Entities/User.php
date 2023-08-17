@@ -1,14 +1,16 @@
 <?php
 
-namespace Deondazy\App\Database\Entities;
+namespace Denosys\App\Database\Entities;
 
 use Doctrine\DBAL\Types\Types;
+use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Deondazy\App\Database\Entities\Session;
+use Denosys\App\Database\Entities\Session;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Denosys\Core\Database\Entities\Traits\HasUuid;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Deondazy\App\Database\Entities\Traits\WithTimestamps;
+use Denosys\Core\Database\Entities\Traits\HasTimestamps;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
@@ -16,7 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use WithTimestamps;
+    use HasTimestamps, HasUuid;
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -49,14 +51,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function setReferenceId(string $referenceId): User
+    public function setUuid(string $uuid): void
     {
-        $this->referenceId = $referenceId;
-
-        return $this;
+        $this->referenceId = $uuid;
     }
 
-    public function getReferenceId(): ?string
+    public function getUuid(): ?string
     {
         return $this->referenceId;
     }

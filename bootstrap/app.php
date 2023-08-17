@@ -1,11 +1,11 @@
 <?php
 
 /**
- * The Deondazy Core Bootstrap File
+ * The Denosys Core Bootstrap File
  *
  * This file sets up all the required files and constants
  *
- * @package Deondazy\Core
+ * @package Denosys\Core
  * @version 1.0.0
  */
 

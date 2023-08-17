@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Deondazy\Core\Config\Exceptions;
+namespace Denosys\Core\Config\Exceptions;
 
-use Deondazy\Core\Exceptions\DeondazyCoreException;
+use Denosys\Core\Exceptions\DenosysCoreException;
 
-class FileNotFoundException extends DeondazyCoreException
+class FileNotFoundException extends DenosysCoreException
 {
 }

@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Commands;
+namespace Denosys\Core\Commands;
 
 use Symfony\Component\Console\Command\Command;
-use Deondazy\Core\Config\ConfigurationInterface;
+use Denosys\Core\Config\ConfigurationInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

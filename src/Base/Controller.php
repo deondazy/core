@@ -2,15 +2,15 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Base;
+namespace Denosys\Core\Base;
 
 use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
-use Deondazy\Core\Base\View;
+use Denosys\Core\Base\View;
 use Twig\Error\RuntimeError;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
-use Deondazy\Core\Config\Exceptions\FileNotFoundException;
+use Denosys\Core\Config\Exceptions\FileNotFoundException;
 
 class Controller
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Deondazy\Core\Config;
+namespace Denosys\Core\Config;
 
-use Deondazy\Core\Config\ConfigurationInterface;
-use Deondazy\Core\Environment\EnvironmentLoaderInterface;
+use Denosys\Core\Config\ConfigurationInterface;
+use Denosys\Core\Environment\EnvironmentLoaderInterface;
 
 class ArrayFileConfiguration implements ConfigurationInterface
 {

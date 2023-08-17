@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\Core\Environment;
+namespace Denosys\Core\Environment;
 
 use PhpOption\Option;
-use Deondazy\Core\Environment\EnvironmentLoaderInterface;
+use Denosys\Core\Environment\EnvironmentLoaderInterface;
 use Dotenv\Repository\RepositoryInterface;
 
 class EnvironmentLoader implements EnvironmentLoaderInterface

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Deondazy\App\Middleware;
+namespace Denosys\App\Middleware;
 
 use Slim\Views\Twig;
 use Odan\Session\SessionInterface;

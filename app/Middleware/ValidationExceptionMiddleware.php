@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Deondazy\App\Middleware;
+namespace Denosys\App\Middleware;
 
 use Odan\Session\SessionInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Deondazy\Core\Exceptions\ValidationException;
+use Denosys\Core\Exceptions\ValidationException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;

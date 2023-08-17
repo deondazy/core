@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-use Deondazy\Core\Config;
+use Denosys\Core\Config;
 
 if (!function_exists('config')) {
     
