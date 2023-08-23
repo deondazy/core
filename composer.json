@@ -18,7 +18,6 @@
         "doctrine/orm": "^2.15",
         "doctrine/sql-formatter": "^1.1",
         "filp/whoops": "^2.14",
-        "odan/session": "^6.1",
         "php-di/slim-bridge": "^3.3",
         "ramsey/uuid": "^4.7",
         "slim/psr7": "^1.6",
@@ -43,7 +42,7 @@
             "Denosys\\App\\": "app/"
         },
         "files": [
-            "app/Functions/Functions.php"
+            "src/Support/Functions.php"
         ]
     },
     "autoload-dev": {
