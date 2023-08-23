@@ -4,7 +4,8 @@ declare(strict_types = 1);
 
 use Slim\App;
 
-ini_set('display_errors', true);
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 $app = (require_once __DIR__ . '/../bootstrap/app.php')
     ->get(App::class);
