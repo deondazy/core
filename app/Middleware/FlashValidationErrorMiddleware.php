@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Denosys\App\Middleware;
 
 use Slim\Views\Twig;
-use Odan\Session\SessionInterface;
+use Denosys\Core\Session\SessionInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
