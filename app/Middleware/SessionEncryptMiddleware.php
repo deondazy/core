@@ -33,11 +33,9 @@ class SessionEncryptMiddleware implements MiddlewareInterface
         $cookieString .= $sessionAttributes['domain'] ? "Domain=" . $sessionAttributes['domain'] . "; " : "";
         $cookieString .= $sessionAttributes['secure'] ? "Secure; " : "";
         $cookieString .= $sessionAttributes['httponly'] ? "HttpOnly; " : "";
-        $cookieString .= $sessionAttributes['same_site'] ? "SameSite=" . $sessionAttributes['same_site'] . "; " : "";
+        $cookieString .= $sessionAttributes['samesite'] ? "SameSite=" . $sessionAttributes['samesite'] . "; " : "";
         $cookieString .= "Max-Age=" . $sessionAttributes['lifetime'] . "; ";
 
-        $response = $response->withAddedHeader('Set-Cookie', $cookieString);
-
-        return $response;
+        return $response->withAddedHeader('Set-Cookie', $cookieString);
     }
 }
