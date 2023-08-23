@@ -9,7 +9,7 @@ use Slim\Psr7\Response;
 use Valitron\Validator;
 use DI\Bridge\Slim\Bridge;
 use Doctrine\ORM\ORMSetup;
-use Denosys\Core\Session\PhpSession;
+use Denosys\Core\Session\NativeSession;
 use Slim\Views\TwigMiddleware;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
@@ -84,7 +84,7 @@ return [
         => $container->get(SessionInterface::class),
 
     SessionInterface::class => fn (ContainerInterface $container) 
-        => new PhpSession(
+        => new NativeSession(
             $container
         ),
 
