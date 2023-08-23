@@ -1,8 +1,8 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Denosys\Core\View;
+namespace Denosys\Core\Support;
 
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
@@ -14,7 +14,8 @@ class ViteExtension extends AbstractExtension
         private string $buildPath,
         private string $manifest,
         private string $viteServer
-    ) {}
+    ) {
+    }
 
     public function getFunctions()
     {
@@ -40,7 +41,7 @@ class ViteExtension extends AbstractExtension
         return $html;
     }
 
-    private function isOnViteServer(string $asset): bool 
+    private function isOnViteServer(string $asset): bool
     {
         static $assetEntries = [];
 
