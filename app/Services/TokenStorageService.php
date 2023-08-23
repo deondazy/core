@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Denosys\App\Services;
 
-use Odan\Session\SessionInterface;
+use Denosys\Core\Session\SessionInterface;
 use Denosys\Core\Encryption\Encrypter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
