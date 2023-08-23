@@ -9,18 +9,18 @@ use Slim\Psr7\Response;
 use Valitron\Validator;
 use DI\Bridge\Slim\Bridge;
 use Doctrine\ORM\ORMSetup;
-use Odan\Session\PhpSession;
+use Denosys\Core\Session\PhpSession;
 use Slim\Views\TwigMiddleware;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
-use Odan\Session\SessionInterface;
-use Denosys\Core\View\ViteExtension;
+use Denosys\Core\Session\SessionInterface;
+use Denosys\Core\Support\ViteExtension;
 use Psr\Container\ContainerInterface;
 use Denosys\Core\Encryption\Encrypter;
 use Psr\Http\Message\ResponseInterface;
 use Denosys\App\Database\Entities\User;
 use Dotenv\Repository\RepositoryBuilder;
-use Odan\Session\SessionManagerInterface;
+use Denosys\Core\Session\SessionManagerInterface;
 use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Denosys\App\Services\TokenStorageService;
@@ -83,8 +83,10 @@ return [
     SessionManagerInterface::class => fn (ContainerInterface $container) 
         => $container->get(SessionInterface::class),
 
-    SessionInterface::class => fn (ConfigurationInterface $config) 
-        => new PhpSession($config->get('session')),
+    SessionInterface::class => fn (ContainerInterface $container) 
+        => new PhpSession(
+            $container
+        ),
 
     Twig::class => function (ConfigurationInterface $config) {
         $twig = Twig::create(
@@ -104,19 +106,11 @@ return [
         return $twig;
     },
 
-    ConfigurationInterface::class => function (ContainerInterface $container) {
-        $directory = __DIR__ . '/../config/';
+    ConfigurationInterface::class => function () {
+        $config = (new ConfigurationManager)
+            ->loadConfigurationFiles(__DIR__ . '/../config/');
 
-        $configurationManager = new ConfigurationManager(
-            $container->get(EnvironmentLoaderInterface::class)
-        );
-
-        $config = $configurationManager->loadConfigurationFiles($directory);
-
-        return new ArrayFileConfiguration(
-            $container->get(EnvironmentLoaderInterface::class),
-            $config
-        );
+        return new ArrayFileConfiguration($config);
     },
 
     UserPasswordHasherInterface::class => fn (ContainerInterface $container)
