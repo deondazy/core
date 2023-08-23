@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Denosys\Core\Base;
 
 use Slim\Views\Twig;
-use Odan\Session\SessionInterface;
+use Denosys\Core\Session\SessionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Denosys\Core\Config\Exceptions\FileNotFoundException;
