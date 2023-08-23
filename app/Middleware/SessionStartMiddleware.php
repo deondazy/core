@@ -8,7 +8,7 @@ use Denosys\Core\Config\ConfigurationInterface;
 use Denosys\Core\Encryption\Encrypter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use Odan\Session\SessionManagerInterface;
+use Denosys\Core\Session\SessionManagerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -23,18 +23,18 @@ class SessionStartMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+
         if (isset($_COOKIE[$this->config->get('session')['name']])) {
             $encryptedSessionId = $_COOKIE[$this->config->get('session')['name']];
-
-            // $decryptedSessionId = $this->encrypter->decrypt($encryptedSessionId);
-            // session_id($decryptedSessionId);
             
             try {
                 $decryptedSessionId = $this->encrypter->decrypt($encryptedSessionId);
                 session_id($decryptedSessionId);
             } catch (\InvalidArgumentException $e) {
+                dd($e->getMessage());
                 // Decryption failed; clear the session ID so that a new session will be started
-                session_id('');
+                // setcookie($this->config->get('session')['name'], '', time() - 3600);
+                // session_id('');
             }
         }
 
