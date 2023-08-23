@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Denosys\App\Middleware;
 
-use Odan\Session\SessionInterface;
+use Denosys\Core\Session\SessionInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Denosys\Core\Exceptions\ValidationException;
