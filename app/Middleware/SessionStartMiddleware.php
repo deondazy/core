@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\App\Middleware;
 
@@ -26,7 +26,7 @@ class SessionStartMiddleware implements MiddlewareInterface
 
         if (isset($_COOKIE[$this->config->get('session')['name']])) {
             $encryptedSessionId = $_COOKIE[$this->config->get('session')['name']];
-            
+
             try {
                 $decryptedSessionId = $this->encrypter->decrypt($encryptedSessionId);
                 session_id($decryptedSessionId);

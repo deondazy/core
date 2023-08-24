@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\App\Middleware;
 
@@ -16,8 +16,8 @@ class FlashValidationErrorMiddleware implements MiddlewareInterface
     public function __construct(
         private readonly Twig $twig,
         private SessionInterface $session
-    )
-    {}
+    ) {
+    }
 
     public function process(Request $request, RequestHandler $handler): Response
     {
@@ -25,10 +25,10 @@ class FlashValidationErrorMiddleware implements MiddlewareInterface
             $errors = $this->session->get('errors');
 
             $this->twig->getEnvironment()->addGlobal('errors', $errors);
-            
+
             $this->session->delete('errors');
         }
-        
+
         return $handler->handle($request);
     }
 }

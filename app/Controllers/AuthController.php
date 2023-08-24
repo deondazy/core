@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\App\Controllers;
 
@@ -23,15 +23,13 @@ class AuthController extends Controller
     public function login(
         ServerRequestInterface $request,
         UserAuthenticationService $authService
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         $formData = $request->getParsedBody();
 
         try {
             $authService->login($formData);
 
             return $this->redirect('/dashboard');
-
         } catch (AuthenticationException $e) {
             $this->flash('error', $e->getMessage());
             return $this->redirect('/login');
@@ -44,14 +42,13 @@ class AuthController extends Controller
     }
 
     public function register(
-        ServerRequestInterface $request, 
+        ServerRequestInterface $request,
         UserAuthenticationService $registrationService
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         $formData = $request->getParsedBody();
-    
+
         $registrationService->register($formData);
-    
+
         return $this->redirect('/login');
     }
 

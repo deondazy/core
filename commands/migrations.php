@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Tools\Console\Command\CurrentCommand;
@@ -17,7 +17,7 @@ use Doctrine\Migrations\Tools\Console\Command\SyncMetadataCommand;
 use Doctrine\Migrations\Tools\Console\Command\UpToDateCommand;
 use Doctrine\Migrations\Tools\Console\Command\VersionCommand;
 
-return fn(DependencyFactory $dependencyFactory) => [
+return fn (DependencyFactory $dependencyFactory) => [
     new CurrentCommand($dependencyFactory),
     new DumpSchemaCommand($dependencyFactory),
     new ExecuteCommand($dependencyFactory),

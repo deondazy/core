@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\Core\Encryption;
 
@@ -10,7 +10,7 @@ class Encrypter
     public function __construct(private readonly string $key)
     {
         $key = $this->getKey();
-        
+
         if (mb_strlen($key, '8bit') !== SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
             throw new \InvalidArgumentException('Key must be ' . SODIUM_CRYPTO_SECRETBOX_KEYBYTES . ' bytes.');
         }

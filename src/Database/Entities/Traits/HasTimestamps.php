@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\Core\Database\Entities\Traits;
 
@@ -21,7 +21,7 @@ trait HasTimestamps
     #[PrePersist, PreUpdate]
     public function updateTimestamps(LifecycleEventArgs $args): void
     {
-        if (! isset($this->createdAt)) {
+        if (!isset($this->createdAt)) {
             $this->createdAt = new DateTime();
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\Core\Base;
 
@@ -17,8 +17,7 @@ class Controller
     public function __construct(
         protected View $view,
         private ContainerInterface $container
-    ){
-
+    ) {
     }
 
     /**
@@ -63,7 +62,7 @@ class Controller
     public function redirect(string $route, array $headers = []): Response
     {
         $response = $this->container->get(Response::class)->withStatus(302)
-        ->withHeader('Location', $route);
+            ->withHeader('Location', $route);
 
         foreach ($headers as $name => $values) {
             foreach ((array) $values as $value) {

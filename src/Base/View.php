@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Denosys\Core\Base;
 
@@ -15,7 +15,8 @@ class View
     public function __construct(
         protected Twig $twig,
         private ContainerInterface $container
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view file template using twig
